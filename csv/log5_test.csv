@@ -1,0 +1,297 @@
+type,error,date,time,details
+Error,Http Client Error,Aug 20,23:39:39,org.springframework.web.client.HttpClientErrorException: 401
+Error,Http Client Error,Aug 20,23:39:39,org.springframework.web.client.HttpClientErrorException: 401
+Error,Http Client Error,Aug 20,23:39:39,org.springframework.web.client.HttpClientErrorException: 401
+Error,Http Client Error,Aug 20,23:39:39,org.springframework.web.client.HttpClientErrorException: 401
+Error,Http Client Error,Aug 20,23:40:45,org.springframework.web.client.HttpClientErrorException: 401
+Error,Http Client Error,Aug 20,23:40:45,org.springframework.web.client.HttpClientErrorException: 401
+Error,Http Client Error,Aug 20,23:40:45,org.springframework.web.client.HttpClientErrorException: 401
+Error,Access Denied,Aug 20,06:59:22," AuditEvent [timestamp=Sun Aug 20 13:59:22 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:39:29," AuditEvent [timestamp=Mon Aug 21 04:39:29 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:28," AuditEvent [timestamp=Mon Aug 21 04:44:28 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 20,21:44:35," AuditEvent [timestamp=Mon Aug 21 04:44:35 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 21,01:53:00," AuditEvent [timestamp=Mon Aug 21 08:53:00 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 21,01:53:32," AuditEvent [timestamp=Mon Aug 21 08:53:32 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 21,01:57:43," AuditEvent [timestamp=Mon Aug 21 08:57:43 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 21,02:06:14," AuditEvent [timestamp=Mon Aug 21 09:06:14 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 21,06:20:17," AuditEvent [timestamp=Mon Aug 21 13:20:17 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Runtime Exception,Aug 20,23:40:45,java.lang.RuntimeException: No node with matching requirements.
+Error,Transport Error,Aug 20,07:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 218]"
+Error,Transport Error,Aug 20,07:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 219]"
+Error,Transport Error,Aug 20,08:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 220]"
+Error,Transport Error,Aug 20,08:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 221]"
+Error,Transport Error,Aug 20,09:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 222]"
+Error,Transport Error,Aug 20,09:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 223]"
+Error,Transport Error,Aug 20,10:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 224]"
+Error,Transport Error,Aug 20,10:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 225]"
+Error,Transport Error,Aug 20,11:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 226]"
+Error,Transport Error,Aug 20,11:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 227]"
+Error,Transport Error,Aug 20,12:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 228]"
+Error,Transport Error,Aug 20,12:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 229]"
+Error,Transport Error,Aug 20,13:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 230]"
+Error,Transport Error,Aug 20,13:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 231]"
+Error,Transport Error,Aug 20,14:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 232]"
+Error,Transport Error,Aug 20,14:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 233]"
+Error,Transport Error,Aug 20,15:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 234]"
+Error,Transport Error,Aug 20,15:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 235]"
+Error,Transport Error,Aug 20,16:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 236]"
+Error,Transport Error,Aug 20,16:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 237]"
+Error,Transport Error,Aug 20,17:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 238]"
+Error,Transport Error,Aug 20,17:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 239]"
+Error,Transport Error,Aug 20,18:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 240]"
+Error,Transport Error,Aug 20,18:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 241]"
+Error,Transport Error,Aug 20,19:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 242]"
+Error,Transport Error,Aug 20,19:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 243]"
+Error,Transport Error,Aug 20,20:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 244]"
+Error,Transport Error,Aug 20,20:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 245]"
+Error,Transport Error,Aug 20,21:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 246]"
+Error,Transport Error,Aug 20,21:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 247]"
+Error,Transport Error,Aug 20,22:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 248]"
+Error,Transport Error,Aug 20,22:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 249]"
+Error,Transport Error,Aug 20,23:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 250]"
+Error,Transport Error,Aug 20,23:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 251]"
+Error,Transport Error,Aug 21,00:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 252]"
+Error,Transport Error,Aug 21,00:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 253]"
+Error,Transport Error,Aug 21,01:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 254]"
+Error,Transport Error,Aug 21,01:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 255]"
+Error,Transport Error,Aug 21,02:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 256]"
+Error,Transport Error,Aug 21,02:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 257]"
+Error,Transport Error,Aug 21,03:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 258]"
+Error,Transport Error,Aug 21,03:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 259]"
+Error,Transport Error,Aug 21,04:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 260]"
+Error,Transport Error,Aug 21,04:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 261]"
+Error,Transport Error,Aug 21,05:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 262]"
+Error,Transport Error,Aug 21,05:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 263]"
+Error,Transport Error,Aug 21,06:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 264]"
+Error,Default Response Error Handler,Aug 20,23:39:39,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Default Response Error Handler,Aug 20,23:39:39,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Default Response Error Handler,Aug 20,23:39:39,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Default Response Error Handler,Aug 20,23:39:39,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Default Response Error Handler,Aug 20,23:40:45,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Default Response Error Handler,Aug 20,23:40:45,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Default Response Error Handler,Aug 20,23:40:45,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Warning,Aug 20,23:32:05, [skExecutor-1798] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 20,23:32:20, [skExecutor-1799] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 20,23:32:20, [skExecutor-1799] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 20,23:32:25, [skExecutor-1800] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 20,23:32:25, [skExecutor-1800] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 20,23:32:25, [skExecutor-1800] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 20,23:39:39,com.dchq.iaas.scheduler.hc.ProxyOperationsUtil - 401
+Error,Warning,Aug 20,23:39:39,com.dchq.iaas.scheduler.hc.ProxyOperationsUtil - 401
+Error,Warning,Aug 20,23:39:39,com.dchq.iaas.scheduler.hc.ProxyOperationsUtil - 401
+Error,Warning,Aug 20,23:39:39,com.dchq.iaas.scheduler.hc.ProxyOperationsUtil - 401
+Error,Warning,Aug 20,23:40:45,com.dchq.iaas.scheduler.hc.ProxyOperationsUtil - 401
+Error,Warning,Aug 20,23:40:45,com.dchq.iaas.scheduler.hc.ProxyOperationsUtil - 401
+Error,Warning,Aug 20,23:40:45,com.dchq.iaas.scheduler.hc.ProxyOperationsUtil - 401
+Error,Warning,Aug 20,23:40:45,com.dchq.iaas.provider.HyperVOperations - No node with matching requirements.
+Use Case,Docker Server Controller,Aug 20,21:44:59,Find all docker-servers
+Use Case,Docker Server Controller,Aug 20,21:45:05,Find docker-server by id [2c9180865c65a7c5015c65f560d1009f]
+Use Case,Docker Server Controller,Aug 20,21:45:05,Find docker-server by id [2c9180875d19a616015d51a257f6238e]
+Use Case,Docker Server Controller,Aug 20,21:46:56,Find docker-server by id [2c9180865c65a7c5015c65f560d1009f]
+Use Case,Docker Server Controller,Aug 20,21:46:56,Find docker-server by id [2c9180875d19a616015d51a257f6238e]
+Use Case,Docker Server Controller,Aug 20,21:47:04,Find docker-server by id [2c9180875d19a616015d51a257f6238e]
+Use Case,Docker Server Controller,Aug 20,21:47:56,Find docker-server by id [2c9180875d19a616015d51a257f6238e]
+Use Case,Docker Server Controller,Aug 20,21:47:56,Find docker-server by id [2c9180865c65a7c5015c65f560d1009f]
+Use Case,Docker Server Controller,Aug 20,21:48:14,Find docker-server by id [2c9180875d19a616015d51a257f6238e]
+Use Case,Docker Server Controller,Aug 20,21:50:03,Find docker-server by id [2c9180875d19a616015d51a257f6238e]
+Use Case,Docker Server Controller,Aug 20,21:50:36,Find all docker-servers
+Use Case,Docker Server Controller,Aug 20,21:50:40,Find Virtual-App by id [2c9180865de18be7015de1a6e3380121]
+Use Case,Docker Server Controller,Aug 20,21:50:55,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 20,23:31:07,Find docker-server by id [2c9180865c65a7c5015c65f560d1009f]
+Use Case,Docker Server Controller,Aug 20,23:31:54,Find docker-server by id [2c9180875d19a616015d51a257f6238e]
+Use Case,Docker Server Controller,Aug 20,23:39:13,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 20,23:40:26,Save docker-server id [null]
+Use Case,Docker Server Controller,Aug 20,23:40:26,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 20,23:41:21,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 21,01:58:16,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 21,01:58:16,Find docker-server by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,01:58:47,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 21,01:58:47,Find docker-server by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,01:58:48,Find Task by docker-serverid [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,01:59:07,Find monitor data for server [2c9180875dd2ce1d015dd342c1ed029b] start [Mon Aug 21 07:58:51 UTC 2017] end [Mon Aug 21 08:58:51 UTC 2017]
+Use Case,Docker Server Controller,Aug 21,01:59:07,Find Task by docker-serverid [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,01:59:08,Find docker-server by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,01:59:17,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 21,02:00:01,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 21,02:00:01,Find docker-server by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:00:01,Find Task by docker-serverid [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:00:23,Find docker-server by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:00:29,Find Task by docker-serverid [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:00:35,Find monitor data for server [2c9180875dd2ce1d015dd342c1ed029b] start [Mon Aug 21 08:00:19 UTC 2017] end [Mon Aug 21 09:00:19 UTC 2017]
+Use Case,Docker Server Controller,Aug 21,02:00:35,Find monitor data for server [2c9180875dd2ce1d015dd342c1ed029b] start [Mon Aug 21 08:00:19 UTC 2017] end [Mon Aug 21 09:00:19 UTC 2017]
+Use Case,Docker Server Controller,Aug 21,02:00:37,Find docker-server status by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:04:53,Find monitor data for server [2c9180875dd2ce1d015dd342c1ed029b] start [Mon Aug 21 08:04:37 UTC 2017] end [Mon Aug 21 09:04:37 UTC 2017]
+Use Case,Docker Server Controller,Aug 21,02:04:54,Find monitor data for server [2c9180875dd2ce1d015dd342c1ed029b] start [Mon Aug 21 08:04:37 UTC 2017] end [Mon Aug 21 09:04:37 UTC 2017]
+Use Case,Docker Server Controller,Aug 21,02:04:55,Find docker-server status by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:04:57,Find monitor data for server [2c9180875dd2ce1d015dd342c1ed029b] start [Mon Aug 21 08:04:40 UTC 2017] end [Mon Aug 21 09:04:40 UTC 2017]
+Use Case,Docker Server Controller,Aug 21,02:04:57,Find monitor data for server [2c9180875dd2ce1d015dd342c1ed029b] start [Mon Aug 21 08:04:40 UTC 2017] end [Mon Aug 21 09:04:40 UTC 2017]
+Use Case,Docker Server Controller,Aug 21,02:04:57,Find Task by docker-serverid [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:04:59,Find docker-server status by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:05:00,getLifeCycleProfile for dockerserver id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:06:01,getLifeCycleProfile for dockerserver id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:07:03,Find Task by docker-serverid [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,02:07:07,Find docker-server by id [2c9180875dd2ce1d015dd342c1ed029b]
+Use Case,Docker Server Controller,Aug 21,03:18:08,Find all docker-servers
+Use Case,Docker Volume Controller,Aug 20,21:51:10,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,21:52:10,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,21:53:10,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,21:54:29,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,22:04:33,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,22:17:18,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,22:22:13,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,22:46:18,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,22:51:58,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,22:57:38,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:07:44,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:14:38,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:20:27,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:25:58,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:31:38,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:37:19,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:42:58,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:45:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:46:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:47:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:48:17,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:48:38,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:49:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:50:17,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:51:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:52:17,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:53:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:54:17,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:54:18,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:55:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:56:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:57:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:58:17,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:59:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 20,23:59:59,Find all Volume.
+Use Case,Docker Volume Controller,Aug 21,00:00:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 21,00:01:16,Find all Volume.
+Use Case,Docker Volume Controller,Aug 21,00:02:17,Find all Volume.
+Use Case,Provision Controller,Aug 20,21:44:53,Find all Provisions.
+Use Case,Provision Controller,Aug 20,21:45:02,Find all Provisions.
+Use Case,Provision Controller,Aug 20,21:45:05,Find Provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:45:05,Find App comments.
+Use Case,Provision Controller,Aug 20,21:45:05,Find ProvisionTask by provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:45:10,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Mon Aug 21 03:44:54 UTC 2017] end [Mon Aug 21 04:44:54 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:45:10,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Mon Aug 21 03:44:54 UTC 2017] end [Mon Aug 21 04:44:54 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:45:19,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Mon Aug 21 03:45:03 UTC 2017] end [Mon Aug 21 04:45:03 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:45:19,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Mon Aug 21 03:45:03 UTC 2017] end [Mon Aug 21 04:45:03 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:46:06,Find Provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:46:06,Find ProvisionTask by provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:46:56,Find Provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:46:56,Find App comments.
+Use Case,Provision Controller,Aug 20,21:46:56,Find ProvisionTask by provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:46:58,Find all Provisions.
+Use Case,Provision Controller,Aug 20,21:47:04,Find Provision id [2c9180875d7c33da015da04a87233a77]
+Use Case,Provision Controller,Aug 20,21:47:04,Find ProvisionTask by provision id [2c9180875d7c33da015da04a87233a77]
+Use Case,Provision Controller,Aug 20,21:47:04,Find App comments.
+Use Case,Provision Controller,Aug 20,21:47:08,find monitor data for Provision [2c9180875d7c33da015da04a87233a77] start [Mon Aug 21 03:46:52 UTC 2017] end [Mon Aug 21 04:46:52 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:47:08,find monitor data for Provision [2c9180875d7c33da015da04a87233a77] start [Mon Aug 21 03:46:52 UTC 2017] end [Mon Aug 21 04:46:52 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:47:45,find monitor data for Provision [2c9180875d7c33da015da04a87233a77] start [Sun Aug 20 07:00:29 UTC 2017] end [Mon Aug 21 06:59:29 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:47:53,Find all Provisions.
+Use Case,Provision Controller,Aug 20,21:47:56,Find ProvisionTask by provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:47:56,Find Provision id [2c9180875de89447015df0c61a053a18]
+Use Case,Provision Controller,Aug 20,21:47:56,Find App comments.
+Use Case,Provision Controller,Aug 20,21:47:59,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Mon Aug 21 03:47:42 UTC 2017] end [Mon Aug 21 04:47:42 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:47:59,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Mon Aug 21 03:47:42 UTC 2017] end [Mon Aug 21 04:47:42 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:48:00,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Sun Aug 20 07:00:44 UTC 2017] end [Mon Aug 21 06:59:44 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:48:03,find monitor data for Provision [2c9180875de89447015df0c61a053a18] start [Mon Aug 21 03:47:47 UTC 2017] end [Mon Aug 21 04:47:47 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:48:10,Find all Provisions.
+Use Case,Provision Controller,Aug 20,21:48:14,Find Provision id [2c9180865de18be7015de7297d9322ff]
+Use Case,Provision Controller,Aug 20,21:48:14,Find ProvisionTask by provision id [2c9180865de18be7015de7297d9322ff]
+Use Case,Provision Controller,Aug 20,21:48:14,Find App comments.
+Use Case,Provision Controller,Aug 20,21:48:16,find monitor data for Provision [2c9180865de18be7015de7297d9322ff] start [Mon Aug 21 03:48:00 UTC 2017] end [Mon Aug 21 04:48:00 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:48:16,find monitor data for Provision [2c9180865de18be7015de7297d9322ff] start [Mon Aug 21 03:48:00 UTC 2017] end [Mon Aug 21 04:48:00 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:48:19,find monitor data for Provision [2c9180865de18be7015de7297d9322ff] start [Sun Aug 20 07:00:03 UTC 2017] end [Mon Aug 21 06:59:03 UTC 2017]
+Use Case,Provision Controller,Aug 20,21:49:14,Find Provision id [2c9180865de18be7015de7297d9322ff]
+Use Case,Provision Controller,Aug 20,21:49:14,Find ProvisionTask by provision id [2c9180865de18be7015de7297d9322ff]
+Use Case,Provision Controller,Aug 20,21:50:03,Find ProvisionTask by provision id [2c9180865de18be7015de7297d9322ff]
+Use Case,Provision Controller,Aug 20,21:50:03,Find Provision id [2c9180865de18be7015de7297d9322ff]
+Use Case,Provision Controller,Aug 20,21:50:03,Find App comments.
+Use Case,Provision Controller,Aug 20,21:50:05,Find all Provisions.
+Use Case,Provision Controller,Aug 20,23:31:06,Provision by Blueprint object id [2c9180865c66c328015ca536d8305c48]
+Use Case,Provision Controller,Aug 20,23:31:06,Find Provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:06,Find App comments.
+Use Case,Provision Controller,Aug 20,23:31:06,Find ProvisionTask by provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:17,Find Provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:17,Find ProvisionTask by provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:27,Find ProvisionTask by provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:27,Find Provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:37,Find Provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:37,Find ProvisionTask by provision id [2c9180875de89447015e037cd5423c19]
+Use Case,Provision Controller,Aug 20,23:31:47,Find all Provisions.
+Use Case,Provision Controller,Aug 20,23:31:53,Find Provision id [2c9180875d7c33da015da04a87233a77]
+Use Case,Provision Controller,Aug 20,23:31:53,Find ProvisionTask by provision id [2c9180875d7c33da015da04a87233a77]
+Use Case,Provision Controller,Aug 20,23:31:53,Find App comments.
+Use Case,Provision Controller,Aug 20,23:32:02,find monitor data for Provision [2c9180875d7c33da015da04a87233a77] start [Mon Aug 21 05:31:46 UTC 2017] end [Mon Aug 21 06:31:46 UTC 2017]
+Use Case,Provision Controller,Aug 20,23:32:02,find monitor data for Provision [2c9180875d7c33da015da04a87233a77] start [Mon Aug 21 05:31:46 UTC 2017] end [Mon Aug 21 06:31:46 UTC 2017]
+Use Case,Provision Controller,Aug 20,23:32:07,find monitor data for Provision [2c9180875d7c33da015da04a87233a77] start [Sun Aug 20 07:00:51 UTC 2017] end [Mon Aug 21 06:59:51 UTC 2017]
+Use Case,Provision Controller,Aug 20,23:32:32,getBackupProfile for Provision id [2c9180875d7c33da015da04a87233a77]
+Use Case,Provision Controller,Aug 20,23:35:28,getBackupProfile for Provision id [2c9180875d7c33da015da04a87233a77]
+Use Case,Provision Controller,Aug 20,23:35:33,getLifeCycleProfile for Provision id [2c9180875d7c33da015da04a87233a77]
+Use Case,Blueprint Controller,Aug 20,21:44:43,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 20,21:44:57,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 20,23:20:14,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 20,23:29:19,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 20,23:30:03,Find Blueprint by id [2c9180865c66c328015ca536d8305c48]
+Use Case,Blueprint Controller,Aug 21,01:53:17,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,01:53:20,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,01:53:35,Find Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 21,01:53:40,Find managed Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 21,01:58:08,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,01:59:22,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,01:59:25,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,01:59:43,Filter Blueprint by term [DOCKER_COMPOSE] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:07:15,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:07:19,Search Blueprint by term [app] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:07:22,Filter Blueprint by term [VM_COMPOSE] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:07:36,Find Blueprint by id [2c9180865c65a7c5015c65e405ab0086]
+Use Case,Blueprint Controller,Aug 21,02:07:38,Find managed Blueprint by id [2c9180865c65a7c5015c65e405ab0086]
+Use Case,Blueprint Controller,Aug 21,02:56:41,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:56:45,Search Blueprint by term [m] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:56:46,Search Blueprint by term [mu] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:56:46,Search Blueprint by term [mul] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:56:46,Search Blueprint by term [mult] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:56:46,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:56:51,Find Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 21,02:56:58,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:57:00,Find Blueprint by id [2c9180865c65a7c5015c65e405ab0086]
+Use Case,Blueprint Controller,Aug 21,02:57:02,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:57:04,Find Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 21,02:57:21,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,02:57:32,Find Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 21,03:01:09,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:01:17,Find Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 21,03:01:26,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:01:28,Find Blueprint by id [2c9180865c65a7c5015c65e405ab0086]
+Use Case,Blueprint Controller,Aug 21,03:01:32,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:02:01,Find Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 21,03:02:04,Search Blueprint by term [multi] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:52:59,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:53:05,Search Blueprint by term [m] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:53:05,Search Blueprint by term [mu] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:53:06,Search Blueprint by term [mul] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:53:06,Search Blueprint by term [mu] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 21,03:53:08,Find Blueprint by id [2c9180865c65a7c5015c65e405ab0086]
+Use Case,Blueprint Controller,Aug 21,03:53:46,Find managed Blueprint by id [2c9180865c65a7c5015c65e405ab0086]

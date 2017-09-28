@@ -1,0 +1,144 @@
+type,error,date,time,details
+Error,Access Denied,Aug 18,06:33:42," AuditEvent [timestamp=Fri Aug 18 13:33:42 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=不允许访问}]"
+Error,Access Denied,Aug 18,08:47:09," AuditEvent [timestamp=Fri Aug 18 15:47:09 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:06:15," AuditEvent [timestamp=Fri Aug 18 16:06:15 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:11:15," AuditEvent [timestamp=Fri Aug 18 16:11:15 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:16:17," AuditEvent [timestamp=Fri Aug 18 16:16:17 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:21:15," AuditEvent [timestamp=Fri Aug 18 16:21:15 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:26:27," AuditEvent [timestamp=Fri Aug 18 16:26:27 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:31:14," AuditEvent [timestamp=Fri Aug 18 16:31:14 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:36:14," AuditEvent [timestamp=Fri Aug 18 16:36:14 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,09:40:14," AuditEvent [timestamp=Fri Aug 18 16:40:14 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,10:54:49," AuditEvent [timestamp=Fri Aug 18 17:54:49 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,10:58:32," AuditEvent [timestamp=Fri Aug 18 17:58:32 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,10:58:36," AuditEvent [timestamp=Fri Aug 18 17:58:36 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,13:18:37," AuditEvent [timestamp=Fri Aug 18 20:18:37 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,13:23:47," AuditEvent [timestamp=Fri Aug 18 20:23:47 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,13:28:36," AuditEvent [timestamp=Fri Aug 18 20:28:36 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,13:31:33," AuditEvent [timestamp=Fri Aug 18 20:31:33 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,13:31:33," AuditEvent [timestamp=Fri Aug 18 20:31:33 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,13:31:33," AuditEvent [timestamp=Fri Aug 18 20:31:33 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,13:31:37," AuditEvent [timestamp=Fri Aug 18 20:31:37 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 18,18:00:03," AuditEvent [timestamp=Sat Aug 19 01:00:03 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Access Denied,Aug 19,02:38:14," AuditEvent [timestamp=Sat Aug 19 09:38:14 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Runtime Exception,Aug 18,09:40:35,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Runtime Exception,Aug 18,09:40:35,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Runtime Exception,Aug 18,09:44:53,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Runtime Exception,Aug 18,09:44:53,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Runtime Exception,Aug 18,09:46:19,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Runtime Exception,Aug 18,09:46:19,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Runtime Exception,Aug 18,10:58:55,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Runtime Exception,Aug 18,10:58:55,java.lang.RuntimeException: java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Transport Error,Aug 18,06:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 121]"
+Error,Transport Error,Aug 18,07:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 122]"
+Error,Transport Error,Aug 18,07:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 123]"
+Error,Transport Error,Aug 18,08:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 124]"
+Error,Transport Error,Aug 18,08:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 125]"
+Error,Transport Error,Aug 18,09:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 126]"
+Error,Transport Error,Aug 18,09:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 127]"
+Error,Transport Error,Aug 18,10:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 128]"
+Error,Transport Error,Aug 18,10:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 129]"
+Error,Transport Error,Aug 18,11:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 130]"
+Error,Transport Error,Aug 18,11:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 131]"
+Error,Transport Error,Aug 18,12:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 132]"
+Error,Transport Error,Aug 18,12:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 133]"
+Error,Transport Error,Aug 18,13:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 134]"
+Error,Transport Error,Aug 18,13:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 135]"
+Error,Transport Error,Aug 18,14:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 136]"
+Error,Transport Error,Aug 18,14:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 137]"
+Error,Transport Error,Aug 18,15:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 138]"
+Error,Transport Error,Aug 18,15:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 139]"
+Error,Transport Error,Aug 18,16:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 140]"
+Error,Transport Error,Aug 18,16:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 141]"
+Error,Transport Error,Aug 18,17:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 142]"
+Error,Transport Error,Aug 18,17:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 143]"
+Error,Transport Error,Aug 18,18:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 144]"
+Error,Transport Error,Aug 18,18:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 145]"
+Error,Transport Error,Aug 18,19:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 146]"
+Error,Transport Error,Aug 18,19:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 147]"
+Error,Transport Error,Aug 18,20:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 148]"
+Error,Transport Error,Aug 18,20:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 149]"
+Error,Transport Error,Aug 18,21:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 150]"
+Error,Transport Error,Aug 18,21:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 151]"
+Error,Transport Error,Aug 18,22:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 152]"
+Error,Transport Error,Aug 18,22:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 153]"
+Error,Transport Error,Aug 18,23:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 154]"
+Error,Transport Error,Aug 18,23:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 155]"
+Error,Transport Error,Aug 19,00:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 156]"
+Error,Transport Error,Aug 19,00:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 157]"
+Error,Transport Error,Aug 19,01:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 158]"
+Error,Transport Error,Aug 19,01:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 159]"
+Error,Transport Error,Aug 19,02:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 160]"
+Error,Transport Error,Aug 19,02:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 161]"
+Error,Transport Error,Aug 19,03:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 162]"
+Error,Transport Error,Aug 19,03:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 163]"
+Error,Transport Error,Aug 19,04:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 164]"
+Error,Transport Error,Aug 19,04:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 165]"
+Error,Transport Error,Aug 19,05:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 166]"
+Error,Transport Error,Aug 19,05:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 167]"
+Error,Transport Error,Aug 19,06:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 168]"
+Error,Transport Error,Aug 19,06:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 169]"
+Error,Warning,Aug 18,09:40:35,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Warning,Aug 18,09:40:35,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Warning,Aug 18,09:44:53,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Warning,Aug 18,09:44:53,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Warning,Aug 18,09:46:19,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Warning,Aug 18,09:46:19,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Warning,Aug 18,10:58:55,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Error,Warning,Aug 18,10:58:55,com.dchq.iaas.service.HandlerDelegate - java.rmi.RemoteException: VI SDK invoke exception:java.net.UnknownHostException: hgvcenter.skygrid.cloud
+Use Case,Docker Server Controller,Aug 18,09:40:23,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 18,09:40:31,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 18,09:44:49,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 18,09:45:00,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 18,09:46:14,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 18,10:15:23,Find all managed docker-servers
+Use Case,Docker Server Controller,Aug 18,10:58:51,Find all managed docker-servers
+Use Case,Provision Controller,Aug 18,13:38:09,Find all Provisions.
+Use Case,Blueprint Controller,Aug 18,09:40:21,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,10:58:43,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:31:45,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:31:50,Filter Blueprint by term [MY] page [1] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:46:36,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:46:38,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:46:40,Filter Blueprint by term [MY] page [1] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:46:42,Find Blueprint by id [2c9180865c66c328015ca4ab5b065a86]
+Use Case,Blueprint Controller,Aug 18,13:46:46,Filter Blueprint by term [MY] page [1] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:46:47,Find Blueprint by id [2c9180865c66c328015ca53831085c4c]
+Use Case,Blueprint Controller,Aug 18,13:46:51,Filter Blueprint by term [MY] page [1] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:46:52,Find Blueprint by id [402881864e1a36cc014e1a399cf90101]
+Use Case,Blueprint Controller,Aug 18,13:47:06,Filter Blueprint by term [MY] page [1] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:47:09,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:47:11,Find Blueprint by id [2c9180865c66c328015ca539d5dc5c53]
+Use Case,Blueprint Controller,Aug 18,13:47:16,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:47:18,Find Blueprint by id [2c9180865c65a7c5015c65caf4b40005]
+Use Case,Blueprint Controller,Aug 18,13:47:21,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:47:24,Find Blueprint by id [2c9180865c66c328015ca534924d5c3d]
+Use Case,Blueprint Controller,Aug 18,13:47:26,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:47:36,Find Blueprint by id [2c9180875d19a616015d1f7dfc0f0d59]
+Use Case,Blueprint Controller,Aug 18,13:47:49,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:47:56,Find Blueprint by id [2c9180865dd40165015dd4c5c1620595]
+Use Case,Blueprint Controller,Aug 18,13:48:00,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:48:10,Find Blueprint by id [2c9180865de18be7015de294672606f0]
+Use Case,Blueprint Controller,Aug 18,13:48:27,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:48:29,Find Blueprint by id [2c9180865c66c328015ca536d8305c48]
+Use Case,Blueprint Controller,Aug 18,13:48:32,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:48:37,Find Blueprint by id [2c9180875d19a616015d19b5a14e004f]
+Use Case,Blueprint Controller,Aug 18,13:48:43,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:48:48,Find Blueprint by id [2c9180875dd2ce1d015dd3c56478063b]
+Use Case,Blueprint Controller,Aug 18,13:49:02,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:49:05,Find Blueprint by id [2c9180865dd40165015dd40dc1180071]
+Use Case,Blueprint Controller,Aug 18,13:49:14,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:49:16,Find Blueprint by id [2c9180865c65a7c5015c65d2d4180057]
+Use Case,Blueprint Controller,Aug 18,13:49:20,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,13:49:32,Find Blueprint by id [2c9180865de18be7015de2cc206f08e9]
+Use Case,Blueprint Controller,Aug 18,14:10:31,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,14:10:33,Find Blueprint by id [2c9180865c65a7c5015c65ca1eb20004]
+Use Case,Blueprint Controller,Aug 18,14:10:37,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,14:10:43,Find Blueprint by id [2c9180865c65a7c5015c65caf4b40005]
+Use Case,Blueprint Controller,Aug 18,14:10:46,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,14:10:54,Find Blueprint by id [2c9180875d19a616015d1f9a39070dd3]
+Use Case,Blueprint Controller,Aug 18,14:10:56,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,15:02:03,Find Blueprint by id [2c9180875de89447015df15409513dff]
+Use Case,Blueprint Controller,Aug 18,15:02:08,Filter Blueprint by term [MY] page [0] pageSize [20]
+Use Case,Blueprint Controller,Aug 18,15:02:17,Find Blueprint by id [2c9180865c66c328015ca534924d5c3d]
+Use Case,Blueprint Controller,Aug 18,15:49:24,Filter Blueprint by term [MY] page [0] pageSize [20]

@@ -3,6 +3,7 @@ import java.util.*;
 
 /**
  * Log file analyzer
+ * Map<processName, Map<dateTime, descriptions>>
  */
 public class LogAnalyzer {
     private Map<String, Map<String, List<String>>> processToDateList;
@@ -44,6 +45,7 @@ public class LogAnalyzer {
                     }
                     currentLine = reader.readLine();
                 }
+                reader.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
