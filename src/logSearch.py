@@ -76,13 +76,11 @@ def sortbyDate(fs):
                     errors.append(row)
         errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]+ " " + entry[3] + " 2017", format))
         for entry in errors:
-            print(entry[2], entry[3])
-        for entry in errors:
-                error_type = entry[0][0]
-                error_name = entry[0][1]
-                error_date = entry[0][2]
-                error_time = entry[0][3]
-                error_detail = entry[0][4]
+                error_type = entry[0]
+                error_name = entry[1]
+                error_date = entry[2]
+                error_time = entry[3]
+                error_detail = entry[4]
                 writer.writerow([error_type, error_name, error_date, error_time, error_detail])
 """
 Example commands used for debugging
