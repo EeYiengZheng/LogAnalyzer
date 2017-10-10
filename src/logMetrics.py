@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 
 from logAnalytics import errorlog, usagelog
+from logSearch import sortbyDate
+import datetime
+import calendar
 
 import csv
 
@@ -10,6 +13,7 @@ failureList = ['HttpClientError', 'AccessDenied', 'RuntimeException', \
 errorRequests = ['HttpClientError', 'RuntimeException', \
             'transport error', 'DefaultResponseErrorHandler']
 
+# With these three following methods, should I use a csv reader?
 
 def requestReliability(fs):
     errorcount = 0
@@ -85,12 +89,51 @@ def usagePieChart(fin, fout):
     plt.axis('equal')
     plt.show()
 
-def errorRate(fin, fout):
-    return
+def errorRate(fs):
+    format = "%b %d %H:%M:%S %Y"
+    rate_dictionary = {}
+    currentdate = datetime.datetime.now()
+    currenthour = 0.5
+    count = 0
+    sortbyDate(fs, "logforRate.csv")
+    with open("logforRate.csv", 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            error_date = row[2]
+            error_time = row[3]
+            if error_date != 'date':
+                date  = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)      
+                if currenthour == 0.5:
+                    currenthour = date.hour
+                    currentdate = date
+                    count = 1
+                    time = str(calendar.month_abbr[date.month]) + " " + str(date.day) + " " + str(date.hour) + ":00"
+                elif date.hour == currenthour \
+                    and date.month == currentdate.month \
+                    and date.day == currentdate.day:
+                    count += 1
+                    rate_dictionary[time] = count
+                else:
+                    currenthour = date.hour
+                    currentdate = date
+                    time = str(calendar.month_abbr[date.month]) + " " + str(date.day) + " " + str(date.hour) + ":00"
+                    count = 0
+    times = list(rate_dictionary.keys())
+    x = range(len(rate_dictionary))
+    y = list(rate_dictionary.values())
+    print(times)
+    print(y)
+    plt.scatter(x, y)
+    plt.plot(x, y)
+    plt.show()
 
 
+"""
+Statements used for testing
+"""
 print(requestReliability("syslog3.log"))
 print(sessionReliability("syslog3.log"))
 print(meanTransactionsBeforeFailure("syslog3.log"))
 errorPieChart("syslog3.log", "errorlog.csv")
 usagePieChart("syslog3.log", "usagelog.csv")
+errorRate("errorlog.csv")

@@ -63,18 +63,19 @@ def searchPeriod(fs, start, end):
 """
 Sort a given log file fs of errors by date.
 """
-def sortbyDate(fs):
+def sortbyDate(fin, fout):
     errors = []
     format = "%b %d %H:%M:%S %Y"
-    with open('sorted_log.csv', 'w') as csvfile:
+    with open(fout, 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
-        with open(fs, 'r') as csvfile:
+        with open(fin, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
                 if row[2] != 'date':
                     errors.append(row)
-        errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]+ " " + entry[3] + " 2017", format))
+        errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
+                        + " " + entry[3] + " 2017", format))
         for entry in errors:
                 error_type = entry[0]
                 error_name = entry[1]
@@ -82,9 +83,10 @@ def sortbyDate(fs):
                 error_time = entry[3]
                 error_detail = entry[4]
                 writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+    return fout
 """
 Example commands used for debugging
 """
 searchTerm("log_test.csv", "Access Denied")
 searchPeriod("log_test.csv", "Aug 24 00:00:00", "Aug 22 00:00:00")
-sortbyDate("log_test.csv")
+sortbyDate("log_test.csv", "sorted_log.csv")
