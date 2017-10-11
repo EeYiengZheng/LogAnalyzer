@@ -4,6 +4,7 @@ from logAnalytics import errorlog, usagelog
 from logSearch import sortbyDate
 import datetime
 import calendar
+import numpy as np
 
 import csv
 
@@ -46,20 +47,21 @@ def sessionReliability(fs):
     return float(count / total)
 
 def meanTransactionsBeforeFailure(fs):
-    datalist = []
-    count = 0
-    failurefound = False
     with open(fs, 'r') as in_file:
-        for line in in_file:
-            for fail in failureList:
-                if fail in line:
-                    failurefound = True
-            if failurefound and count != 0:
-                datalist.append(count)
-                count = 0
-            else:
-                count += 1
-                failurefound = False
+        datalist = []
+        count = 0
+        failurefound = False
+        with open(fs, 'r') as in_file:
+            for line in in_file:
+                for fail in failureList:
+                    if fail in line:
+                        failurefound = True
+                if failurefound and count != 0:
+                    datalist.append(count)
+                    count = 0
+                else:
+                    count += 1
+                    failurefound = False
     return float(sum(datalist) / len(datalist))
 
 def terminalFailureProbability(fs):
@@ -102,12 +104,15 @@ def errorRate(fs):
             error_date = row[2]
             error_time = row[3]
             if error_date != 'date':
-                date  = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)      
+                date  = datetime.datetime.strptime(error_date + " " + error_time \
+                    + " 2017", format)      
                 if currenthour == 0.5:
                     currenthour = date.hour
                     currentdate = date
+                    firstdate = date
                     count = 1
-                    time = str(calendar.month_abbr[date.month]) + " " + str(date.day) + " " + str(date.hour) + ":00"
+                    time = str(calendar.month_abbr[date.month]) + \
+                    " " + str(date.day) + " " + str(date.hour) + ":00"
                 elif date.hour == currenthour \
                     and date.month == currentdate.month \
                     and date.day == currentdate.day:
@@ -116,21 +121,26 @@ def errorRate(fs):
                 else:
                     currenthour = date.hour
                     currentdate = date
-                    time = str(calendar.month_abbr[date.month]) + " " + str(date.day) + " " + str(date.hour) + ":00"
+                    time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
+                    + " " + str(date.hour) + ":00"
                     count = 0
     times = list(rate_dictionary.keys())
     x = range(len(rate_dictionary))
     y = list(rate_dictionary.values())
-    print(times)
-    print(y)
+    plt.title("Number of Errors per hour")
+    plt.xlabel("Time")
+    plt.ylabel("Number of Errors")
     plt.scatter(x, y)
+    plt.xticks([i*4 for i in range(int(len(rate_dictionary) / 4 ))], \
+        [str(datetime.datetime.combine(firstdate, datetime.time(4 * i)).strftime("%b %d %H:00")) \
+        for i in range(int(len(rate_dictionary) / 4 ))])
     plt.plot(x, y)
     plt.show()
-
 
 """
 Statements used for testing
 """
+
 print(requestReliability("syslog3.log"))
 print(sessionReliability("syslog3.log"))
 print(meanTransactionsBeforeFailure("syslog3.log"))
