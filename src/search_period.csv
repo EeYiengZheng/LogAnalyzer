@@ -1,4 +1,7 @@
 type,error,date,time,details
+Error,Http Client Error,Aug 22,11:00:24,2017-08-22 18:00:24.979  WARN 1 --- [skExecutor-2504] c.d.n.pfsense.PfSenseOperations          : org.springframework.web.client.HttpClientErrorException: 401 Unauthorized
+Error,Http Client Error,Aug 22,11:00:24,java.lang.RuntimeException: org.springframework.web.client.HttpClientErrorException: 401 Unauthorized
+Error,Http Client Error,Aug 22,11:00:24,Caused by: org.springframework.web.client.HttpClientErrorException: 401 Unauthorized
 Error,Access Denied,Aug 22,09:08:19," AuditEvent [timestamp=Tue Aug 22 16:08:19 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
 Error,Access Denied,Aug 22,09:28:37," AuditEvent [timestamp=Tue Aug 22 16:28:37 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
 Error,Access Denied,Aug 22,09:33:37," AuditEvent [timestamp=Tue Aug 22 16:33:37 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
@@ -92,3 +95,68 @@ Error,Access Denied,Aug 22,21:51:25," AuditEvent [timestamp=Wed Aug 23 04:51:25 
 Error,Access Denied,Aug 22,21:56:27," AuditEvent [timestamp=Wed Aug 23 04:56:27 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
 Error,Access Denied,Aug 23,01:54:44," AuditEvent [timestamp=Wed Aug 23 08:54:44 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
 Error,Access Denied,Aug 23,02:54:07," AuditEvent [timestamp=Wed Aug 23 09:54:07 UTC 2017, principal=anonymousUser, type=AUTHORIZATION_FAILURE, data={type=org.springframework.security.access.AccessDeniedException, message=Access is denied}]"
+Error,Runtime Exception,Aug 22,11:00:24,java.lang.RuntimeException: org.springframework.web.client.HttpClientErrorException: 401 Unauthorized
+Error,Transport Error,Aug 22,07:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 314]"
+Error,Transport Error,Aug 22,07:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 315]"
+Error,Transport Error,Aug 22,08:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 316]"
+Error,Transport Error,Aug 22,08:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 317]"
+Error,Transport Error,Aug 22,09:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 318]"
+Error,Transport Error,Aug 22,09:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 319]"
+Error,Transport Error,Aug 22,10:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 320]"
+Error,Transport Error,Aug 22,10:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 321]"
+Error,Transport Error,Aug 22,11:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 322]"
+Error,Transport Error,Aug 22,11:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 323]"
+Error,Transport Error,Aug 22,12:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 324]"
+Error,Transport Error,Aug 22,12:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 325]"
+Error,Transport Error,Aug 22,13:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 326]"
+Error,Transport Error,Aug 22,13:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 327]"
+Error,Transport Error,Aug 22,14:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 328]"
+Error,Transport Error,Aug 22,14:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 329]"
+Error,Transport Error,Aug 22,15:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 330]"
+Error,Transport Error,Aug 22,15:38:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 331]"
+Error,Transport Error,Aug 22,16:08:44,"[MessageBroker-2] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 332]"
+Error,Transport Error,Aug 22,16:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 333]"
+Error,Transport Error,Aug 22,17:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 334]"
+Error,Transport Error,Aug 22,17:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 335]"
+Error,Transport Error,Aug 22,18:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 336]"
+Error,Transport Error,Aug 22,18:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 337]"
+Error,Transport Error,Aug 22,19:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 338]"
+Error,Transport Error,Aug 22,19:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 339]"
+Error,Transport Error,Aug 22,20:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 340]"
+Error,Transport Error,Aug 22,20:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 341]"
+Error,Transport Error,Aug 22,21:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 342]"
+Error,Transport Error,Aug 22,21:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 343]"
+Error,Transport Error,Aug 22,22:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 344]"
+Error,Transport Error,Aug 22,22:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 345]"
+Error,Transport Error,Aug 22,23:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 346]"
+Error,Transport Error,Aug 22,23:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 347]"
+Error,Transport Error,Aug 23,00:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 348]"
+Error,Transport Error,Aug 23,00:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 349]"
+Error,Transport Error,Aug 23,01:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 350]"
+Error,Transport Error,Aug 23,01:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 351]"
+Error,Transport Error,Aug 23,02:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 352]"
+Error,Transport Error,Aug 23,02:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 353]"
+Error,Transport Error,Aug 23,03:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 354]"
+Error,Transport Error,Aug 23,03:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 355]"
+Error,Transport Error,Aug 23,04:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 356]"
+Error,Transport Error,Aug 23,04:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 357]"
+Error,Transport Error,Aug 23,05:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 358]"
+Error,Transport Error,Aug 23,05:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 359]"
+Error,Transport Error,Aug 23,06:08:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 360]"
+Error,Transport Error,Aug 23,06:38:44,"[MessageBroker-1] - sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 361]"
+Error,Default Response Error Handler,Aug 22,11:00:24,#011at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+Error,Warning,Aug 22,09:51:00, [skExecutor-2419] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 22,09:51:15, [skExecutor-2420] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 22,09:51:15, [skExecutor-2420] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 22,09:51:20, [skExecutor-2421] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 22,09:51:20, [skExecutor-2421] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 22,09:51:20, [skExecutor-2421] c.d.s.p.helper.VolumeEntitlementChecker  : TODO -- look for volume by repository not cluster & host.
+Error,Warning,Aug 22,10:48:24, [nio-8080-exec-8] com.dchq.config.ExceptionTranslator      : ERROR-ID [b53ff5c3-b569-428f-8ad8-5e889554e067]
+Error,Warning,Aug 22,10:48:24, [nio-8080-exec-8] com.dchq.config.ExceptionTranslator      : Access is denied
+Error,Warning,Aug 22,10:49:20, [nio-8080-exec-3] com.dchq.config.ExceptionTranslator      : ERROR-ID [2caef46f-87cd-43e9-99f4-3415003bc3c7]
+Error,Warning,Aug 22,10:49:20, [nio-8080-exec-3] com.dchq.config.ExceptionTranslator      : Access is denied
+Error,Warning,Aug 22,10:50:09, [nio-8080-exec-7] com.dchq.config.ExceptionTranslator      : ERROR-ID [0c3e307b-a679-44ff-86fb-7707b33c8df8]
+Error,Warning,Aug 22,10:50:09, [nio-8080-exec-7] com.dchq.config.ExceptionTranslator      : Access is denied
+Error,Warning,Aug 22,11:00:24, [skExecutor-2504] c.d.n.pfsense.PfSenseOperations          : org.springframework.web.client.HttpClientErrorException: 401 Unauthorized
+Error,Warning,Aug 22,11:00:24, [skExecutor-2504] c.d.n.pfsense.PfSenseOperations          : null
+Error,Timeout,Aug 22,23:20:07,"Missed heartbeats from client, timeout: 60s"
