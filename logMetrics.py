@@ -131,6 +131,7 @@ def errorRate(fs):
 """
 Statements used for testing
 """
+
 print(requestReliability("syslog3.log"))
 print(sessionReliability("syslog3.log"))
 print(meanTransactionsBeforeFailure("syslog3.log"))
