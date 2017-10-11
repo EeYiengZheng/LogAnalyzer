@@ -87,6 +87,11 @@ def sortbyDate(fin, fout):
 """
 Example commands used for debugging
 """
+def createLog(fs):
+    errorlog(fs, "log_test.csv")
+    usagelog(fs, "log_test.csv")
+
+createLog("syslog3.log")
 searchTerm("log_test.csv", "Access Denied")
 searchPeriod("log_test.csv", "Aug 24 00:00:00", "Aug 22 00:00:00")
 sortbyDate("log_test.csv", "sorted_log.csv")
