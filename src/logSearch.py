@@ -2,6 +2,7 @@ import csv
 from re import *
 import time
 import datetime
+from logAnalytics import errorlog, usagelog
 
 count = 0
 word_code = '[38866]: '
@@ -87,11 +88,9 @@ def sortbyDate(fin, fout):
 """
 Example commands used for debugging
 """
-def createLog(fs):
-    errorlog(fs, "log_test.csv")
-    usagelog(fs, "log_test.csv")
 
-createLog("syslog3.log")
+errorlog("syslog3.log", "log_test.csv")
+usagelog("syslog3.log", "usage_test.csv")
 searchTerm("log_test.csv", "Access Denied")
 searchPeriod("log_test.csv", "Aug 24 00:00:00", "Aug 22 00:00:00")
 sortbyDate("log_test.csv", "sorted_log.csv")
