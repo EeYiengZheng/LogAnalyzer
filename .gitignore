@@ -26,5 +26,8 @@ hs_err_pid*
 *.iml
 
 # Python 
-*/__pycache__
+__pycache__
 src/*.csv
+
+# Flask virtual environment
+flaskfrontend/flask
