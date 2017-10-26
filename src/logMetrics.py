@@ -137,13 +137,17 @@ def errorRate(fs):
     plt.plot(x, y)
     plt.show()
 
+
+
+
 """
 Statements used for testing
 """
 
-print(requestReliability("syslog3.log"))
-print(sessionReliability("syslog3.log"))
-print(meanTransactionsBeforeFailure("syslog3.log"))
+
+print("Request Reliability: " + str(requestReliability("syslog3.log")))
+print("Session Reliability: " + str(sessionReliability("syslog3.log")))
+print("Mean Transaction Before Failure: " + str(meanTransactionsBeforeFailure("syslog3.log")))
 errorPieChart("syslog3.log", "errorlog.csv")
 usagePieChart("syslog3.log", "usagelog.csv")
 errorRate("errorlog.csv")
