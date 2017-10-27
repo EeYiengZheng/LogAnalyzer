@@ -18,7 +18,7 @@ the key word to an output file.
 """
 def searchTerm(fs, term):
     with open ('search_term.csv', 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
         with open(fs, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
@@ -46,7 +46,7 @@ def searchPeriod(fs, start, end):
         e = s
         s = tmp
     with open('search_period.csv', 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
         with open(fs, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
@@ -68,7 +68,7 @@ def sortbyDate(fin, fout):
     errors = []
     format = "%b %d %H:%M:%S %Y"
     with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
         with open(fin, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)

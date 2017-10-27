@@ -1,4 +1,4 @@
-import csv, os
+import csv
 from re import *
 import time
 
@@ -34,7 +34,7 @@ def errorlog(fin, fout):
                     end_index = line.index(word_code) + len(word_code)
                     error_type = 'Error'
                     error_name = 'Http Client Error'
-                    error_detail = line[end_index:].strip()
+                    error_detail = line[end_index:].rstrip()
                     error_date = search('\w{3}\s\d{1,2}', line).group(0)
                     error_time = search('\d{2}:\d{2}:\d{2}', line).group(0)
     
