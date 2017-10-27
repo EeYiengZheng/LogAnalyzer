@@ -1,4 +1,4 @@
-import csv
+import csv, os
 from re import *
 import time
 
@@ -12,7 +12,7 @@ def errorlog(fin, fout):
     count = 0
     error_dict = {}
     with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
     
         # open a syslog file to read from
@@ -34,7 +34,7 @@ def errorlog(fin, fout):
                     end_index = line.index(word_code) + len(word_code)
                     error_type = 'Error'
                     error_name = 'Http Client Error'
-                    error_detail = line[end_index:].rstrip()
+                    error_detail = line[end_index:].strip()
                     error_date = search('\w{3}\s\d{1,2}', line).group(0)
                     error_time = search('\d{2}:\d{2}:\d{2}', line).group(0)
     
@@ -171,7 +171,7 @@ def usagelog(fin, fout):
     count = 0
     error_dict = {}
     with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
     
         # open a syslog file to read from
