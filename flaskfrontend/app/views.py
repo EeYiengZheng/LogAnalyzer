@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
 from .models import User
 from datetime import datetime
-from .forms import LoginForm, EditForm
+from .forms import LoginForm, RegistrationForm, EditForm
 
 
 @lm.user_loader
@@ -54,6 +54,17 @@ def login():
                            title='Sign In',
                            form=form,
                            providers=app.config['OPENID_PROVIDERS'])
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User(form.username.data, form.email.data,
+                    form.password.data)
+        db.add(user)
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
 
 @oid.after_login

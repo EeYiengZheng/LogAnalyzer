@@ -34,16 +34,15 @@
      #}
 
     <!-- Google OAuth 2 script -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-    <h1>Sign In</h1>
-    <form action="" method="post" name="login">
+
+    <div class="text-center">
+        <h1>Sign In</h1>
+        <img src="{{ url_for('static', filename='img/img_avatar.png') }}" alt="Avatar"
+             class="img-responsive img-circle avatar"/>
+    </div>
+    <form class="login" action="" method="post" name="login">
         {{ form.hidden_tag() }}
-        <div class="imgcontainer">
-            <img style="width: 100px;" src="{{url_for('static', filename='img/img_avatar.png')}}" alt="Avatar"
-                 class="avatar img-responsive">
-        </div>
-
         <div class="container">
             <label><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
@@ -51,24 +50,16 @@
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
 
-            <button type="submit">Login</button>
-            <input type="checkbox" checked="checked"> Remember me
+            <button class="btn btn-primary btn-block" type="submit">Login</button>
+            <p>{{ form.remember_me }} Remember Me</p>
         </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
+        <div class="container">
+            <button class="btn btn-danger disabled" type="button">Cancel</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
-    <div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true">
-<a href="#" onclick="signOut();">Sign out</a>
-<script>
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-</script>
+    <h4 class="text-center"><b>Use OAuth</b></h4>
+    <div class="container">
+        <div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
     </div>
 {% endblock %}
