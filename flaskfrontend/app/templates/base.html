@@ -1,29 +1,37 @@
 <html>
-  <head>
+<head>
+    <meta name="google-signin-client_id"
+          content="379298888253-g273kjmmvubafqedvlep73pcefsnee7i.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
     {% if title %}
-    <title>{{ title }} - microblog</title>
+        <title>{{ title }} - Log Analyzer</title>
     {% else %}
-    <title>microblog</title>
+        <title>Log Analyzer</title>
     {% endif %}
-  </head>
-  <body>
-        <div>Microblog:
+</head>
+<body>
+<div class="container-fluid">
+    <div>Log Analyzer:
         <a href="{{ url_for('index') }}">Home</a>
         {% if g.user.is_authenticated %}
-        | <a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a>
-        | <a href="{{ url_for('logout') }}">Logout</a>
+            | <a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a>
+            | <a href="{{ url_for('logout') }}">Logout</a>
         {% endif %}
     </div>
     <hr>
     {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-    {% for message in messages %}
-        <li>{{ message }} </li>
-    {% endfor %}
-    </ul>
-    {% endif %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }} </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     {% endwith %}
     {% block content %}{% endblock %}
-  </body>
+</div>
+</body>
 </html>

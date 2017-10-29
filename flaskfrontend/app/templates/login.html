@@ -2,20 +2,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {#
+    Old OpenID sign-in script
     <script type="text/javascript">
-    function set_openid(openid, pr)
-    {
-        u = openid.search('<username>');
-        if (u != -1) {
-            // openid requires username
-            user = prompt('Enter your ' + pr + ' username:');
-            openid = openid.substr(0, u) + user;
+        function set_openid(openid, pr) {
+            u = openid.search('<username>');
+            if (u != -1) {
+                // openid requires username
+                user = prompt('Enter your ' + pr + ' username:');
+                openid = openid.substr(0, u) + user;
+            }
+            form = document.forms['login'];
+            form.elements['openid'].value = openid;
         }
-        form = document.forms['login'];
-        form.elements['openid'].value = openid;
-    }
     </script>
-    <h1>Sign In</h1>
     <form action="" method="post" name="login">
         {{ form.hidden_tag() }}
         <p>
@@ -25,10 +25,50 @@
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}<br>
             |{% for pr in providers %}
-                <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
-            {% endfor %}
+            <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
+        {% endfor %}
         </p>
         <p>{{ form.remember_me }} Remember Me</p>
         <p><input type="submit" value="Sign In"></p>
     </form>
+     #}
+
+    <!-- Google OAuth 2 script -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <h1>Sign In</h1>
+    <form action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+        <div class="imgcontainer">
+            <img style="width: 100px;" src="{{url_for('static', filename='img/img_avatar.png')}}" alt="Avatar"
+                 class="avatar img-responsive">
+        </div>
+
+        <div class="container">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit">Login</button>
+            <input type="checkbox" checked="checked"> Remember me
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true">
+<a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+    </div>
 {% endblock %}
