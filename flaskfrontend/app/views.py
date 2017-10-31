@@ -3,14 +3,11 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
 from .forms import LoginForm#, UploadForm
 from .models import User
-<<<<<<< HEAD
 from flask import url_for, redirect, render_template
 from flask_wtf import Form
 #from werkzeug.utils import secure_filename
-=======
 from datetime import datetime
 from .forms import LoginForm, RegistrationForm, EditForm
->>>>>>> 6c7cfa9956903366fbf075e87ca7304551607f58
 
 
 @lm.user_loader
