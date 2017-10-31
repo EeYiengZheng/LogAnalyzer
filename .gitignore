@@ -24,3 +24,10 @@ hs_err_pid*
 # IDE specifics
 .idea
 *.iml
+
+# Python 
+**/__pycache__
+src/*.csv
+
+# Flask virtual environment
+flaskfrontend/flask

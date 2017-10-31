@@ -1,7 +1,12 @@
 from app import db
+<<<<<<< HEAD
 
+=======
+from flask_login import UserMixin
+from hashlib import md5
+>>>>>>> 6c7cfa9956903366fbf075e87ca7304551607f58
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)

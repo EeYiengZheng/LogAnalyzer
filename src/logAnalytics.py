@@ -12,7 +12,7 @@ def errorlog(fin, fout):
     count = 0
     error_dict = {}
     with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
     
         # open a syslog file to read from
@@ -171,7 +171,7 @@ def usagelog(fin, fout):
     count = 0
     error_dict = {}
     with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
     
         # open a syslog file to read from

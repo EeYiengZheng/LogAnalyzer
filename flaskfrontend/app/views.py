@@ -3,9 +3,14 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
 from .forms import LoginForm#, UploadForm
 from .models import User
+<<<<<<< HEAD
 from flask import url_for, redirect, render_template
 from flask_wtf import Form
 #from werkzeug.utils import secure_filename
+=======
+from datetime import datetime
+from .forms import LoginForm, RegistrationForm, EditForm
+>>>>>>> 6c7cfa9956903366fbf075e87ca7304551607f58
 
 
 @lm.user_loader
@@ -52,6 +57,17 @@ def login():
                            title='Sign In',
                            form=form,
                            providers=app.config['OPENID_PROVIDERS'])
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User(form.username.data, form.email.data,
+                    form.password.data)
+        db.add(user)
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
 
 @oid.after_login
