@@ -58,6 +58,15 @@
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
+
+    <!-- Registration button -->
+    <form class="register" action="{{url_for('register')}}" method="post" name="register">
+        {{ form.hidden_tag() }}
+        <div class="container">
+            <button class="btn btn-primary btn-block" type="submit">Register</button>
+        </div>
+    </form>
+    
     <h4 class="text-center"><b>Use OAuth</b></h4>
     <div class="container">
         <div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
