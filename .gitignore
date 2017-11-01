@@ -26,8 +26,13 @@ hs_err_pid*
 *.iml
 
 # Python 
-**/__pycache__
+__pycache__
 src/*.csv
+.pyc
 
 # Flask virtual environment
 flaskfrontend/flask
+
+# MacOS specific
+.DS_Store
+.DS_store.orig
