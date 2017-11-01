@@ -1,14 +1,9 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
-from .forms import LoginForm#, UploadForm
 from .models import User
-from flask import url_for, redirect, render_template
-from flask_wtf import Form
-#from werkzeug.utils import secure_filename
 from datetime import datetime
 from .forms import LoginForm, RegistrationForm, EditForm
-
 
 @lm.user_loader
 def load_user(id):
