@@ -17,7 +17,6 @@ def before_request():
 
 @app.route('/')
 @app.route('/index')
-@login_required
 def index():
     user = g.user
     posts = [
@@ -32,12 +31,27 @@ def index():
     ]
     return render_template('index.html',
                            title='Home',
-                           user=user,
-                           posts=posts)
+                           user=user)
+
+@app.route('/usecase')
+@login_required
+def usecase():
+    user = g.user
+    return render_template('usecase.html',
+                           title='Use Case',
+                           user=user)
+
+
+@app.route('/errorcase')
+@login_required
+def errorcase():
+    user = g.user
+    return render_template('usecase.html',
+                           title='Error Case',
+                           user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
-@oid.loginhandler
 def login():
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
@@ -54,15 +68,13 @@ def login():
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(form.username.data, form.email.data,
-                    form.password.data)
+        user = User()
         db.add(user)
         flash('Thanks for registering')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
 
-@oid.after_login
 def after_login(resp):
     if resp.email is None or resp.email == "":
         flash('Invalid login. Please try again.')
