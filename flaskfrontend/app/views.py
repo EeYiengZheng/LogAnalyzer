@@ -100,7 +100,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-
+"""
 def after_login(resp):
     if resp.email is None or resp.email == "":
         flash('Invalid login. Please try again.')
@@ -118,7 +118,7 @@ def after_login(resp):
         remember_me = session['remember_me']
         session.pop('remember_me', None)
     login_user(user, remember=remember_me)
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(request.args.get('next') or url_for('index'))"""
 
 
 @app.route('/logout')

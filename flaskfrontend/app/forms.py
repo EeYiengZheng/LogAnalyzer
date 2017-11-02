@@ -5,7 +5,7 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[Length(min=5, max=50), DataRequired(), Email(message='invalid email')])
+    email = StringField('Email', validators=[Length(min=5, max=64), DataRequired(), Email(message='invalid email')])
     password = PasswordField('Password', validators=[
         DataRequired(), Length(min=8, max=128, message='password need to be 8 to 128 characters')])
     remember_me = BooleanField('Keep me logged in', default=False)
@@ -13,9 +13,9 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    email = StringField('Email Address', validators=[Length(min=6, max=64), DataRequired(), Email()])
+    email = StringField('Email Address', validators=[Length(min=5, max=64), DataRequired(), Email()])
     password = PasswordField('New Password',
-                             validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
+                             validators=[Length(min=8, max=128), DataRequired(), EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Repeat Password', validators=[DataRequired()])
     submit = SubmitField('Register')
 
