@@ -4,6 +4,7 @@ from app import app, db, lm, oid
 from .models import User
 from datetime import datetime
 from .forms import LoginForm, RegistrationForm, EditForm
+from werkzeug.utils import secure_filename
 
 @lm.user_loader
 def load_user(id):
@@ -32,6 +33,36 @@ def index():
     return render_template('index.html',
                            title='Home',
                            user=user)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+ALLOWED_EXTENSIONS = ['log', 'csv']  # <-- don't know where to put this
+
+@app.route('/upload')
+@login_required
+def upload():
+    return render_template('upload.html')
+
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        f = request.files['file']
+        if f.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if f and allowed_file(f.filename):
+            f_name = secure_filename(f.filename)
+            f.save('/uploads_' + f_name)
+            return redirect(url_for('index'))
+        f.save(f.filename)
+        return 'file uploaded successfully'
+    return
 
 @app.route('/usecase')
 @login_required
