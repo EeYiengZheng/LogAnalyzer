@@ -7,6 +7,8 @@
     </div>
     <form class="register" action="" method="post" name="register">
         {{ form.hidden_tag() }}
+
+        {# old registration form
         <div class="container">
             <label><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
@@ -16,5 +18,20 @@
 
             <button class="btn btn-primary btn-block" type="submit">Register</button>
         </div>
+         #}
+
+        {# new registration form #}
+        <div class="container">
+            {% from "formhelper.html" import render_field %}
+            <form method=post action="{url_for('register')}">
+                <dl>
+                    {{ render_field(form.email) }}
+                    {{ render_field(form.password) }}
+                    {{ render_field(form.confirm) }}
+                </dl>
+                <p><input class="btn btn-primary float-right" type=submit value=Register></p>
+            </form>
+        </div>
     </form>
 {% endblock %}
+
