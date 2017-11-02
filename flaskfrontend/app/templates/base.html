@@ -74,7 +74,7 @@
                     <a class="nav-link" href="{{ url_for('index') }}">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">&lt;Placeholder Link&gt;</a>
+                   <a class="nav-link" href="#">&lt;Placeholder&gt;</a>
                 </li>
                 <li class="nav-item">
                     {% if g.user.is_authenticated %}
@@ -100,7 +100,6 @@
             </form>
         </div>
     </nav>
->>>>>>> 6c7cfa9956903366fbf075e87ca7304551607f58
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>

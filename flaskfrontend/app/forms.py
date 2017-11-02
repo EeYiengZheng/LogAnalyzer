@@ -11,10 +11,9 @@ from wtforms.validators import DataRequired, Length, EqualTo
 class LoginForm(FlaskForm):
     openid = StringField('openid', validators=[DataRequired()])
     remember_me = BooleanField('remember_me', default=False)
-"""
+
 class UploadForm(Form):
     file = FileField()
-"""
 
 class EditForm(FlaskForm):
     nickname = StringField('nickname', validators=[DataRequired()])

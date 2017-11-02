@@ -1,11 +1,11 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
-from .forms import LoginForm#, UploadForm
+from .forms import LoginForm, UploadForm
 from .models import User
 from flask import url_for, redirect, render_template
 from flask_wtf import Form
-#from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename
 from datetime import datetime
 from .forms import LoginForm, RegistrationForm, EditForm
 
@@ -87,7 +87,6 @@ def after_login(resp):
     login_user(user, remember=remember_me)
     return redirect(request.args.get('next') or url_for('index'))
 
-"""
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     form = UploadForm()
@@ -98,5 +97,3 @@ def upload():
         return redirect(url_for('index'))
 
     return render_template('index.html', form=form)
-
-"""
