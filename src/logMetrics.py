@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt, mpld3
 
 from logAnalytics import errorlog, usagelog
 from logSearch import sortbyDate
@@ -9,31 +9,33 @@ import numpy as np
 import csv
 
 failureList = ['HttpClientError', 'AccessDenied', 'RuntimeException', \
-			'transport error', 'DefaultResponseErrorHandler', 'WARN', \
-			'timeout']
+               'transport error', 'DefaultResponseErrorHandler', 'WARN', \
+               'timeout']
 errorRequests = ['HttpClientError', 'RuntimeException', \
-            'transport error', 'DefaultResponseErrorHandler']
+                 'transport error', 'DefaultResponseErrorHandler']
+
 
 # With these three following methods, should I use a csv reader?
 
 def requestReliability(fs):
     errorcount = 0
-    total = 0;
+    total = 0
     errorfound = False
     with open(fs, 'r') as in_file:
-    	for line in in_file:
+        for line in in_file:
             for error in errorRequests:
-            	if error in line:
-            		errorfound = True
+                if error in line:
+                    errorfound = True
             if errorfound:
-            	errorcount += 1
+                errorcount += 1
             total += 1
             errorfound = False
     return float(errorcount / total)
 
+
 def sessionReliability(fs):
     count = 0
-    total = 0;
+    total = 0
     failurefound = False
     with open(fs, 'r') as in_file:
         for line in in_file:
@@ -45,6 +47,7 @@ def sessionReliability(fs):
             total += 1
             failurefound = False
     return float(count / total)
+
 
 def meanTransactionsBeforeFailure(fs):
     with open(fs, 'r') as in_file:
@@ -64,22 +67,26 @@ def meanTransactionsBeforeFailure(fs):
                     failurefound = False
     return float(sum(datalist) / len(datalist))
 
+
 def terminalFailureProbability(fs):
     return
 
+
 def averageSessionLength(fs):
     return
+
 
 def errorPieChart(fin, fout):
     dictionary = errorlog(fin, fout)
     errors = list(dictionary.keys())
     counts = list(dictionary.values())
-    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'red', 
-            'salmon', 'peru']
+    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'red',
+              'salmon', 'peru']
     patches, texts = plt.pie(counts, colors=colors, shadow=True, startangle=90)
     plt.legend(patches, errors, loc="best")
     plt.axis('equal')
     plt.show()
+
 
 def usagePieChart(fin, fout):
     dictionary = usagelog(fin, fout)
@@ -90,6 +97,7 @@ def usagePieChart(fin, fout):
     plt.legend(patches, entries, loc="best")
     plt.axis('equal')
     plt.show()
+
 
 def errorRate(fs):
     format = "%b %d %H:%M:%S %Y"
@@ -104,25 +112,25 @@ def errorRate(fs):
             error_date = row[2]
             error_time = row[3]
             if error_date != 'date':
-                date  = datetime.datetime.strptime(error_date + " " + error_time \
-                    + " 2017", format)      
+                date = datetime.datetime.strptime(error_date + " " + error_time \
+                                                  + " 2017", format)
                 if currenthour == 0.5:
                     currenthour = date.hour
                     currentdate = date
                     firstdate = date
                     count = 1
                     time = str(calendar.month_abbr[date.month]) + \
-                    " " + str(date.day) + " " + str(date.hour) + ":00"
+                           " " + str(date.day) + " " + str(date.hour) + ":00"
                 elif date.hour == currenthour \
-                    and date.month == currentdate.month \
-                    and date.day == currentdate.day:
+                        and date.month == currentdate.month \
+                        and date.day == currentdate.day:
                     count += 1
                     rate_dictionary[time] = count
                 else:
                     currenthour = date.hour
                     currentdate = date
                     time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
-                    + " " + str(date.hour) + ":00"
+                           + " " + str(date.hour) + ":00"
                     count = 0
     times = list(rate_dictionary.keys())
     x = range(len(rate_dictionary))
@@ -131,19 +139,15 @@ def errorRate(fs):
     plt.xlabel("Time")
     plt.ylabel("Number of Errors")
     plt.scatter(x, y)
-    plt.xticks([i*4 for i in range(int(len(rate_dictionary) / 4 ))], \
-        [str(datetime.datetime.combine(firstdate, datetime.time(4 * i)).strftime("%b %d %H:00")) \
-        for i in range(int(len(rate_dictionary) / 4 ))])
+    plt.xticks([i * 4 for i in range(int(len(rate_dictionary) / 4))], \
+               [str(datetime.datetime.combine(firstdate, datetime.time(4 * i)).strftime("%b %d %H:00")) \
+                for i in range(int(len(rate_dictionary) / 4))])
     plt.plot(x, y)
     plt.show()
-
-
-
 
 """
 Statements used for testing
 """
-
 
 print("Request Reliability: " + str(requestReliability("syslog3.log")))
 print("Session Reliability: " + str(sessionReliability("syslog3.log")))
@@ -151,3 +155,5 @@ print("Mean Transaction Before Failure: " + str(meanTransactionsBeforeFailure("s
 errorPieChart("syslog3.log", "errorlog.csv")
 usagePieChart("syslog3.log", "usagelog.csv")
 errorRate("errorlog.csv")
+
+

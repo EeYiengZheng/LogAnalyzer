@@ -7,7 +7,7 @@ from logAnalytics import errorlog, usagelog
 count = 0
 word_code = '[38866]: '
 
-#start_time = time.perf_counter()
+# start_time = time.perf_counter()
 # create a new csv file to write to
 
 
@@ -16,8 +16,10 @@ Find a term from the error log fs.
 Function searches each row of the error file and writes rows that contain
 the key word to an output file.
 """
+
+
 def searchTerm(fs, term):
-    with open ('search_term.csv', 'w') as csvfile:
+    with open('search_term.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
         with open(fs, 'r') as csvfile:
@@ -31,16 +33,19 @@ def searchTerm(fs, term):
                     error_detail = row[4]
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
 
+
 """
 Find the errors in file fs from a certain time period.
 Search queries must be in form ''
 Function converts a 'start' and 'end' date and/or time to datetime format.
 Then the function writes the errors that occurred between those times to the output file.
 """
+
+
 def searchPeriod(fs, start, end):
     format = "%b %d %H:%M:%S %Y"
     s = datetime.datetime.strptime(start + " 2017", format)
-    e = datetime.datetime.strptime(end +  " 2017", format)
+    e = datetime.datetime.strptime(end + " 2017", format)
     if s > e:
         tmp = e
         e = s
@@ -57,13 +62,16 @@ def searchPeriod(fs, start, end):
                 error_time = row[3]
                 error_detail = row[4]
                 if error_date != 'date':
-                    date  = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
+                    date = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
                     if date >= s and date <= e:
                         writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+
 
 """
 Sort a given log file fs of errors by date.
 """
+
+
 def sortbyDate(fin, fout):
     errors = []
     format = "%b %d %H:%M:%S %Y"
@@ -76,21 +84,23 @@ def sortbyDate(fin, fout):
                 if row[2] != 'date':
                     errors.append(row)
         errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
-                        + " " + entry[3] + " 2017", format))
+                                                                             + " " + entry[3] + " 2017", format))
         for entry in errors:
-                error_type = entry[0]
-                error_name = entry[1]
-                error_date = entry[2]
-                error_time = entry[3]
-                error_detail = entry[4]
-                writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+            error_type = entry[0]
+            error_name = entry[1]
+            error_date = entry[2]
+            error_time = entry[3]
+            error_detail = entry[4]
+            writer.writerow([error_type, error_name, error_date, error_time, error_detail])
     return fout
+
+
 """
 Example commands used for debugging
-"""
 
 errorlog("syslog3.log", "log_test.csv")
 usagelog("syslog3.log", "usage_test.csv")
 searchTerm("log_test.csv", "Access Denied")
 searchPeriod("log_test.csv", "Aug 24 00:00:00", "Aug 22 00:00:00")
 sortbyDate("log_test.csv", "sorted_log.csv")
+"""

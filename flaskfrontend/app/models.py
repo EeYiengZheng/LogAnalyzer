@@ -1,6 +1,7 @@
-from app import db
+from app import db, lm
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -9,7 +10,6 @@ class User(UserMixin, db.Model):
     nickname = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     logs = db.relationship('Log', backref='users')
-
 
     @property
     def password(self):
@@ -30,6 +30,11 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.email)
+
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 class Log(db.Model):

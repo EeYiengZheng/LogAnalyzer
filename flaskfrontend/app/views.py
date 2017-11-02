@@ -1,14 +1,10 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
-from app import app, db, lm, oid
+from app import app, db, lm
+from config import ALLOWED_EXTENSIONS
 from .models import User
-from datetime import datetime
 from .forms import LoginForm, RegistrationForm, EditForm
 from werkzeug.utils import secure_filename
-
-@lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))
 
 
 @app.before_request
@@ -20,33 +16,23 @@ def before_request():
 @app.route('/index')
 def index():
     user = g.user
-    posts = [
-        {
-            'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
     return render_template('index.html',
                            title='Home',
                            user=user)
+
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-ALLOWED_EXTENSIONS = ['log', 'csv']  # <-- don't know where to put this
-
 @app.route('/upload')
 @login_required
 def upload():
     return render_template('upload.html')
 
-@app.route('/uploader', methods = ['GET', 'POST'])
+
+@app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -63,6 +49,7 @@ def upload_file():
         f.save(f.filename)
         return 'file uploaded successfully'
     return
+
 
 @app.route('/usecase')
 @login_required
@@ -84,16 +71,20 @@ def errorcase():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if g.user is not None and g.user.is_authenticated:
-        return redirect(url_for('index'))
+    # if g.user is not None and g.user.is_authenticated:
+    #    return redirect(url_for('upload'))
     form = LoginForm()
     if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user, form.remember_me.data)
+            return redirect(request.args.get('next') or url_for('main.index'))
+        flash('Invalid username or password.')
         session['remember_me'] = form.remember_me.data
-        return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
     return render_template('login.html',
                            title='Sign In',
-                           form=form,
-                           providers=app.config['OPENID_PROVIDERS'])
+                           form=form)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -101,7 +92,7 @@ def register():
     if request.method == 'POST' and form.validate():
         user = User()
         user.email = request.form.get('email')
-        user.password_hash = request.form.get('password') #will hash later
+        user.password_hash = request.form.get('password')  # will hash later
         db.session.add(user)
         flash('Thanks for registering')
         return redirect(url_for('login'))
@@ -128,10 +119,10 @@ def after_login(resp):
     return redirect(request.args.get('next') or url_for('index'))
 
 
-
 @app.route('/logout')
 def logout():
     logout_user()
+    flash('Yoiu are logged out')
     return redirect(url_for('index'))
 
 
@@ -147,4 +138,16 @@ def upload():
 
     return render_template('index.html', form=form)
 
+
+from logMetrics import errorPieChart, usagePieChart, errorRate
+
+
+@app.route('/graph')
+def show_graph():
+    errpie = errorPieChart({{url_for('static', filename='syslog3.log')}},
+                           {{url_for('static', filename='errorlog.csv')}})
+    usepie = usagePieChart({{url_for('static', filename='syslog3.log')}},
+                           {{url_for('static', filename='usagelog.csv')}})
+    errrate = errorRate({{url_for('static', filename='errorlog.csv')}})
+    return render_template('graph.html', epie=errpie, upie=usepie, err=errrate)
 """

@@ -38,13 +38,26 @@
 
     <div class="text-center">
         <h1>Sign In</h1>
+        {#
         <img src="{{ url_for('static', filename='img/img_avatar.png') }}" alt="Avatar"
              class="img-responsive img-circle avatar"/>
+        #}
     </div>
+    {% from "formhelper.html" import render_field %}
+    <form method=post action="{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
+        <dl>
+            {{ render_field(form.email) }}
+            {{ render_field(form.password) }}
+        </dl>
+        <p>{{ form.remember_me }} Keep me logged in
+            <input class="btn btn-primary float-right" type=submit value=Login></p>
+    </form>
+
+    {#
     <form class="login" action="" method="post" name="login">
         {{ form.hidden_tag() }}
         <div class="container">
-            <label><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="email" required>
 
             <label><b>Password</b></label>
@@ -54,21 +67,25 @@
             <p>{{ form.remember_me }} Remember Me</p>
         </div>
         <div class="container">
+
             <button class="btn btn-danger disabled" type="button">Cancel</button>
+
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
-
     <!-- Registration button -->
-    <form class="register" action="{{url_for('register')}}" method="get" name="register">
+    <form class="register" action="{{ url_for('register') }}" method="get" name="register">
         {{ form.hidden_tag() }}
         <div class="container">
             <button class="btn btn-primary btn-block" type="submit">Register</button>
         </div>
     </form>
-    
+ #}
+    <br>
+    <hr>
+    <br>
     <h4 class="text-center"><b>Use OAuth</b></h4>
-    <div class="container">
+    <div class="d-flex justify-content-center">
         <div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
     </div>
 {% endblock %}
