@@ -60,10 +60,10 @@
     </form>
 
     <!-- Registration button -->
-    <form class="register" action="{{url_for('register')}}" method="post" name="register">
+    <form class="register" action="{{url_for('register')}}" method="get" name="register">
         {{ form.hidden_tag() }}
         <div class="container">
-            <button class="btn btn-primary btn-block" type="button">Register</button>
+            <button class="btn btn-primary btn-block" type="submit">Register</button>
         </div>
     </form>
     

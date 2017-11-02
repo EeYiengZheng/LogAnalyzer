@@ -23,7 +23,7 @@
         {# new registration form #}
         <div class="container">
             {% from "formhelper.html" import render_field %}
-            <form method=post action="login.html">
+            <form method=post action="{url_for('register')}">
                 <dl>
                     {{ render_field(form.email) }}
                     {{ render_field(form.password) }}

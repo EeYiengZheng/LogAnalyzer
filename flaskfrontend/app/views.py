@@ -69,7 +69,8 @@ def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User()
-        db.add(user)
+        user.email = request.form.get('email')
+        db.session.add(user)
         flash('Thanks for registering')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
