@@ -1,8 +1,7 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, models
-from config import ALLOWED_EXTENSIONS
-from .models import User
+from .models import User, Log
 from .forms import LoginForm, RegistrationForm, UploadForm
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
@@ -22,11 +21,6 @@ def index():
                            user=user)
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
 @app.route('/upload')
 @login_required
 def upload():
@@ -38,6 +32,7 @@ def upload():
 
 @app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
+    from .utils import allowed_file
     if request.method == 'POST':
         if 'new_file' not in request.files:
             flash('No file part')
@@ -47,12 +42,35 @@ def upload_file():
             flash('No selected file')
             return redirect(url_for('upload'))
         if f and allowed_file(f.filename):
-            import os
+            import hashlib
+            from os import path, remove
+            hasher = hashlib.sha256()
+            BLOCKSIZE = 65536
+            tmp_path = path.join('tmp', f.filename)
+            f.save(tmp_path)
+            with open(tmp_path, 'rb') as afile:
+                buf = afile.read(BLOCKSIZE)
+                while len(buf) > 0:
+                    hasher.update(buf)
+                    buf = afile.read(BLOCKSIZE)
+            remove(tmp_path)
+            hash = hasher.hexdigest()
+            log_hash = models.Log.query.filter_by(file_hash=hash).first()
+            if log_hash is not None:
+                flash('Upload unsuccessful: file already exist')
+                return redirect(url_for('upload'))
             f_name = secure_filename(f.filename)
-            f.save(os.path.join(app.root_path + app.config['UPLOAD_FOLDER'], f_name))
+            i_f_name = str(current_user.id) + '_' + f_name
+            new_log = Log()
+            new_log.file_hash = hash
+            new_log.filename = f_name
+            new_log.internal_f_name = i_f_name
+            db.session.add(new_log)
+            db.session.commit()
+
+            f.save(join(app.root_path + app.config['UPLOAD_FOLDER'], f_name))
             flash('File uploaded: ' + f_name)
             return redirect(url_for('index'))
-        flash('Upload unsuccessful: file not allowed')
         return redirect(url_for('upload'))
     return
 
@@ -106,56 +124,8 @@ def register():
     return render_template('register.html', form=form)
 
 
-"""
-def after_login(resp):
-    if resp.email is None or resp.email == "":
-        flash('Invalid login. Please try again.')
-        return redirect(url_for('login'))
-    user = User.query.filter_by(email=resp.email).first()
-    if user is None:
-        nickname = resp.nickname
-        if nickname is None or nickname == "":
-            nickname = resp.email.split('@')[0]
-        user = User(nickname=nickname, email=resp.email)
-        db.session.add(user)
-        db.session.commit()
-    remember_me = False
-    if 'remember_me' in session:
-        remember_me = session['remember_me']
-        session.pop('remember_me', None)
-    login_user(user, remember=remember_me)
-    return redirect(request.args.get('next') or url_for('index'))"""
-
-
 @app.route('/logout')
 def logout():
     logout_user()
     flash('You are logged out')
     return redirect(url_for('index'))
-
-
-"""
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    form = UploadForm()
-
-    if form.validate_on_submit():
-        filename = secure_filename(form.file.data.filename)
-        form.file.data.save('uploads/' + filename)
-        return redirect(url_for('index'))
-
-    return render_template('index.html', form=form)
-
-
-from logMetrics import errorPieChart, usagePieChart, errorRate
-
-
-@app.route('/graph')
-def show_graph():
-    errpie = errorPieChart({{url_for('static', filename='syslog3.log')}},
-                           {{url_for('static', filename='errorlog.csv')}})
-    usepie = usagePieChart({{url_for('static', filename='syslog3.log')}},
-                           {{url_for('static', filename='usagelog.csv')}})
-    errrate = errorRate({{url_for('static', filename='errorlog.csv')}})
-    return render_template('graph.html', epie=errpie, upie=usepie, err=errrate)
-"""
