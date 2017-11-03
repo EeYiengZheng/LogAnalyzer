@@ -6,7 +6,7 @@ from .models import User
 from .forms import LoginForm, RegistrationForm, EditForm
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
-
+import os
 
 @app.before_request
 def before_request():
@@ -45,10 +45,10 @@ def upload_file():
             return redirect(request.url)
         if f and allowed_file(f.filename):
             f_name = secure_filename(f.filename)
-            f.save('/uploads_' + f_name)
+            f.save(os.path.join(app.root_path + app.config['UPLOAD_FOLDER'], f_name))
+            flash('File upload succesful')
             return redirect(url_for('index'))
-        f.save(f.filename)
-        return 'file uploaded successfully'
+        return 'Invalid file. Only uploaded .log or .csv files!'
     return
 
 

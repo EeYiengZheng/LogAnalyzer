@@ -8,6 +8,7 @@ from config import basedir
 
 app = Flask(__name__, static_folder='static')
 app.config.from_object('config')
+app.config['UPLOAD_FOLDER'] = '/uploads'
 db = SQLAlchemy(app)
 lm = LoginManager()
 lm.init_app(app)
