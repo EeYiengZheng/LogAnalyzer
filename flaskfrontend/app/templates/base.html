@@ -21,6 +21,10 @@
             margin-bottom: 20px;
         }
 
+        .jumbotron {
+            height: 90vh;
+        }
+
         /* Full-width inputs */
         input[type=text], input[type=password] {
             width: 100%;
@@ -110,7 +114,7 @@
 
     <main role="main">
         <div class="jumbotron">
-            <div class="col-sm-8 mx-auto">
+            <div class="col-sm-5 mx-auto">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
@@ -119,7 +123,7 @@
                     {% endif %}
                 {% endwith %}
             </div>
-            <div class="col-sm-8 mx-auto">
+            <div class="col-sm-5 mx-auto">
                 {% block content %}
                     {# content goes here  #}
                 {% endblock %}

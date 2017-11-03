@@ -25,9 +25,4 @@ class RegistrationForm(FlaskForm):
 
 
 class UploadForm(FlaskForm):
-    file = FileField('Log File', validators=[validators.input_required()])
-
-
-class EditForm(FlaskForm):
-    nickname = StringField('nickname', validators=[DataRequired()])
-    about_me = TextAreaField('about_me', validators=[Length(min=0, max=140)])
+    file = FileField('new_file', validators=[validators.input_required()])

@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, models
 from config import ALLOWED_EXTENSIONS
 from .models import User
-from .forms import LoginForm, RegistrationForm, EditForm
+from .forms import LoginForm, RegistrationForm, UploadForm
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
 
@@ -30,25 +30,30 @@ def allowed_file(filename):
 @app.route('/upload')
 @login_required
 def upload():
-    return render_template('upload.html')
+    form = UploadForm(request.form)
+    return render_template('upload.html',
+                           form=form,
+                           title='Upload')
 
 
-@app.route('/uploader', methods=['GET', 'POST'])
+@app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        if 'file' not in request.files:
+        if 'new_file' not in request.files:
             flash('No file part')
-            return redirect(request.url)
-        f = request.files['file']
+            return redirect(url_for('upload'))
+        f = request.files['new_file']
         if f.filename == '':
             flash('No selected file')
-            return redirect(request.url)
+            return redirect(url_for('upload'))
         if f and allowed_file(f.filename):
+            import os
             f_name = secure_filename(f.filename)
-            f.save('/uploads_' + f_name)
+            f.save(os.path.join(app.root_path + app.config['UPLOAD_FOLDER'], f_name))
+            flash('File uploaded: ' + f_name)
             return redirect(url_for('index'))
-        f.save(f.filename)
-        return 'file uploaded successfully'
+        flash('Upload unsuccessful: file not allowed')
+        return redirect(url_for('upload'))
     return
 
 
@@ -100,6 +105,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
+
 """
 def after_login(resp):
     if resp.email is None or resp.email == "":
@@ -124,7 +130,7 @@ def after_login(resp):
 @app.route('/logout')
 def logout():
     logout_user()
-    flash('Yoiu are logged out')
+    flash('You are logged out')
     return redirect(url_for('index'))
 
 
