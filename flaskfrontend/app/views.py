@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, session, url_for, request, g
+from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, models
 from .models import User, Log
@@ -39,6 +39,16 @@ def upload_file():
         f = request.files['new_file']
         return file_save_seq(f)
     return
+
+
+
+@app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    from config import UPLOAD_FOLDER
+    from os import path
+    userFolder = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
+    return send_from_directory(directory=userFolder, filename=filename)
+    
 
 
 @app.route('/usecase')

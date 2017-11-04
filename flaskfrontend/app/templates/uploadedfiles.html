@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 
+{% block script_content %}
+
+    $(document).ready(function(){
+        $('#sel1').change(function() {
+            $("#downloadLog").attr("action", "/uploads/" + $(this).find("option:selected").text());
+            $("#chooseAFile").prop('disabled', 'true');
+        });
+    });
+
+{% endblock %}
+
+
 {% block content %}
-    <h1>Uploaded File</h1>
+<form id="downloadLog" action="#">
     <div class="form-group">
         <label for="sel1">Uploaded Files:</label>
         <select class="form-control" id="sel1">
+            <option id="chooseAFile" class="disabled">Choose a file</option>
             {% for file in files %}
-                <option class="disabled">Choose a file</option>
                 <option>{{ file.filename}}</option>
             {% endfor %}
         </select>
-
     </div>
+  	<p><input type="submit" value="Download selected file"></p>
+</form>
     {% block uploaded %}
 
     {% endblock %}
