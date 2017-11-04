@@ -1,5 +1,10 @@
-from flask import flash
-from config import ALLOWED_EXTENSIONS
+from flask import flash, url_for, redirect
+from werkzeug.utils import secure_filename
+from config import ALLOWED_EXTENSIONS, UPLOAD_FOLDER
+from app import app, models, db
+from os import path, remove, makedirs, rename
+from flask_login import current_user
+import hashlib
 
 
 def allowed_file(filename):
@@ -14,6 +19,67 @@ def allowed_file(filename):
         flash('Upload unsuccessful: Filetype not allowed')
         ret = ret and False
     return ret
+
+
+def file_save_seq(f):
+    if f.filename == '':
+        flash('No selected file')
+        return redirect(url_for('upload'))
+    if f and allowed_file(f.filename):
+        hasher = hashlib.sha256()
+        BLOCKSIZE = 65536
+        tmp_path = path.join('tmp', f.filename)
+        f.save(tmp_path)
+
+        with open(tmp_path, 'rb') as afile:
+            buf = afile.read(BLOCKSIZE)
+            while len(buf) > 0:
+                hasher.update(buf)
+                buf = afile.read(BLOCKSIZE)
+        hash = hasher.hexdigest()
+
+        log_hash = models.Log.query.filter_by(file_hash=hash).first()
+        if log_hash is not None:
+            remove(tmp_path)
+            flash('Upload unsuccessful: file already exist')
+            return redirect(url_for('upload'))
+        f_name = secure_filename(f.filename)
+        i_f_name = f_name.rsplit('.', 1)[0] + '_'
+        i = 0
+        dest_path = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
+        if not path.exists(dest_path):
+            makedirs(dest_path)
+        while path.isfile(path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id),
+                                    i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1])):
+            i += 1
+        i_f_name = i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1]
+
+        new_log = models.Log(owner=current_user)
+        new_log.file_hash = hash
+        new_log.filename = f_name
+        new_log.internal_f_name = i_f_name
+        db.session.add(new_log)
+        db.session.commit()
+
+        rename(tmp_path, path.join(dest_path, i_f_name))
+        flash('File uploaded: ' + f_name)
+        return redirect(url_for('index'))
+    return redirect(url_for('upload'))
+
+
+def findUserFiles(target_user):
+    import os
+    from config import UPLOAD_FOLDER
+    fileArray = []
+    userFolder = os.path.join(app.root_path, UPLOAD_FOLDER, str(target_user.id))
+    if (os.path.exists(userFolder)):
+        for filename in os.listdir(userFolder):
+            if filename.endswith(".log"):
+                filePath = os.path.abspath(userFolder + "/" + filename)
+                with open(filePath, "r") as f:
+                    content = f.read()
+                fileArray.append({'filename': filename, 'contents': content})
+    return fileArray
 
 
 '''

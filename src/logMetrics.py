@@ -156,7 +156,8 @@ def errorRate(fs):
 """
 Statements used for testing
 """
-file = '/Users/William/Desktop/syslog3.log'
+user = 'Emp' # <--- your computer username
+file = '/Users/{}/Desktop/syslog3.log'.format(user)
 
 print("Request Reliability: " + str(requestReliability(file)))
 print("Session Reliability: " + str(sessionReliability(file)))

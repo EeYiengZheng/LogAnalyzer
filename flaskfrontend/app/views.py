@@ -3,8 +3,8 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, models
 from .models import User, Log
 from .forms import LoginForm, RegistrationForm, UploadForm
-from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
+from .utils import allowed_file, findUserFiles, file_save_seq
 
 
 @app.before_request
@@ -32,97 +32,31 @@ def upload():
 
 @app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
-    from .utils import allowed_file
-    from os import path, remove, makedirs, rename
-    from config import UPLOAD_FOLDER
-    import hashlib
     if request.method == 'POST':
         if 'new_file' not in request.files:
             flash('No file part')
             return redirect(url_for('upload'))
         f = request.files['new_file']
-        if f.filename == '':
-            flash('No selected file')
-            return redirect(url_for('upload'))
-        if f and allowed_file(f.filename):
-            hasher = hashlib.sha256()
-            BLOCKSIZE = 65536
-            tmp_path = path.join('tmp', f.filename)
-            f.save(tmp_path)
-
-            with open(tmp_path, 'rb') as afile:
-                buf = afile.read(BLOCKSIZE)
-                while len(buf) > 0:
-                    hasher.update(buf)
-                    buf = afile.read(BLOCKSIZE)
-            hash = hasher.hexdigest()
-            log_hash = models.Log.query.filter_by(file_hash=hash).first()
-            if log_hash is not None:
-                remove(tmp_path)
-                flash('Upload unsuccessful: file already exist')
-                return redirect(url_for('upload'))
-            f_name = secure_filename(f.filename)
-            i_f_name = f_name.rsplit('.', 1)[0] + '_'
-            i = 0
-            dest_path = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
-            if not path.exists(dest_path):
-                makedirs(dest_path)
-            while path.isfile(path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id),
-                                        i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1])):
-                i += 1
-            i_f_name = i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1]
-
-            new_log = Log(owner=current_user)
-            new_log.file_hash = hash
-            new_log.filename = f_name
-            new_log.internal_f_name = i_f_name
-            db.session.add(new_log)
-            db.session.commit()
-
-            rename(tmp_path, path.join(dest_path, i_f_name))
-            flash('File uploaded: ' + f_name)
-            return redirect(url_for('index'))
-        return redirect(url_for('upload'))
+        return file_save_seq(f)
     return
 
-
-def findUserFiles(targetUser):
-    import os
-    from os import path
-    from config import UPLOAD_FOLDER
-    from pathlib import Path
-    fileArray = []
-    userFolder = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
-    if (os.path.exists(userFolder)):
-        for filename in os.listdir(userFolder):
-            if filename.endswith(".log"):
-                filePath = os.path.abspath(userFolder + "/" + filename)
-                with open(filePath, "r") as f:
-                    content = f.read()
-                fileArray.append({'filename' : filename, 'contents' : content})
-    return fileArray
-
-
-    
 
 @app.route('/usecase')
 @login_required
 def usecase():
-    user = g.user
     fileArray = findUserFiles(current_user)
     return render_template('usecase.html',
-                            title='Use Case',
-                           files = fileArray)
+                           title='Use Case',
+                           files=fileArray)
 
 
 @app.route('/errorcase')
 @login_required
 def errorcase():
-    user = g.user
     fileArray = findUserFiles(current_user)
-    return render_template('usecase.html',
+    return render_template('errorcase.html',
                            title='Error Case',
-                           files = fileArray)
+                           files=fileArray)
 
 
 @app.route('/login', methods=['GET', 'POST'])
