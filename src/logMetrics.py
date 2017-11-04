@@ -1,12 +1,15 @@
 import matplotlib.pyplot as plt, mpld3
-
+from matplotlib import rcParams
 from logAnalytics import errorlog, usagelog
 from logSearch import sortbyDate
 import datetime
 import calendar
 import numpy as np
-
 import csv
+
+
+
+rcParams['figure.figsize'] = (10, 4)
 
 failureList = ['HttpClientError', 'AccessDenied', 'RuntimeException', \
                'transport error', 'DefaultResponseErrorHandler', 'WARN', \
@@ -82,10 +85,12 @@ def errorPieChart(fin, fout):
     counts = list(dictionary.values())
     colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'red',
               'salmon', 'peru']
-    patches, texts = plt.pie(counts, colors=colors, shadow=True, startangle=90)
-    plt.legend(patches, errors, loc="best")
+    patches, texts = plt.pie(counts, colors=colors, startangle=90)
+    plt.legend(patches, errors, loc='upper right', )
     plt.axis('equal')
-    plt.show()
+    plt.tight_layout()
+    fig = plt.figure()
+    print(mpld3.fig_to_html(fig, template_type='simple'))
 
 
 def usagePieChart(fin, fout):
@@ -93,10 +98,12 @@ def usagePieChart(fin, fout):
     entries = list(dictionary.keys())
     counts = list(dictionary.values())
     colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
-    patches, texts = plt.pie(counts, colors=colors, shadow=True, startangle=90)
-    plt.legend(patches, entries, loc="best")
+    patches, texts = plt.pie(counts, colors=colors, startangle=90)
+    plt.legend(patches, entries, loc='upper right')
+    plt.tight_layout()
     plt.axis('equal')
-    plt.show()
+    fig = plt.figure()
+    print(mpld3.fig_to_html(fig, template_type='simple'))
 
 
 def errorRate(fs):
@@ -143,17 +150,17 @@ def errorRate(fs):
                [str(datetime.datetime.combine(firstdate, datetime.time(4 * i)).strftime("%b %d %H:00")) \
                 for i in range(int(len(rate_dictionary) / 4))])
     plt.plot(x, y)
-    plt.show()
+    fig = plt.figure()
+    print(mpld3.fig_to_html(fig, template_type='simple'))
 
 """
 Statements used for testing
 """
+file = '/Users/William/Desktop/syslog3.log'
 
-print("Request Reliability: " + str(requestReliability("syslog3.log")))
-print("Session Reliability: " + str(sessionReliability("syslog3.log")))
-print("Mean Transaction Before Failure: " + str(meanTransactionsBeforeFailure("syslog3.log")))
-errorPieChart("syslog3.log", "errorlog.csv")
-usagePieChart("syslog3.log", "usagelog.csv")
+print("Request Reliability: " + str(requestReliability(file)))
+print("Session Reliability: " + str(sessionReliability(file)))
+print("Mean Transaction Before Failure: " + str(meanTransactionsBeforeFailure(file)))
+errorPieChart(file, "errorlog.csv")
+usagePieChart(file, "usagelog.csv")
 errorRate("errorlog.csv")
-
-
