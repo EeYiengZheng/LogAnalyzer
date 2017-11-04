@@ -92,10 +92,17 @@ def findUserFiles(targetUser):
     from pathlib import Path
     fileArray = []
     userFolder = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
-    for filename in os.listdir(userFolder):
-        if filename.endswith(".log"):
-            fileArray.append({'filename' : filename, 'path' : os.path.abspath(filename)})
+    if (os.path.exists(userFolder)):
+        for filename in os.listdir(userFolder):
+            if filename.endswith(".log"):
+                filePath = os.path.abspath(userFolder + "/" + filename)
+                with open(filePath, "r") as f:
+                    content = f.read()
+                fileArray.append({'filename' : filename, 'contents' : content})
     return fileArray
+
+
+    
 
 @app.route('/usecase')
 @login_required
