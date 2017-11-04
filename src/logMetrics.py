@@ -90,7 +90,7 @@ def errorPieChart(fin, fout):
     plt.axis('equal')
     plt.tight_layout()
     fig = plt.figure()
-    print(mpld3.fig_to_html(fig, template_type='simple'))
+    return mpld3.fig_to_html(fig, template_type='simple')
 
 
 def usagePieChart(fin, fout):
@@ -103,7 +103,7 @@ def usagePieChart(fin, fout):
     plt.tight_layout()
     plt.axis('equal')
     fig = plt.figure()
-    print(mpld3.fig_to_html(fig, template_type='simple'))
+    return mpld3.fig_to_html(fig, template_type='simple')
 
 
 def errorRate(fs):
@@ -151,11 +151,11 @@ def errorRate(fs):
                 for i in range(int(len(rate_dictionary) / 4))])
     plt.plot(x, y)
     fig = plt.figure()
-    print(mpld3.fig_to_html(fig, template_type='simple'))
+    return mpld3.fig_to_html(fig, template_type='simple')
 
 """
 Statements used for testing
-"""
+
 user = 'Emp' # <--- your computer username
 file = '/Users/{}/Desktop/syslog3.log'.format(user)
 
@@ -165,3 +165,4 @@ print("Mean Transaction Before Failure: " + str(meanTransactionsBeforeFailure(fi
 errorPieChart(file, "errorlog.csv")
 usagePieChart(file, "usagelog.csv")
 errorRate("errorlog.csv")
+"""

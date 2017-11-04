@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, models
 from .models import User, Log
-from .forms import LoginForm, RegistrationForm, UploadForm
+from .forms import LoginForm, RegistrationForm, UploadForm, FileSelectForm
 from werkzeug.security import generate_password_hash
 from .utils import allowed_file, findUserFiles, file_save_seq
 
@@ -45,7 +45,7 @@ def upload_file():
 @login_required
 def usecase():
     fileArray = findUserFiles(current_user)
-    return render_template('usecase.html',
+    return render_template(['usecase.html'],
                            title='Use Case',
                            files=fileArray)
 

@@ -7,13 +7,13 @@
         <select class="form-control" id="sel1">
             {% for file in files %}
                 <option class="disabled">Choose a file</option>
-                <option>{{ file.filename}}</option>
+                <option>{{ file.filename }}</option>
             {% endfor %}
         </select>
 
     </div>
-    {% block uploaded %}
+{% endblock %}
 
-    {% endblock %}
+{% block uploaded %}
 
 {% endblock %}

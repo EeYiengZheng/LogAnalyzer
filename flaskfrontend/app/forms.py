@@ -1,7 +1,9 @@
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import validators, StringField, BooleanField, TextAreaField, PasswordField, SubmitField, FileField
 from wtforms.validators import DataRequired, Length, EqualTo, Email, ValidationError
 from app.models import User
+from app.utils import findUserFiles
 
 
 class LoginForm(FlaskForm):
