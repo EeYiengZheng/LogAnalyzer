@@ -17,7 +17,7 @@
     <div class="form-group">
         <label for="sel1">Uploaded Files:</label>
         <select class="form-control" id="sel1">
-            <option id="chooseAFile" class="disabled">Choose a file</option>
+            <option id="chooseAFile" class="">Choose a file</option>
             {% for file in files %}
                 <option>{{ file.filename }}</option>
             {% endfor %}

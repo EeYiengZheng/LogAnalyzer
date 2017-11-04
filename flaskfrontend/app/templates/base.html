@@ -18,19 +18,6 @@
         <title>Log Analyzer</title>
     {% endif %}
     <style>
-        /* body */
-        body {
-            padding-bottom: 20px;
-        }
-
-        .navbar {
-            margin-bottom: 20px;
-        }
-
-        .jumbotron {
-            height: 50vh;
-        }
-
         /* Full-width inputs */
         input[type=text], input[type=password] {
             width: 100%;
@@ -41,10 +28,12 @@
             box-sizing: border-box;
         }
 
+        #top-jumbo {
+            margin-bottom: 0;
+        }
         /* Avatar image */
-        img.avatar {
-            width: 30%;
-            border-radius: 50%;
+        .avatar-img{
+            width: 18vw;
         }
 
         /* The "Forgot password" text */
@@ -60,7 +49,7 @@
     </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="">
     <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
         <a class="navbar-brand" href="{{ url_for('index') }}">Log Analyzer</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbar1"
@@ -120,9 +109,9 @@
         </div>
     </nav>
 
-    <main role="main">
-        <div class="jumbotron">
-            <div class="col-sm-5 mx-auto">
+    <main role="main" jumbotron-fluid>
+        <div class="jumbotron" id="top-jumbo">
+            <div class="mx-auto">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
@@ -147,15 +136,14 @@
             </div>
 
         </div>
+
     </main>
     <div>
-    {%  block new %}
+        {% block new %}
 
-    {% endblock %}
+        {% endblock %}
     </div>
 </div>
-
-
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
