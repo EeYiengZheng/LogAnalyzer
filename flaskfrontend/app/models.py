@@ -1,3 +1,5 @@
+import datetime
+
 from app import db, lm
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash, hashlib
@@ -8,7 +10,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     password_hash = db.Column(db.String(128))
     email = db.Column(db.String(120), index=True, unique=True)
-    logs = db.relationship('Log', backref='users')
+    logs = db.relationship('Log', backref='owner', lazy='dynamic')
 
     @property
     def password(self):
@@ -42,8 +44,8 @@ class Log(db.Model):
     filename = db.Column(db.String)
     internal_f_name = db.Column(db.String(128), unique=True)
     file_hash = db.Column(db.String(64), unique=True)
-    timestamp = db.Column(db.DateTime)
+    timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
-        return '<Post %r>' % (self.body)
+        return '<Log %r by %r>' % (self.filename, self.user_id)

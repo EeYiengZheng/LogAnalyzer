@@ -33,6 +33,9 @@ def upload():
 @app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
     from .utils import allowed_file
+    from os import path, remove, makedirs
+    from config import UPLOAD_FOLDER
+    import hashlib
     if request.method == 'POST':
         if 'new_file' not in request.files:
             flash('No file part')
@@ -42,8 +45,6 @@ def upload_file():
             flash('No selected file')
             return redirect(url_for('upload'))
         if f and allowed_file(f.filename):
-            import hashlib
-            from os import path, remove
             hasher = hashlib.sha256()
             BLOCKSIZE = 65536
             tmp_path = path.join('tmp', f.filename)
@@ -56,21 +57,30 @@ def upload_file():
             remove(tmp_path)
             hash = hasher.hexdigest()
             log_hash = models.Log.query.filter_by(file_hash=hash).first()
+            f_name = secure_filename(f.filename)
+            i_f_name = f_name.rsplit('.', 1)[0] + '_'
+            i = 0
+            tmp_path = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
+            if not path.exists(tmp_path):
+                makedirs(tmp_path)
+            while path.isfile(path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id),
+                                        i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1])):
+                i += 1
+            i_f_name = i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1]
             if log_hash is not None:
                 flash('Upload unsuccessful: file already exist')
                 return redirect(url_for('upload'))
-            f_name = secure_filename(f.filename)
-            i_f_name = str(current_user.id) + '_' + f_name
-            new_log = Log()
-            new_log.file_hash = hash
-            new_log.filename = f_name
-            new_log.internal_f_name = i_f_name
-            db.session.add(new_log)
-            db.session.commit()
+            else:
+                new_log = Log(owner=current_user)
+                new_log.file_hash = hash
+                new_log.filename = f_name
+                new_log.internal_f_name = i_f_name
+                db.session.add(new_log)
+                db.session.commit()
 
-            f.save(join(app.root_path + app.config['UPLOAD_FOLDER'], f_name))
-            flash('File uploaded: ' + f_name)
-            return redirect(url_for('index'))
+                f.save(path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), i_f_name))
+                flash('File uploaded: ' + f_name)
+                return redirect(url_for('index'))
         return redirect(url_for('upload'))
     return
 

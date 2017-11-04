@@ -9,3 +9,4 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 ALLOWED_EXTENSIONS = ['log']  # <-- don't know where to put this? config.py
+UPLOAD_FOLDER = 'uploads'
