@@ -1,11 +1,10 @@
-
 {% extends "base.html" %}
 
 {% block content %}
     <h1>Upload File</h1>
     <p>Supported filetype: *.log</p>
     <form action="http://localhost:5000/upload_file" method="POST"
-          enctype="multipart/form-data" >
+          enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <input type="file" name="new_file" accept=".log"/>
         <input type="submit"/>
