@@ -86,22 +86,43 @@ def upload_file():
     return
 
 
+def findUserFiles(targetUser):
+    import os
+    from os import path
+    from config import UPLOAD_FOLDER
+    from pathlib import Path
+    fileArray = []
+    userFolder = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
+    if (os.path.exists(userFolder)):
+        for filename in os.listdir(userFolder):
+            if filename.endswith(".log"):
+                filePath = os.path.abspath(userFolder + "/" + filename)
+                with open(filePath, "r") as f:
+                    content = f.read()
+                fileArray.append({'filename' : filename, 'contents' : content})
+    return fileArray
+
+
+    
+
 @app.route('/usecase')
 @login_required
 def usecase():
     user = g.user
+    fileArray = findUserFiles(current_user)
     return render_template('usecase.html',
-                           title='Use Case',
-                           user=user)
+                            title='Use Case',
+                           files = fileArray)
 
 
 @app.route('/errorcase')
 @login_required
 def errorcase():
     user = g.user
+    fileArray = findUserFiles(current_user)
     return render_template('usecase.html',
                            title='Error Case',
-                           user=user)
+                           files = fileArray)
 
 
 @app.route('/login', methods=['GET', 'POST'])
