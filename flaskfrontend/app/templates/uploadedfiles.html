@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"></head>
+<body>
+	
+<div class="form-group">
+  <label for="sel1">Uploaded Files:</label>
+  <select class="form-control" id="sel1">
+	{% for file in files %}
+    	<option>{{ file.filename }}</option>
+	{% endfor %}
+  </select>
+</div>
+
+
+
+</body>
+</html>
