@@ -44,7 +44,7 @@ class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String)
     internal_f_name = db.Column(db.String(128), unique=True)
-    file_hash = db.Column(db.String(64), unique=True)
+    file_hash = db.Column(db.String(64))
     timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

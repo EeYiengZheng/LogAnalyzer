@@ -38,7 +38,7 @@ def file_save_seq(f):
                 buf = afile.read(BLOCKSIZE)
         hash = hasher.hexdigest()
 
-        log_hash = models.Log.query.filter_by(file_hash=hash).first()
+        log_hash = models.Log.query.filter_by(file_hash=hash, user_id=current_user.id).first()
         if log_hash is not None:
             remove(tmp_path)
             flash('Upload unsuccessful: file already exist')
@@ -50,9 +50,9 @@ def file_save_seq(f):
         if not path.exists(dest_path):
             makedirs(dest_path)
         while path.isfile(path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id),
-                                    i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1])):
+                                    i_f_name + str(current_user.id) + "_" + str(i) + '.' + f_name.rsplit('.', 1)[1])):
             i += 1
-        i_f_name = i_f_name + str(i) + '.' + f_name.rsplit('.', 1)[1]
+        i_f_name = i_f_name + str(current_user.id) + "_" + str(i) + '.' + f_name.rsplit('.', 1)[1]
 
         new_log = models.Log(owner=current_user)
         new_log.file_hash = hash
@@ -78,7 +78,7 @@ def findUserFiles(target_user):
                 filePath = os.path.abspath(userFolder + "/" + filename)
                 with open(filePath, "r") as f:
                     content = f.read()
-                fileArray.append({'filename': filename, 'contents': content})
+                fileArray.append({'filename': filename.replace('_' + str(current_user.id), ''), 'contents': content})
     return fileArray
 
 
