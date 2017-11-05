@@ -7,6 +7,19 @@
             $("#downloadLog").attr("action", "/uploads/" + $(this).find("option:selected").text());
             $("#chooseAFile").prop('disabled', 'true');
         });
+
+        $('#analyzeBtn').click(function() {
+        $.ajax({
+            url: '/graphs',
+            type: 'POST',
+            success: function(response) {
+                $('#feedback').html(response)
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        });
     });
 
 {% endblock %}
@@ -25,4 +38,9 @@
     </div>
   	<p><input type="submit" value="Download selected file"></p>
 </form>
+
+
+<button id="analyzeBtn">Analyze Selected File</button>
+<div id="feedback"></div>
+
 {% endblock %}
