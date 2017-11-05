@@ -63,6 +63,14 @@ def usecase():
 @app.route('/errorcase')
 @login_required
 def errorcase():
+    fileArray = findUserFiles(current_user)
+    return render_template('errorcase.html',
+                           title='Error Case',
+                           files=fileArray)
+
+
+@app.route('/graphs', methods=['GET', 'POST'])
+def graphs():
     import matplotlib.pyplot as plt, mpld3
     #random data to test matplot
     dictionary = {}
@@ -74,12 +82,8 @@ def errorcase():
     fig, ax = plt.subplots()
     ax.plot(errors, counts)
     htmlOutput = mpld3.fig_to_html(fig)
-    fileArray = findUserFiles(current_user)
     matplotHtml = Markup(htmlOutput)
-    return render_template('errorcase.html',
-                           title='Error Case',
-                           files=fileArray,
-                           matplotHtml=matplotHtml)
+    return matplotHtml
 
 
 @app.route('/login', methods=['GET', 'POST'])

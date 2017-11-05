@@ -3,16 +3,29 @@
 {% block script_content %}
 
     $(document).ready(function(){
-    $('#sel1').change(function() {
-    $("#downloadLog").attr("action", "/uploads/" + $(this).find("option:selected").text());
-    $("#chooseAFile").prop('disabled', 'true');
-    });
+        $('#sel1').change(function() {
+            $("#downloadLog").attr("action", "/uploads/" + $(this).find("option:selected").text());
+            $("#chooseAFile").prop('disabled', 'true');
+        });
+
+        $('#analyzeBtn').click(function() {
+        $.ajax({
+            url: '/graphs',
+            type: 'POST',
+            success: function(response) {
+                $('#feedback').html(response)
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        });
     });
 
 {% endblock %}
 
 {% block content %}
-    <form id="downloadLog" action="#" enctype="multipart/form-data">
+    <form id="downloadLog" action="#">
         <div class="p-2 form-group">
             <label for="sel1">Uploaded Files:</label>
             <select class="form-control" id="sel1">
@@ -23,9 +36,10 @@
             </select>
             <br>
             <div class="d-flex  justify-content-between">
-                <input type="submit" class="btn btn-primary" value="Download selected file">
-                <input type="submit" class="btn btn-primary" value="Analyze">
+                <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
+                <button id="analyzeBtn" formaction="#" class="btn btn-primary" >Analyze</button>
             </div>
         </div>
     </form>
+    <div id="feedback"></div>
 {% endblock %}
