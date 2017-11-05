@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
+from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory, Markup
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, models
 from .models import User, Log
@@ -63,10 +63,23 @@ def usecase():
 @app.route('/errorcase')
 @login_required
 def errorcase():
+    import matplotlib.pyplot as plt, mpld3
+    #random data to test matplot
+    dictionary = {}
+    dictionary['someError'] = 55
+    dictionary['anotherOne'] = 5
+    dictionary['alot'] = 123
+    errors = list(dictionary.keys())
+    counts = list(dictionary.values())
+    fig, ax = plt.subplots()
+    ax.plot(errors, counts)
+    htmlOutput = mpld3.fig_to_html(fig)
     fileArray = findUserFiles(current_user)
+    matplotHtml = Markup(htmlOutput)
     return render_template('errorcase.html',
                            title='Error Case',
-                           files=fileArray)
+                           files=fileArray,
+                           matplotHtml=matplotHtml)
 
 
 @app.route('/login', methods=['GET', 'POST'])
