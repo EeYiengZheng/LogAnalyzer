@@ -2,11 +2,14 @@
 
 {% block content %}
     <h1>Upload File</h1>
-    <p>Supported filetype: *.log</p>
     <form action="http://localhost:5000/upload_file" method="POST"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data" class="form-inline">
         {{ form.hidden_tag() }}
-        <input type="file" name="new_file" accept=".log"/>
-        <input type="submit"/>
+        <div class="form-group">
+            <label for="f-chooser1">Supported filetype: *.log</label>
+            <input type="file" class="form-control-file" name="new_file" id="f-chooser1" accept=".log"/>
+        <input class="btn btn-primary float-right" type="submit"/>
+        </div>
+
     </form>
 {% endblock %}

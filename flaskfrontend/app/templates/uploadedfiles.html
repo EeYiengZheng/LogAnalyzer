@@ -3,26 +3,29 @@
 {% block script_content %}
 
     $(document).ready(function(){
-        $('#sel1').change(function() {
-            $("#downloadLog").attr("action", "/uploads/" + $(this).find("option:selected").text());
-            $("#chooseAFile").prop('disabled', 'true');
-        });
+    $('#sel1').change(function() {
+    $("#downloadLog").attr("action", "/uploads/" + $(this).find("option:selected").text());
+    $("#chooseAFile").prop('disabled', 'true');
+    });
     });
 
 {% endblock %}
 
-
 {% block content %}
-<form id="downloadLog" action="#">
-    <div class="form-group">
-        <label for="sel1">Uploaded Files:</label>
-        <select class="form-control" id="sel1">
-            <option id="chooseAFile" class="">Choose a file</option>
-            {% for file in files %}
-                <option>{{ file.filename }}</option>
-            {% endfor %}
-        </select>
-    </div>
-  	<p><input type="submit" value="Download selected file"></p>
-</form>
+    <form id="downloadLog" action="#" enctype="multipart/form-data">
+        <div class="p-2 form-group">
+            <label for="sel1">Uploaded Files:</label>
+            <select class="form-control" id="sel1">
+                <option id="chooseAFile" class="">Choose a file</option>
+                {% for file in files %}
+                    <option>{{ file.filename }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <div class="d-flex  justify-content-between">
+                <input type="submit" class="btn btn-primary" value="Download selected file">
+                <input type="submit" class="btn btn-primary" value="Analyze">
+            </div>
+        </div>
+    </form>
 {% endblock %}
