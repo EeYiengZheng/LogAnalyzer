@@ -1,10 +1,10 @@
 from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory, Markup
 from flask_login import login_user, logout_user, current_user, login_required
-from app import app, db, lm, models
-from .models import User, Log
+from app import app, db, models
+from .models import User
 from .forms import LoginForm, RegistrationForm, UploadForm
 from werkzeug.security import generate_password_hash
-from .utils import allowed_file, findUserFiles, file_save_seq
+from .utils import findUserFiles, file_save_seq
 
 
 @app.before_request
@@ -41,14 +41,12 @@ def upload_file():
     return
 
 
-
 @app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     from config import UPLOAD_FOLDER
     from os import path
     userFolder = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
     return send_from_directory(directory=userFolder, filename=filename)
-    
 
 
 @app.route('/usecase')
@@ -72,7 +70,7 @@ def errorcase():
 @app.route('/graphs', methods=['GET', 'POST'])
 def graphs():
     import matplotlib.pyplot as plt, mpld3
-    #random data to test matplot
+    # random data to test matplot
     dictionary = {}
     dictionary['someError'] = 55
     dictionary['anotherOne'] = 5
@@ -85,7 +83,7 @@ def graphs():
     matplotHtml = Markup(htmlOutput)
 
     filename = request.args['filename']
-    #src/--.py functions should be called here to return matplot html
+    # src/--.py functions should be called here to return matplot html
 
     return matplotHtml
 
