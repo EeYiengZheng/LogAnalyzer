@@ -11,7 +11,7 @@
 #}
 
     {% if current_user.is_authenticated %}
-        <h1 class="text-center">Hello, {{ current_user.email }} </h1>
+        <h1 class="text-center">Hello, {{ current_user.username }} </h1>
     {% else %}
         <h1 class="text-center">
             Welcome to Log Analytics!

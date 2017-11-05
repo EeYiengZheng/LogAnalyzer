@@ -91,6 +91,7 @@ def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User()
+        user.username = request.form.get('username')
         user.email = request.form.get('email')
         user.password_hash = generate_password_hash(request.form.get('password'))
         db.session.add(user)
