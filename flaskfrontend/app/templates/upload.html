@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>Upload File</h1>
-    <form action="http://localhost:5000/upload_file" method="POST"
-          enctype="multipart/form-data" class="form-inline">
+{% block uploader %}
+    <div class="p-2">
+        <h1>Upload File</h1>
+    </div>
+    <form class="form-inline" action="http://localhost:5000/upload_file" method="POST"
+          enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            <label for="f-chooser1">Supported filetype: *.log</label>
-            <input type="file" class="form-control-file" name="new_file" id="f-chooser1" accept=".log"/>
-        <input class="btn btn-primary float-right" type="submit"/>
+            <label for="f-chooser1"> </label>
+            <div class="p-2"><input type="file" class="form-control-file" name="new_file" id="f-chooser1"
+                                    accept=".log" aria-describedby="file-chooser-helper"/>
+                <small id="file-chooser-helper" class="form-text text-muted">Supported filetype: *.log</small>
+            </div>
+            <div class="p-2"><input class="btn btn-primary float-right" type="submit"/></div>
         </div>
-
     </form>
 {% endblock %}
