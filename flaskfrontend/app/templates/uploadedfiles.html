@@ -11,7 +11,8 @@
         $('#analyzeBtn').click(function() {
         $.ajax({
             url: '/graphs',
-            type: 'POST',
+            type: 'GET',
+            data: { filename: $("#sel1").find("option:selected").text() },
             success: function(response) {
                 $('#feedback').html(response)
             },
@@ -37,7 +38,7 @@
             <br>
             <div class="d-flex  justify-content-between">
                 <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
-                <button id="analyzeBtn" formaction="#" class="btn btn-primary" >Analyze</button>
+                <button id="analyzeBtn" type="button" class="btn btn-primary" >Analyze</button>
             </div>
         </div>
     </form>

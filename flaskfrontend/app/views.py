@@ -83,6 +83,10 @@ def graphs():
     ax.plot(errors, counts)
     htmlOutput = mpld3.fig_to_html(fig)
     matplotHtml = Markup(htmlOutput)
+
+    filename = request.args['filename']
+    #src/--.py functions should be called here to return matplot html
+
     return matplotHtml
 
 
