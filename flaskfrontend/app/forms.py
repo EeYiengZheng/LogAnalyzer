@@ -1,9 +1,7 @@
-from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import validators, StringField, BooleanField, TextAreaField, PasswordField, SubmitField, FileField
 from wtforms.validators import DataRequired, Length, EqualTo, Email, ValidationError
 from app.models import User
-from app.utils import findUserFiles
 
 
 class LoginForm(FlaskForm):
@@ -15,10 +13,11 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[Length(min=4, max=25), DataRequired()])
+    username = StringField('Nickname', validators=[Length(min=4, max=25), DataRequired()])
     email = StringField('Email Address', validators=[Length(min=5, max=64), DataRequired(), Email()])
     password = PasswordField('New Password',
-                             validators=[Length(min=8, max=128), DataRequired(), EqualTo('confirm', message='Passwords must match')])
+                             validators=[Length(min=8, max=128), DataRequired(),
+                                         EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Repeat Password', validators=[DataRequired()])
     submit = SubmitField('Register')
 
