@@ -5,7 +5,8 @@ from .models import User
 from .forms import LoginForm, RegistrationForm, UploadForm
 from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
-
+from config import UPLOAD_FOLDER
+from os import path
 
 @app.before_request
 def before_request():
@@ -43,8 +44,6 @@ def upload_file():
 
 @app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
-    from config import UPLOAD_FOLDER
-    from os import path
     userFolder = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id))
     return send_from_directory(directory=userFolder, filename=filename)
 
@@ -70,22 +69,23 @@ def errorcase():
 @app.route('/graphs', methods=['GET', 'POST'])
 def graphs():
     import matplotlib.pyplot as plt, mpld3
-    # random data to test matplot
-    dictionary = {}
-    dictionary['someError'] = 55
-    dictionary['anotherOne'] = 5
-    dictionary['alot'] = 123
+
+    filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
+    # src/--.py functions should be called here to return matplot html
+    from src import logMetrics
+    dictionary = logMetrics.errorPieChart(filename, "errorlog.csv")
+
     errors = list(dictionary.keys())
     counts = list(dictionary.values())
-    fig, ax = plt.subplots()
-    ax.plot(errors, counts)
-    htmlOutput = mpld3.fig_to_html(fig)
-    matplotHtml = Markup(htmlOutput)
+    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'red',
+              'salmon', 'peru']
+    patches, texts = plt.pie(counts, colors=colors, startangle=90)
+    plt.legend(patches, errors, loc='upper right', )
+    plt.axis('equal')
+    plt.tight_layout()
+    fig = plt.gcf()
 
-    filename = request.args['filename']
-    # src/--.py functions should be called here to return matplot html
-
-    return matplotHtml
+    return mpld3.fig_to_html(fig, template_type='simple')
 
 
 @app.route('/login', methods=['GET', 'POST'])

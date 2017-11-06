@@ -78,7 +78,7 @@ def findUserFiles(target_user):
                 filePath = os.path.abspath(userFolder + "/" + filename)
                 with open(filePath, "r") as f:
                     content = f.read()
-                fileArray.append({'filename': filename.replace('_' + str(current_user.id), ''), 'contents': content})
+                fileArray.append({'filename': filename, 'contents': content})  # .replace('_' + str(current_user.id),'')
     return fileArray
 
 

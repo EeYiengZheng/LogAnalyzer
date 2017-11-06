@@ -81,16 +81,7 @@ def averageSessionLength(fs):
 
 def errorPieChart(fin, fout):
     dictionary = errorlog(fin, fout)
-    errors = list(dictionary.keys())
-    counts = list(dictionary.values())
-    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'red',
-              'salmon', 'peru']
-    patches, texts = plt.pie(counts, colors=colors, startangle=90)
-    plt.legend(patches, errors, loc='upper right', )
-    plt.axis('equal')
-    plt.tight_layout()
-    fig = plt.figure()
-    return mpld3.fig_to_html(fig, template_type='simple')
+    return dictionary
 
 
 def usagePieChart(fin, fout):
