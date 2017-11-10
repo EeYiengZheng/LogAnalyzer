@@ -8,9 +8,23 @@
             $("#chooseAFile").prop('disabled', 'true');
         });
 
-        $('#analyzeBtn').click(function() {
+        $('#analyzeBtnUse').click(function() {
         $.ajax({
-            url: '/graphs',
+            url: '/graphs_use',
+            type: 'GET',
+            data: { filename: $("#sel1").find("option:selected").text() },
+            success: function(response) {
+                $('#feedback').html(response)
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        });
+
+        $('#analyzeBtnErr').click(function() {
+        $.ajax({
+            url: '/graphs_err',
             type: 'GET',
             data: { filename: $("#sel1").find("option:selected").text() },
             success: function(response) {
@@ -38,7 +52,11 @@
             <br>
             <div class="d-flex  justify-content-between">
                 <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
-                <button id="analyzeBtn" type="button" class="btn btn-primary" >Analyze</button>
+                {% if request.path == "/usecase" %}
+                <button id="analyzeBtnUse" type="button" class="btn btn-primary" >Analyze</button>
+                {% elif request.path == "/errorcase" %}
+                <button id="analyzeBtnErr" type="button" class="btn btn-primary" >Analyze</button>
+                {% endif %}
             </div>
         </div>
     </form>

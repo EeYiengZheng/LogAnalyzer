@@ -1,13 +1,8 @@
 import csv
 from re import *
-import time
 
-# count = 0
 word_code = '[38866]: '
 
-
-start_time = time.perf_counter()
-# create a new csv file to write to
 
 def errorlog(fin, fout):
     error_dict = {'HttpClientError': 0, 'AccessDenied': 0, 'RuntimeException': 0, 'transport error': 0,
@@ -137,8 +132,8 @@ def errorlog(fin, fout):
 
 
 def usagelog(fin, fout):
-    count = 0
-    error_dict = {}
+    usage_dict = {'DockerServerController': 0, 'DockerVolumeController': 0, 'ProvisionController': 0,
+                  'BlueprintController': 0}
     with open(fout, 'w') as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
@@ -146,8 +141,8 @@ def usagelog(fin, fout):
         # open a syslog file to read from
         with open(fin, 'r') as in_file:
 
-            # Use Case 1: Compute/VM - look for "DockerServerController"
             for line in in_file:
+                # Use Case 1: Compute/VM - look for "DockerServerController"
                 if search('DockerServerController', line):
                     this_word_code = 'DockerServerController  :'
                     end_index = line.index(this_word_code) + len(this_word_code)
@@ -158,13 +153,9 @@ def usagelog(fin, fout):
                     error_time = search('\d{2}:\d{2}:\d{2}', line).group(0)
 
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-                    count += 1
-            error_dict['DockerServerController'] = count
-            count = 0
-            in_file.seek(0)
+                    usage_dict['DockerServerController'] += 1
 
-            # Use Case 2: Volumes - look for 'DockerVolumeController'
-            for line in in_file:
+                # Use Case 2: Volumes - look for 'DockerVolumeController'
                 if search('DockerVolumeController', line):
                     this_word_code = 'DockerVolumeController  :'
                     end_index = line.index(this_word_code) + len(this_word_code)
@@ -175,12 +166,9 @@ def usagelog(fin, fout):
                     error_time = search('\d{2}:\d{2}:\d{2}', line).group(0)
 
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-                    count += 1
-            count = 0
-            in_file.seek(0)
+                    usage_dict['DockerVolumeController'] += 1
 
-            # Use Case 3: Containers - look for 'ProvisionController'
-            for line in in_file:
+                # Use Case 3: Containers - look for 'ProvisionController'
                 if search('ProvisionController', line):
                     this_word_code = 'ProvisionController    :'
                     end_index = line.index(this_word_code) + len(this_word_code)
@@ -191,13 +179,9 @@ def usagelog(fin, fout):
                     error_time = search('\d{2}:\d{2}:\d{2}', line).group(0)
 
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-                    count += 1
-            error_dict['ProvisionController'] = count
-            count = 0
-            in_file.seek(0)
+                    usage_dict['ProvisionController'] += 1
 
-            # Use Case 4: Blueprints - look for 'BlueprintController'
-            for line in in_file:
+                # Use Case 4: Blueprints - look for 'BlueprintController'
                 if search('BlueprintController', line):
                     this_word_code = 'BlueprintController    :'
                     end_index = line.index(this_word_code) + len(this_word_code)
@@ -208,10 +192,21 @@ def usagelog(fin, fout):
                     error_time = search('\d{2}:\d{2}:\d{2}', line).group(0)
 
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-                    count += 1
-            error_dict['BlueprintController'] = count
-            count = 0
-            in_file.seek(0)
-    return error_dict
+                    usage_dict['BlueprintController'] += 1
+    return usage_dict
 
-print(time.perf_counter() - start_time)
+
+def errorPieChart(fin, fout):
+    import time
+    start_time = time.time()
+    dictionary = errorlog(fin, fout)
+    print("--- %s seconds ---" % (time.time() - start_time))
+    return dictionary
+
+
+def usagePieChart(fin, fout):
+    import time
+    start_time = time.time()
+    dictionary = usagelog(fin, fout)
+    print("--- %s seconds ---" % (time.time() - start_time))
+    return dictionary
