@@ -4,7 +4,7 @@ from app import app, db, models
 from .models import User
 from .forms import LoginForm, RegistrationForm, UploadForm
 from werkzeug.security import generate_password_hash
-from .utils import findUserFiles, file_save_seq
+from .utils import findUserFiles, file_save_seq, errorPieChart
 from config import UPLOAD_FOLDER
 from os import path
 
@@ -72,8 +72,7 @@ def graphs():
 
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
     # src/--.py functions should be called here to return matplot html
-    from src import logMetrics
-    dictionary = logMetrics.errorPieChart(filename, "errorlog.csv")
+    dictionary = errorPieChart(filename, "errorlog.csv")
 
     errors = list(dictionary.keys())
     counts = list(dictionary.values())
