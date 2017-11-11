@@ -9,6 +9,7 @@ from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from os import path
 from .analyzer import usagePieChart, errorPieChart
 
+
 @app.before_request
 def before_request():
     g.user = current_user
@@ -65,9 +66,7 @@ def usecase():
 @login_required
 def errorcase():
     fileArray = findUserFiles(current_user)
-    '''
-    error analysis statistics 
-    '''
+
     return render_template('errorcase.html',
                            title='Error Case',
                            files=fileArray)  # stats=statistics
@@ -76,10 +75,17 @@ def errorcase():
 @app.route('/graphs_err', methods=['GET', 'POST'])
 def graphs_error():
     import matplotlib.pyplot as plt, mpld3
+    from os import makedirs
+
+    if request.args['filename'] == 'Choose a file':
+        return ''
 
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
     # src/--.py functions should be called here to return matplot html
-    dictionary = errorPieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, "errorlog.csv"))
+    if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
+        makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
+    dictionary = errorPieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"))
 
     errors = list(dictionary.keys())
     counts = list(dictionary.values())
@@ -90,29 +96,61 @@ def graphs_error():
     plt.axis('equal')
     plt.tight_layout()
     fig = plt.gcf()
+    stats = ''
+    headers = ''
+    with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                        request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"), 'r') as csv:
+        headers = csv.readline()
+        stats = csv.read()
+    summary = '<summary><table><tr><th>Error</th><th>Count</th></tr>'
+    for e in range(1, len(errors)):
+        summary += '<tr><td>' + errors[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
+    summary += '</table></summary>'
+    html = mpld3.fig_to_html(fig, template_type='simple') \
+           + '<div class="data container">' + '<details>' \
+           + summary + '<p>' + stats + '</p>' + '</details>' + '</div>'
 
-    return mpld3.fig_to_html(fig, template_type='simple')
+    return html
 
 
 @app.route('/graphs_use', methods=['GET', 'POST'])
 def graphs_usage():
     import matplotlib.pyplot as plt, mpld3
+    from os import makedirs
 
+    if request.args['filename'] == 'Choose a file':
+        return ''
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
     # src/--.py functions should be called here to return matplot html
-    dictionary = usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, "usagelog.csv"))
+    if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
+        makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
+    dictionary = usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))
 
-    usage = list(dictionary.keys())
+    entries = list(dictionary.keys())
     counts = list(dictionary.values())
-    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'red',
-              'salmon', 'peru']
+    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
     patches, texts = plt.pie(counts, colors=colors, startangle=90)
-    plt.legend(patches, usage, loc='upper right', )
-    plt.axis('equal')
+    plt.legend(patches, entries, loc='upper right')
     plt.tight_layout()
+    plt.axis('equal')
     fig = plt.gcf()
 
-    return mpld3.fig_to_html(fig, template_type='simple')
+    stats = ''
+    headers = ''
+    with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                        request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"), 'r') as csv:
+        headers = csv.readline()
+        stats = csv.read()
+    summary = '<summary><table><tr><th>Error</th><th>Count</th></tr>'
+    for e in range(0, len(entries)):
+        summary += '<tr><td>' + entries[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
+    summary += '</table></summary>'
+    html = mpld3.fig_to_html(fig, template_type='simple') \
+           + '<div class="data container">' + '<details>' \
+           + summary + '<p>' + stats + '</p>' + '</details>' + '</div>'
+
+    return html
 
 
 @app.route('/login', methods=['GET', 'POST'])

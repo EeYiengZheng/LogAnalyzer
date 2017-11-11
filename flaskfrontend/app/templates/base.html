@@ -32,15 +32,8 @@
             margin-bottom: 0;
         }
 
-        /* Avatar image */
-        .avatar-img {
-            width: 18vw;
-        }
-
-        /* The "Forgot password" text */
-        span.psw {
-            float: right;
-            padding-top: 16px;
+        .data {
+            white-space: pre;
         }
 
         :root #content > #right > .dose > .dosesingle,
@@ -130,16 +123,16 @@
                 {% block about %}
                 {% endblock %}
             </div>
-            <div class="d-flex p-2 justify-content-center">
-                {% block uploaded %}
-
-                {% endblock %}
-            </div>
-            <div class="d-flex justify-content-center">
+            <div class="col-sm-5 mx-auto">
                 <div class="d-flex p-2 flex-column">
                     {% block uploader %}
                     {% endblock %}
                 </div>
+            </div>
+            <div class="d-flex p-2 justify-content-center">
+                {% block stats %}
+
+                {% endblock %}
             </div>
 
         </div>

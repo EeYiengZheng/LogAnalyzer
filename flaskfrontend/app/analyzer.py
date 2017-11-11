@@ -197,16 +197,10 @@ def usagelog(fin, fout):
 
 
 def errorPieChart(fin, fout):
-    import time
-    start_time = time.time()
     dictionary = errorlog(fin, fout)
-    print("--- %s seconds ---" % (time.time() - start_time))
     return dictionary
 
 
 def usagePieChart(fin, fout):
-    import time
-    start_time = time.time()
     dictionary = usagelog(fin, fout)
-    print("--- %s seconds ---" % (time.time() - start_time))
     return dictionary
