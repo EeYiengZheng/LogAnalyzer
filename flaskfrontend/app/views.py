@@ -133,7 +133,6 @@ def graphs_usage():
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
-<<<<<<< HEAD
     dictionary = usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                    request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))
     entries = list(dictionary.keys())
@@ -143,7 +142,6 @@ def graphs_usage():
     plt.legend(patches, entries, loc='upper right')
     plt.tight_layout()
     plt.axis('equal')
-=======
     dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                    request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items())
 
@@ -154,7 +152,6 @@ def graphs_usage():
         counts.append(val)
     plt.close()
     plt.plot(entries, counts)
->>>>>>> 0fcad914abf527bbd473c38db885b190891bd1a9
     fig = plt.gcf()
     fig.set_figheight(5)
     fig.set_figwidth(9)
