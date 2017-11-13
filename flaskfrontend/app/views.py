@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory, Markup
+from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, models
 from .models import User
@@ -84,31 +84,41 @@ def graphs_error():
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
-    dictionary = errorPieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                   request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"))
+    dictionary = sorted(errorPieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv")).items())
 
-    errors = list(dictionary.keys())
-    counts = list(dictionary.values())
-    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'red',
-              'salmon', 'peru']
-    patches, texts = plt.pie(counts, colors=colors, startangle=90)
-    plt.legend(patches, errors, loc='upper right', )
-    plt.axis('equal')
-    plt.tight_layout()
+    errors = list()
+    counts = list()
+    for key, val in dictionary:
+        errors.append(key)
+        counts.append(val)
+    plt.close()
+    plt.plot(errors, counts)
     fig = plt.gcf()
-    stats = ''
-    headers = ''
+    fig.set_figheight(5)
+    fig.set_figwidth(12)
+    stats = '<table class="table table-striped">'
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                         request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"), 'r') as csv:
-        headers = csv.readline()
-        stats = csv.read()
-    summary = '<summary><table><tr><th>Error</th><th>Count</th></tr>'
-    for e in range(1, len(errors)):
-        summary += '<tr><td>' + errors[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
-    summary += '</table></summary>'
-    html = mpld3.fig_to_html(fig, template_type='simple') \
-           + '<div class="data container">' + '<details>' \
-           + summary + '<p>' + stats + '</p>' + '</details>' + '</div>'
+        headers = csv.readline().split(',')
+        stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{}</th></tr></thead><tbody>'.format(
+            headers[1], headers[2] + headers[3], headers[4])
+        contents = csv.readlines()
+        l = 1
+        for line in contents:
+            tokens = line.split(',', 4)
+            stats += '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{}</td></tr>'.format(
+                l, tokens[1], tokens[2] + ' ' + tokens[3], tokens[4].replace('"', ''))
+            l += 1
+        stats += '</tbody></table>'
+    summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
+    for e in range(0, len(errors)):
+        summarized += '<tr scope="row"><td>' + errors[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
+    summarized += '</table>'
+    html = '<div class="container container-fluid"><div class="row justify-content-center"'\
+           + mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
+           + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
+           + stats + '</details>' + '</div></div>'
 
     return html
 
@@ -123,6 +133,7 @@ def graphs_usage():
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
+<<<<<<< HEAD
     dictionary = usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                    request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))
     entries = list(dictionary.keys())
@@ -132,21 +143,44 @@ def graphs_usage():
     plt.legend(patches, entries, loc='upper right')
     plt.tight_layout()
     plt.axis('equal')
-    fig = plt.gcf()
+=======
+    dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items())
 
-    stats = ''
-    headers = ''
+    entries = list()
+    counts = list()
+    for key, val in dictionary:
+        entries.append(key)
+        counts.append(val)
+    plt.close()
+    plt.plot(entries, counts)
+>>>>>>> 0fcad914abf527bbd473c38db885b190891bd1a9
+    fig = plt.gcf()
+    fig.set_figheight(5)
+    fig.set_figwidth(9)
+
+    stats = '<table class="table table-striped">'
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                         request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"), 'r') as csv:
-        headers = csv.readline()
-        stats = csv.read()
-    summary = '<summary><table><tr><th>Error</th><th>Count</th></tr>'
+        headers = csv.readline().split(',')
+        stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{}</th></tr></thead><tbody>'.format(
+            headers[1], headers[2] + headers[3], headers[4])
+        contents = csv.readlines()
+        l = 1
+        for line in contents:
+            tokens = line.split(',', 4)
+            stats += '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{}</td></tr>'.format(
+                l, tokens[1], tokens[2] + ' '+tokens[3], tokens[4])
+            l += 1
+        stats += '</tbody></table>'
+    summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
     for e in range(0, len(entries)):
-        summary += '<tr><td>' + entries[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
-    summary += '</table></summary>'
-    html = mpld3.fig_to_html(fig, template_type='simple') \
-           + '<div class="data container">' + '<details>' \
-           + summary + '<p>' + stats + '</p>' + '</details>' + '</div>'
+        summarized += '<tr scope="row"><td>' + entries[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
+    summarized += '</table>'
+    html = '<div class="container container-fluid"><div class="row justify-content-center"'\
+           + mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
+           + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
+           + stats + '</details>' + '</div></div>'
 
     return html
 
