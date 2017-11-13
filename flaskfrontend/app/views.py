@@ -101,23 +101,24 @@ def graphs_error():
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                         request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"), 'r') as csv:
         headers = csv.readline().split(',')
-        stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{} {}</th></tr></thead><tbody>'.format(
-            headers[1], headers[2], headers[3], headers[4])
+        stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{}</th></tr></thead><tbody>'.format(
+            headers[1], headers[2] + headers[3], headers[4])
         contents = csv.readlines()
         l = 1
         for line in contents:
-            tokens = line.split(',')
-            stats += '<tr><th scope="row">{}</th><td>{}</td><td>{} {}</td><td>{}</td></tr>'.format(
-                l, tokens[1], tokens[2], tokens[3], tokens[4:])
+            tokens = line.split(',', 4)
+            stats += '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{}</td></tr>'.format(
+                l, tokens[1], tokens[2] + ' ' + tokens[3], tokens[4].replace('"', ''))
             l += 1
         stats += '</tbody></table>'
     summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
     for e in range(0, len(errors)):
         summarized += '<tr scope="row"><td>' + errors[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
     summarized += '</table>'
-    html = '<div class="container container-fluid"><div class="row justify-content-center"'+mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
-           + summarized + '</div><div class="row justify-content-center"><details title="Details"><summary>' + 'Detailed Statistics' \
-           + '</summary>' + stats + '</details>' + '</div></div>'
+    html = '<div class="container container-fluid"><div class="row justify-content-center"'\
+           + mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
+           + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
+           + stats + '</details>' + '</div></div>'
 
     return html
 
@@ -151,23 +152,24 @@ def graphs_usage():
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                         request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"), 'r') as csv:
         headers = csv.readline().split(',')
-        stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{} {}</th></tr></thead><tbody>'.format(
-            headers[1], headers[2], headers[3], headers[4])
+        stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{}</th></tr></thead><tbody>'.format(
+            headers[1], headers[2] + headers[3], headers[4])
         contents = csv.readlines()
         l = 1
         for line in contents:
-            tokens = line.split(',')
-            stats += '<tr><th scope="row">{}</th><td>{}</td><td>{} {}</td><td>{}</td></tr>'.format(
-                l, tokens[1], tokens[2], tokens[3], tokens[4:])
+            tokens = line.split(',', 4)
+            stats += '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{}</td></tr>'.format(
+                l, tokens[1], tokens[2] + ' '+tokens[3], tokens[4])
             l += 1
         stats += '</tbody></table>'
     summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
     for e in range(0, len(entries)):
         summarized += '<tr scope="row"><td>' + entries[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
     summarized += '</table>'
-    html = '<div class="container container-fluid"><div class="row justify-content-center"'+mpld3.fig_to_html(fig) + '</div><div class="row justify-content-center">' \
-           + summarized + '</div><div class="row justify-content-center"><details title="Details"><summary>' + 'Detailed Statistics' \
-           + '</summary>' + stats + '</details>' + '</div></div>'
+    html = '<div class="container container-fluid"><div class="row justify-content-center"'\
+           + mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
+           + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
+           + stats + '</details>' + '</div></div>'
 
     return html
 
