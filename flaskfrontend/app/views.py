@@ -7,8 +7,9 @@ from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
 from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from os import path
-from .analyzer import usagePieChart, errorPieChart, searchPeriod
+from .analyzer import usagePieChart, errorPieChart, searchPeriod, earliestDate, latestDate
 import datetime
+from dateutil import parser
 
 @app.before_request
 def before_request():
@@ -136,13 +137,17 @@ def graphs_usage():
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
 
-    if isinstance(start, datetime.date) and isinstance(end, datetime.date):
-        dictionary = sorted(usagePieChart(searchPeriod(filename, start, end), path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+    #if isinstance(start, datetime.date) and isinstance(end, datetime.date):
+    if start != '' and end != '':
+        parser.parse(start, earliestDate(filename))
+        parser.parse(end, latestDate(filename))
+        return "hello!!"
+        """dictionary = sorted(usagePieChart(searchPeriod(filename, start, end), path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                               request.args['filename'].rsplit('.', 1)[
-                                                                  0] + "_usagelog.csv")).items())
+                                                                  0] + "_usagelog.csv")).items())"""
     else:
         dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items())
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items()[0])
     entries = list()
     counts = list()
     for key, val in dictionary:

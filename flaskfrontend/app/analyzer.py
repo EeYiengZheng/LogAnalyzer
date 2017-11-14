@@ -194,7 +194,7 @@ def usagelog(fin, fout):
 
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
                     usage_dict['BlueprintController'] += 1
-    return usage_dict
+    return (usage_dict, fout)
 
 
 def errorPieChart(fin, fout):
@@ -297,3 +297,33 @@ def sortbyDate(fin, fout):
             error_detail = entry[4]
             writer.writerow([error_type, error_name, error_date, error_time, error_detail])
     return fout
+
+"""
+Returns the date of the earliest entry
+"""
+def earliestDate(fin):
+    errors = []
+    format = "%b %d %H:%M:%S %Y"
+    with open(fin, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            if row[2] != 'date':
+                errors.append(row)
+    errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                             + " " + entry[3] + " 2017", format))
+    return errors.index(0)
+
+"""
+Returns the date of the latest entry
+"""
+def latestDate(fin):
+    errors = []
+    format = "%b %d %H:%M:%S %Y"
+    with open(fin, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            if row[2] != 'date':
+                errors.append(row)
+    errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                             + " " + entry[3] + " 2017", format))
+    return errors.index(len(errors) - 1)
