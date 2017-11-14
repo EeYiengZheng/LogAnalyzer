@@ -32,6 +32,7 @@ src/*.csv
 
 # Flask virtual environment
 flaskfrontend/flask
+flask
 
 # MacOS specific
 .DS_Store
