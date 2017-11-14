@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
 from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from os import path
-from .analyzer import errorPeriod, usagePeriod, usagelog, errorlog
+from .analyzer import errorSearch, usageSearch, usagelog, errorlog
 import datetime
 from dateutil import parser
 
@@ -98,7 +98,7 @@ def graphs_error():
         e = loginfo[3]
     print(s)
     print(e)
-    dictionary = sorted(errorPeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+    dictionary = sorted(errorSearch(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                    request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e,
                                     term)[0].items())
     print(dictionary)
@@ -164,7 +164,7 @@ def graphs_usage():
         e = loginfo[3]
     print(s)
     print(e)
-    dictionary = sorted(usagePeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+    dictionary = sorted(usageSearch(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                     request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e, term)[0].items())
     print(dictionary)
     entries = list()

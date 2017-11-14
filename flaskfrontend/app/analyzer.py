@@ -220,40 +220,6 @@ def usagelog(fin, fout):
     latestDate = datetime.datetime.strptime(cases[lastindex][2] + " " + cases[lastindex][3] + " 2017", format)
     return (usage_dict, fout, earliestDate, latestDate)
 
-
-"""def errorPieChart(fin, fout):
-    dictionary = errorlog(fin, fout)
-    return dictionary
-
-
-def usagePieChart(fin, fout):
-    dictionary = usagelog(fin, fout)
-    return dictionary"""
-
-"""
-Find a term from the error log fs.
-Function searches each row of the error file and writes rows that contain
-the key word to an output file.
-Returns fs, the output file
-"""
-
-
-def searchTerm(fs, term):
-    with open('search_term.csv', 'w') as csvfile:
-        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['type', 'error', 'date', 'time', 'details'])
-        with open(fs, 'r') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for row in reader:
-                if term in row:
-                    error_type = row[0]
-                    error_name = row[1]
-                    error_date = row[2]
-                    error_time = row[3]
-                    error_detail = row[4]
-                    writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-    return fs
-
 """
 Find the errors in file fs from a certain time period.
 Search queries must be in form ''
@@ -263,7 +229,7 @@ Returns fs, the output file
 """
 
 
-def errorPeriod(fs, fout, start, end, term):
+def errorSearch(fs, fout, start, end, term):
     error_dict = {'Http Client Error': 0, 'Access Denied': 0, 'Runtime Exception': 0, 'Transport Error': 0,
                   'Default Response Error Handler': 0, 'Warning': 0, 'Timeout': 0}
     format = "%b %d %H:%M:%S %Y"
@@ -309,7 +275,7 @@ Returns fs, the output file
 """
 
 
-def usagePeriod(fs, fout, start, end, term):
+def usageSearch(fs, fout, start, end, term):
     usage_dict = {'Docker Server Controller': 0, 'Docker Volume Controller': 0, 'Provision Controller': 0,
                   'Blueprint Controller': 0}
     format = "%b %d %H:%M:%S %Y"
@@ -343,16 +309,4 @@ def usagePeriod(fs, fout, start, end, term):
                             writer.writerow([usage_type, usage_name, usage_date, usage_time, usage_detail])
                             if usage_name in usage_dict.keys():
                                 usage_dict[usage_name] += 1
-
-        """        
-        with open(fs, 'r') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for row in reader:
-                if term in row:
-                    error_type = row[0]
-                    error_name = row[1]
-                    error_date = row[2]
-                    error_time = row[3]
-                    error_detail = row[4]
-                    writer.writerow([error_type, error_name, error_date, error_time, error_detail])"""
     return (usage_dict, fout)
