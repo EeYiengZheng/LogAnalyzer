@@ -7,8 +7,8 @@ from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
 from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from os import path
-from .analyzer import usagePieChart, errorPieChart
-
+from .analyzer import usagePieChart, errorPieChart, searchPeriod
+import datetime
 
 @app.before_request
 def before_request():
@@ -135,9 +135,14 @@ def graphs_usage():
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
-    dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items())
 
+    if isinstance(start, datetime.date) and isinstance(end, datetime.date):
+        dictionary = sorted(usagePieChart(searchPeriod(filename, start, end), path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                              request.args['filename'].rsplit('.', 1)[
+                                                                  0] + "_usagelog.csv")).items())
+    else:
+        dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items())
     entries = list()
     counts = list()
     for key, val in dictionary:
