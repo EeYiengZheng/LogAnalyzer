@@ -1,7 +1,6 @@
 import csv
 import datetime
 from re import *
-from dateutil import parser
 
 word_code = '[38866]: '
 
