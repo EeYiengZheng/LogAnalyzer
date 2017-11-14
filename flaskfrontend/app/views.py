@@ -82,42 +82,26 @@ def graphs_error():
         return ''
     start = request.args['start']
     end = request.args['end']
+    term = request.args['term']
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
-    """if start != '' and end != '':
-        log = errorlog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                           request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"))[1]
-        s = parser.parse(start, parserinfo=None, default=datetime.datetime(earliestDate(log).year, 1, 1))
-        e = parser.parse(end, parserinfo=None, default=datetime.datetime(latestDate(log).year, 12, 31))
-        print(log)
-        print(s)
-        print(e)
-        dictionary = sorted(errorPeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                       request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"),
-                                        s, e)[0].items())
-        print(dictionary)
-    else:
-        dictionary = sorted(errorlog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                         request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"))[
-                                        0].items())
-        print(dictionary)"""
     loginfo = errorlog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                            request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"))
+    log = loginfo[1]
     if start != '' and end != '':
-        log = loginfo[1]
         s = parser.parse(start, parserinfo=None, default=datetime.datetime(loginfo[2].year, 1, 1))
         e = parser.parse(end, parserinfo=None, default=datetime.datetime(loginfo[3].year, 12, 31))
-        print(s)
-        print(e)
-        dictionary = sorted(errorPeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                       request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"),
-                                        s, e)[0].items())
-        print(dictionary)
     else:
-        dictionary = sorted(loginfo[0].items())
-        print(dictionary)
+        s = loginfo[2]
+        e = loginfo[3]
+    print(s)
+    print(e)
+    dictionary = sorted(errorPeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e,
+                                    term)[0].items())
+    print(dictionary)
     errors = list()
     counts = list()
     for key, val in dictionary:
