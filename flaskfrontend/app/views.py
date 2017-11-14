@@ -129,6 +129,8 @@ def graphs_usage():
     from os import makedirs
     if request.args['filename'] == 'Choose a file':
         return ''
+    start = request.args['start']
+    end = request.args['end']
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
