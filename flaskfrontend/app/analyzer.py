@@ -264,8 +264,8 @@ def usagePeriod(fs, fout, start, end):
                     date = datetime.datetime.strptime(usage_date + " " + usage_time + " 2017", format)
                     if date >= start and date <= end:
                         writer.writerow([usage_type, usage_name, usage_date, usage_time, usage_detail])
-                if usage_name in usage_dict.keys():
-                    usage_dict[usage_name] += 1
+                        if usage_name in usage_dict.keys():
+                            usage_dict[usage_name] += 1
     return (usage_dict, fout)
 
 """
@@ -300,8 +300,8 @@ def errorPeriod(fs, fout, start, end):
                     date = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
                     if date >= start and date <= end:
                         writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-                if error_name in error_dict.keys():
-                    error_dict[error_name] += 1
+                        if error_name in error_dict.keys():
+                            error_dict[error_name] += 1
     return (error_dict, fout)
 
 """
