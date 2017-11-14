@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
 from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from os import path
-from .analyzer import usagePieChart, errorPieChart, searchPeriod, earliestDate, latestDate
+from .analyzer import usagePieChart, errorPieChart, searchPeriod, earliestDate, latestDate, usagelog
 import datetime
 from dateutil import parser
 
@@ -137,17 +137,18 @@ def graphs_usage():
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
 
-    #if isinstance(start, datetime.date) and isinstance(end, datetime.date):
+    log = usagelog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                            request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))[1]
     if start != '' and end != '':
-        parser.parse(start, earliestDate(filename))
-        parser.parse(end, latestDate(filename))
+        parser.parse(start, parserinfo=None, default=earliestDate(log))
+        parser.parse(end, parserinfo=None, default=latestDate(log))
         return "hello!!"
         """dictionary = sorted(usagePieChart(searchPeriod(filename, start, end), path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                               request.args['filename'].rsplit('.', 1)[
                                                                   0] + "_usagelog.csv")).items())"""
     else:
         dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items()[0])
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))[0].items())
     entries = list()
     counts = list()
     for key, val in dictionary:

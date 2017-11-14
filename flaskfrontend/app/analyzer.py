@@ -1,6 +1,7 @@
 import csv
 import datetime
 from re import *
+from dateutil import parser
 
 word_code = '[38866]: '
 
@@ -247,8 +248,8 @@ Returns fs, the output file
 
 def searchPeriod(fs, start, end):
     format = "%b %d %H:%M:%S %Y"
-    s = datetime.datetime.strptime(start + " 2017", format)
-    e = datetime.datetime.strptime(end + " 2017", format)
+    s = parser.parse(start)
+    e = parser.parse(end)
     if s > e:
         tmp = e
         e = s
@@ -311,7 +312,7 @@ def earliestDate(fin):
                 errors.append(row)
     errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
                                                                              + " " + entry[3] + " 2017", format))
-    return errors.index(0)
+    return datetime.datetime.strptime(errors[0][2] + " " + errors[0][3] + " 2017", format)
 
 """
 Returns the date of the latest entry
@@ -326,4 +327,5 @@ def latestDate(fin):
                 errors.append(row)
     errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
                                                                              + " " + entry[3] + " 2017", format))
-    return errors.index(len(errors) - 1)
+    lastindex = len(errors) - 1
+    return datetime.datetime.strptime(errors[lastindex][2] + " " + errors[lastindex][3] + " 2017", format)
