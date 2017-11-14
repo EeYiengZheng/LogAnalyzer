@@ -12,7 +12,7 @@
         $.ajax({
             url: '/graphs_use',
             type: 'GET',
-            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val(), term: $("#term").val()},
+            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val()},
 
             success: function(response) {
                 $('#feedback').html(response)
@@ -27,7 +27,7 @@
         $.ajax({
             url: '/graphs_err',
             type: 'GET',
-            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val() term: $("#term").val()},
+            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val()},
             success: function(response) {
                 $('#feedback').html(response)
             },
@@ -53,6 +53,8 @@
             <br>(Optional: Search by Date and Time)<br>
             Start:<input id="start" type="text">
             End: <input id="end" type="text">
+            <br>(Optional: Filter by searching for term)<br>
+            Term: <input id="term" type="text">
             <div class="d-flex  justify-content-between">
                 <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
                 {% if request.path == "/usecase" %}
@@ -61,7 +63,5 @@
                 <button id="analyzeBtnErr" type="button" class="btn btn-primary" >Analyze</button>
                 {% endif %}
             </div>
-            <br>(Optional: Filter by searching for term)<br>
-            <input id="term" type="text">
     </form>
 {% endblock %}
