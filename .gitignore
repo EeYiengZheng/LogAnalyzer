@@ -37,3 +37,6 @@ flask
 # MacOS specific
 .DS_Store
 .DS_store.orig
+
+# test
+LogAnalyzer.iml
