@@ -50,6 +50,11 @@
                 {% endfor %}
             </select>
             <br>
+            <label for="sel1">Optional: Input Dates in format: Month Day Year hh:mm:ss:</label>
+            <div class="d-flex  justify-content-between">
+                <input name="start">
+                <input name="end">
+            </div>
             <div class="d-flex  justify-content-between">
                 <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
                 {% if request.path == "/usecase" %}
@@ -58,6 +63,5 @@
                 <button id="analyzeBtnErr" type="button" class="btn btn-primary" >Analyze</button>
                 {% endif %}
             </div>
-        </div>
     </form>
 {% endblock %}

@@ -127,13 +127,21 @@ def graphs_error():
 def graphs_usage():
     import matplotlib.pyplot as plt, mpld3
     from os import makedirs
-
     if request.args['filename'] == 'Choose a file':
         return ''
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
+    dictionary = usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))
+    entries = list(dictionary.keys())
+    counts = list(dictionary.values())
+    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+    patches, texts = plt.pie(counts, colors=colors, startangle=90)
+    plt.legend(patches, entries, loc='upper right')
+    plt.tight_layout()
+    plt.axis('equal')
     dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                    request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv")).items())
 
