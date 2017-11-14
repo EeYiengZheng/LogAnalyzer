@@ -12,7 +12,7 @@
         $.ajax({
             url: '/graphs_use',
             type: 'GET',
-            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val()},
+            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val(), term: $("#term").val()},
 
             success: function(response) {
                 $('#feedback').html(response)
@@ -27,7 +27,7 @@
         $.ajax({
             url: '/graphs_err',
             type: 'GET',
-            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val()},
+            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val(), term: $("#term").val()},
             success: function(response) {
                 $('#feedback').html(response)
             },

@@ -164,24 +164,25 @@ def graphs_usage():
         return ''
     start = request.args['start']
     end = request.args['end']
+    term = request.args['term']
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
     loginfo = usagelog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                            request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))
+    log = loginfo[1]
     if start != '' and end != '':
-        log = loginfo[1]
         s = parser.parse(start, parserinfo=None, default=datetime.datetime(loginfo[2].year, 1, 1))
         e = parser.parse(end, parserinfo=None, default=datetime.datetime(loginfo[3].year, 12, 31))
-        print(s)
-        print(e)
-        dictionary = sorted(usagePeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                        request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e)[0].items())
-        print(dictionary)
     else:
-        dictionary = sorted(loginfo[0].items())
-        print(dictionary)
+        s = loginfo[2]
+        e = loginfo[3]
+    print(s)
+    print(e)
+    dictionary = sorted(usagePeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                    request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e, term)[0].items())
+    print(dictionary)
     entries = list()
     counts = list()
     for key, val in dictionary:

@@ -301,7 +301,7 @@ Returns fs, the output file
 """
 
 
-def usagePeriod(fs, fout, start, end):
+def usagePeriod(fs, fout, start, end, term):
     usage_dict = {'Docker Server Controller': 0, 'Docker Volume Controller': 0, 'Provision Controller': 0,
                   'Blueprint Controller': 0}
     format = "%b %d %H:%M:%S %Y"
@@ -315,17 +315,18 @@ def usagePeriod(fs, fout, start, end):
         with open(fs, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
-                usage_type = row[0]
-                usage_name = row[1]
-                usage_date = row[2]
-                usage_time = row[3]
-                usage_detail = row[4]
-                if usage_date != 'date':
-                    date = datetime.datetime.strptime(usage_date + " " + usage_time + " 2017", format)
-                    if date >= start and date <= end:
-                        writer.writerow([usage_type, usage_name, usage_date, usage_time, usage_detail])
-                        if usage_name in usage_dict.keys():
-                            usage_dict[usage_name] += 1
+                if term == '' or term in row:
+                    usage_type = row[0]
+                    usage_name = row[1]
+                    usage_date = row[2]
+                    usage_time = row[3]
+                    usage_detail = row[4]
+                    if usage_date != 'date':
+                        date = datetime.datetime.strptime(usage_date + " " + usage_time + " 2017", format)
+                        if date >= start and date <= end:
+                            writer.writerow([usage_type, usage_name, usage_date, usage_time, usage_detail])
+                            if usage_name in usage_dict.keys():
+                                usage_dict[usage_name] += 1
     return (usage_dict, fout)
 
 """
