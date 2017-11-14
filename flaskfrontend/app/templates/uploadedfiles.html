@@ -12,7 +12,8 @@
         $.ajax({
             url: '/graphs_use',
             type: 'GET',
-            data: { filename: $("#sel1").find("option:selected").text() },
+            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val() },
+
             success: function(response) {
                 $('#feedback').html(response)
             },
@@ -26,7 +27,7 @@
         $.ajax({
             url: '/graphs_err',
             type: 'GET',
-            data: { filename: $("#sel1").find("option:selected").text() },
+            data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val() },
             success: function(response) {
                 $('#feedback').html(response)
             },
@@ -40,6 +41,12 @@
 {% endblock %}
 
 {% block uploader %}
+    <!--<label for="sel1">Optional: Input Dates in format: Month Day Year hh:mm:ss:</label>
+    <div class="d-flex  justify-content-between">
+        <input name="start" type="text">
+        <input name="end" type="text">
+        <input type ="submit">
+    </div>-->
     <form id="downloadLog" action="#">
         <div class="p-2 form-group">
             <label for="sel1">Uploaded Files:</label>
@@ -49,14 +56,16 @@
                     <option>{{ file.filename }}</option>
                 {% endfor %}
             </select>
-            <br>
-            <label for="sel1">Optional: Input Dates in format: Month Day Year hh:mm:ss:</label>
-            <div class="d-flex  justify-content-between">
-                <input name="start">
-                <input name="end">
-            </div>
+            <input id="start" type="text">
+            <input id="end" type="text">
             <div class="d-flex  justify-content-between">
                 <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
+                <!--{% if request.path == "/usecase" %}
+                <input id="analyzeBtnUse" type="submit" value="Analyze"/>
+                {% elif request.path == "/errorcase" %}
+                <input id="analyzeBtnErr" type="submit" value="Analyze"/>
+                {% endif %}                -->
+
                 {% if request.path == "/usecase" %}
                 <button id="analyzeBtnUse" type="button" class="btn btn-primary" >Analyze</button>
                 {% elif request.path == "/errorcase" %}
