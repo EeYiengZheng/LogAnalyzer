@@ -38,5 +38,5 @@ flask
 .DS_Store
 .DS_store.orig
 
-# test
-LogAnalyzer.iml
+# temporarily
+flaskfrontend/app.db
