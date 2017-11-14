@@ -238,7 +238,7 @@ def searchTerm(fs, term):
 
 
 """
-Find the errors in file fs from a certain time period.
+Find the usage cases in file fs from a certain time period.
 Search queries must be in form ''
 Function converts a 'start' and 'end' date and/or time to datetime format.
 Then the function writes the errors that occurred between those times to the output file, fs.
@@ -246,36 +246,37 @@ Returns fs, the output file
 """
 
 
-def searchPeriod(fs, start, end):
+def usagePeriod(fs, fout, start, end):
+    usage_dict = {'Docker Server Controller': 0, 'Docker Volume Controller': 0, 'Provision Controller': 0,
+                  'Blueprint Controller': 0}
     format = "%b %d %H:%M:%S %Y"
-    s = parser.parse(start)
-    e = parser.parse(end)
-    if s > e:
-        tmp = e
-        e = s
-        s = tmp
-    with open('search_period.csv', 'w') as csvfile:
+    if start > end:
+        tmp = end
+        end = start
+        start = tmp
+    with open(fout, 'w') as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
         with open(fs, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
-                error_type = row[0]
-                error_name = row[1]
-                error_date = row[2]
-                error_time = row[3]
-                error_detail = row[4]
-                if error_date != 'date':
-                    date = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
-                    if date >= s and date <= e:
-                        writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-    return fs
+                usage_type = row[0]
+                usage_name = row[1]
+                usage_date = row[2]
+                usage_time = row[3]
+                usage_detail = row[4]
+                if usage_date != 'date':
+                    date = datetime.datetime.strptime(usage_date + " " + usage_time + " 2017", format)
+                    if date >= start and date <= end:
+                        writer.writerow([usage_type, usage_name, usage_date, usage_time, usage_detail])
+                if usage_name in usage_dict.keys():
+                    usage_dict[usage_name] += 1
+    return (usage_dict, fout)
 
 
 """
 Sort a given log file fs of errors by date.
 """
-
 
 def sortbyDate(fin, fout):
     errors = []
@@ -297,7 +298,7 @@ def sortbyDate(fin, fout):
             error_time = entry[3]
             error_detail = entry[4]
             writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-    return fout
+    return (fout)
 
 """
 Returns the date of the earliest entry

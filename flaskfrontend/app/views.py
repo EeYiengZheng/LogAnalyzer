@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
 from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from os import path
-from .analyzer import usagePieChart, errorPieChart, searchPeriod, earliestDate, latestDate, usagelog
+from .analyzer import usagePieChart, errorPieChart, usagePeriod, earliestDate, latestDate, usagelog
 import datetime
 from dateutil import parser
 
@@ -136,18 +136,18 @@ def graphs_usage():
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
-
-    log = usagelog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                            request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))[1]
     if start != '' and end != '':
-        parser.parse(start, parserinfo=None, default=earliestDate(log))
-        parser.parse(end, parserinfo=None, default=latestDate(log))
-        return "hello!!"
-        """dictionary = sorted(usagePieChart(searchPeriod(filename, start, end), path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                                              request.args['filename'].rsplit('.', 1)[
-                                                                  0] + "_usagelog.csv")).items())"""
+        log = usagelog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                           request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))[1]
+        s = parser.parse(start, parserinfo=None, default=datetime.datetime(earliestDate(log).year, 1, 1))
+        e = parser.parse(end, parserinfo=None, default=datetime.datetime(latestDate(log).year, 12, 31))
+        print(s)
+        print(e)
+        dictionary = sorted(usagePeriod(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                           request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e)[0].items())
+        print(dictionary)
     else:
-        dictionary = sorted(usagePieChart(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+        dictionary = sorted(usagelog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                                    request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))[0].items())
     entries = list()
     counts = list()
