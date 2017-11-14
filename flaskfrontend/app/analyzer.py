@@ -124,7 +124,7 @@ def errorlog(fin, fout):
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
                     error_dict['timeout'] += 1
 
-    return error_dict
+    return (error_dict, fout)
 
 
     # ------------- Use Cases ----------------
@@ -198,19 +198,14 @@ def usagelog(fin, fout):
     return (usage_dict, fout)
 
 
-def errorPieChart(fin, fout):
+"""def errorPieChart(fin, fout):
     dictionary = errorlog(fin, fout)
     return dictionary
 
 
 def usagePieChart(fin, fout):
     dictionary = usagelog(fin, fout)
-    return dictionary
-
-
-count = 0
-word_code = '[38866]: '
-
+    return dictionary"""
 
 """
 Find a term from the error log fs.
@@ -273,32 +268,41 @@ def usagePeriod(fs, fout, start, end):
                     usage_dict[usage_name] += 1
     return (usage_dict, fout)
 
-
 """
-Sort a given log file fs of errors by date.
+Find the errors in file fs from a certain time period.
+Search queries must be in form ''
+Function converts a 'start' and 'end' date and/or time to datetime format.
+Then the function writes the errors that occurred between those times to the output file, fs.
+Returns fs, the output file
 """
 
-def sortbyDate(fin, fout):
-    errors = []
+
+def errorPeriod(fs, fout, start, end):
+    error_dict = {'Http Client Error': 0, 'Access Denied': 0, 'Runtime Exception': 0, 'Transport Error': 0,
+                  'Default Response Error Handler': 0, 'Warning': 0, 'Timeout': 0}
     format = "%b %d %H:%M:%S %Y"
+    if start > end:
+        tmp = end
+        end = start
+        start = tmp
     with open(fout, 'w') as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
-        with open(fin, 'r') as csvfile:
+        with open(fs, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
-                if row[2] != 'date':
-                    errors.append(row)
-        errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
-                                                                             + " " + entry[3] + " 2017", format))
-        for entry in errors:
-            error_type = entry[0]
-            error_name = entry[1]
-            error_date = entry[2]
-            error_time = entry[3]
-            error_detail = entry[4]
-            writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-    return (fout)
+                error_type = row[0]
+                error_name = row[1]
+                error_date = row[2]
+                error_time = row[3]
+                error_detail = row[4]
+                if error_date != 'date':
+                    date = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
+                    if date >= start and date <= end:
+                        writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+                if error_name in error_dict.keys():
+                    error_dict[error_name] += 1
+    return (error_dict, fout)
 
 """
 Returns the date of the earliest entry
