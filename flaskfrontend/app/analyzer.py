@@ -123,7 +123,19 @@ def errorlog(fin, fout):
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
                     error_dict['timeout'] += 1
 
-    return (error_dict, fout)
+    errors = []
+    format = "%b %d %H:%M:%S %Y"
+    with open(fout, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            if row[2] != 'date':
+                errors.append(row)
+    errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                             + " " + entry[3] + " 2017", format))
+    earliestDate = datetime.datetime.strptime(errors[0][2] + " " + errors[0][3] + " 2017", format)
+    lastindex = len(errors) - 1
+    latestDate = datetime.datetime.strptime(errors[lastindex][2] + " " + errors[lastindex][3] + " 2017", format)
+    return (error_dict, fout, earliestDate, latestDate)
 
 
     # ------------- Use Cases ----------------
@@ -194,7 +206,19 @@ def usagelog(fin, fout):
 
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
                     usage_dict['BlueprintController'] += 1
-    return (usage_dict, fout)
+    cases = []
+    format = "%b %d %H:%M:%S %Y"
+    with open(fout, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            if row[2] != 'date':
+                cases.append(row)
+    cases = sorted(cases, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                             + " " + entry[3] + " 2017", format))
+    earliestDate = datetime.datetime.strptime(cases[0][2] + " " + cases[0][3] + " 2017", format)
+    lastindex = len(cases) - 1
+    latestDate = datetime.datetime.strptime(cases[lastindex][2] + " " + cases[lastindex][3] + " 2017", format)
+    return (usage_dict, fout, earliestDate, latestDate)
 
 
 """def errorPieChart(fin, fout):
@@ -229,6 +253,43 @@ def searchTerm(fs, term):
                     error_detail = row[4]
                     writer.writerow([error_type, error_name, error_date, error_time, error_detail])
     return fs
+
+"""
+Find the errors in file fs from a certain time period.
+Search queries must be in form ''
+Function converts a 'start' and 'end' date and/or time to datetime format.
+Then the function writes the errors that occurred between those times to the output file, fs.
+Returns fs, the output file
+"""
+
+
+def errorPeriod(fs, fout, start, end):
+#def errorPeriod(fs, fout, term, start, end):
+    error_dict = {'Http Client Error': 0, 'Access Denied': 0, 'Runtime Exception': 0, 'Transport Error': 0,
+                  'Default Response Error Handler': 0, 'Warning': 0, 'Timeout': 0}
+    format = "%b %d %H:%M:%S %Y"
+    if start > end:
+        tmp = end
+        end = start
+        start = tmp
+    with open(fout, 'w') as csvfile:
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['type', 'error', 'date', 'time', 'details'])
+        with open(fs, 'r') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+            for row in reader:
+                error_type = row[0]
+                error_name = row[1]
+                error_date = row[2]
+                error_time = row[3]
+                error_detail = row[4]
+                if error_date != 'date':
+                    date = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
+                    if date >= start and date <= end:
+                        writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+                        if error_name in error_dict.keys():
+                            error_dict[error_name] += 1
+    return (error_dict, fout)
 
 
 """
@@ -268,44 +329,8 @@ def usagePeriod(fs, fout, start, end):
     return (usage_dict, fout)
 
 """
-Find the errors in file fs from a certain time period.
-Search queries must be in form ''
-Function converts a 'start' and 'end' date and/or time to datetime format.
-Then the function writes the errors that occurred between those times to the output file, fs.
-Returns fs, the output file
-"""
-
-
-def errorPeriod(fs, fout, start, end):
-    error_dict = {'Http Client Error': 0, 'Access Denied': 0, 'Runtime Exception': 0, 'Transport Error': 0,
-                  'Default Response Error Handler': 0, 'Warning': 0, 'Timeout': 0}
-    format = "%b %d %H:%M:%S %Y"
-    if start > end:
-        tmp = end
-        end = start
-        start = tmp
-    with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['type', 'error', 'date', 'time', 'details'])
-        with open(fs, 'r') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for row in reader:
-                error_type = row[0]
-                error_name = row[1]
-                error_date = row[2]
-                error_time = row[3]
-                error_detail = row[4]
-                if error_date != 'date':
-                    date = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
-                    if date >= start and date <= end:
-                        writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-                        if error_name in error_dict.keys():
-                            error_dict[error_name] += 1
-    return (error_dict, fout)
-
-"""
 Returns the date of the earliest entry
-"""
+
 def earliestDate(fin):
     errors = []
     format = "%b %d %H:%M:%S %Y"
@@ -318,9 +343,8 @@ def earliestDate(fin):
                                                                              + " " + entry[3] + " 2017", format))
     return datetime.datetime.strptime(errors[0][2] + " " + errors[0][3] + " 2017", format)
 
-"""
+
 Returns the date of the latest entry
-"""
 def latestDate(fin):
     errors = []
     format = "%b %d %H:%M:%S %Y"
@@ -333,3 +357,4 @@ def latestDate(fin):
                                                                              + " " + entry[3] + " 2017", format))
     lastindex = len(errors) - 1
     return datetime.datetime.strptime(errors[lastindex][2] + " " + errors[lastindex][3] + " 2017", format)
+"""
