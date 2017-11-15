@@ -101,7 +101,7 @@ def errorRate(fs):
     currentdate = datetime.datetime.now()
     currenthour = 0.5
     count = 0
-    logSearch.logSearch.sortbyDate(fs, "logforRate.csv")
+    logSearch.sortbyDate(fs, "logforRate.csv")
     with open("logforRate.csv", 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:

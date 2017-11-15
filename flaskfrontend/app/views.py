@@ -215,12 +215,14 @@ def rate_usage():
     end = request.args['end']
     term = request.args['term']
     filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
+    print("1")
     # src/--.py functions should be called here to return matplot html
     if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
         makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
     loginfo = usagelog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                            request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))
     log = loginfo[1]
+    print("2")
     if start != '' and end != '':
         s = parser.parse(start, parserinfo=None, default=datetime.datetime(loginfo[2].year, 1, 1))
         e = parser.parse(end, parserinfo=None, default=datetime.datetime(loginfo[3].year, 12, 31))
@@ -231,10 +233,9 @@ def rate_usage():
     print(e)
     rateInfo = usageRate(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                                     request.args['filename'].rsplit('.', 1)[0] + "_usageRate.csv"), s, e, term)
+    print(rateInfo)
     dictionary = rateInfo[0]
-    print(dictionary)
-    entries = list()
-    counts = list()
+    #print(dictionary)
     x = range(len(dictionary))
     y = list(dictionary.values())
     plt.title("Number of Errors per hour")
@@ -245,22 +246,19 @@ def rate_usage():
                [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) \
                 for i in range(int(len(dictionary) / 4))])
     plt.plot(x, y)
-    """fig = plt.figure()
-    return mpld3.fig_to_html(fig, template_type='simple')
-    
-    
-    
+    fig = plt.figure()
+    """    
     for key, val in dictionary:
         entries.append(key)
         counts.append(val)
     plt.close()
     x = range(len(entries))
     plt.plot(x, counts, 'ro', markersize=12)
-    plt.xticks(x, entries)"""
-    fig = plt.gcf()
+    plt.xticks(x, entries)
+    fig = plt.gcf()"""
     fig.set_figheight(5)
     fig.set_figwidth(9)
-
+    """
     stats = '<table class="table table-striped">'
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
                         request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"), 'r') as csv:
@@ -284,7 +282,8 @@ def rate_usage():
            + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
            + stats + '</details>' + '</div></div>'
 
-    return html
+    return html"""
+    return mpld3.fig_to_html(fig, template_type='simple')
 
 
 @app.route('/login', methods=['GET', 'POST'])

@@ -233,6 +233,7 @@ def errorSearch(fs, fout, start, end, term):
     error_dict = {'Http Client Error': 0, 'Access Denied': 0, 'Runtime Exception': 0, 'Transport Error': 0,
                   'Default Response Error Handler': 0, 'Warning': 0, 'Timeout': 0}
     format = "%b %d %H:%M:%S %Y"
+    errors = []
     if start > end:
         tmp = end
         end = start
@@ -251,18 +252,25 @@ def errorSearch(fs, fout, start, end, term):
                         if term in line:
                             found = True
                             break
-                error_type = row[0]
                 error_name = row[1]
                 error_date = row[2]
                 error_time = row[3]
-                error_detail = row[4]
                 if found:
                     if error_date != 'date':
                         date = datetime.datetime.strptime(error_date + " " + error_time + " 2017", format)
                         if date >= start and date <= end:
-                            writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+                            errors.append(row)
                             if error_name in error_dict.keys():
                                 error_dict[error_name] += 1
+    errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                       + " " + entry[3] + " 2017", format))
+    for entry in errors:
+        error_type = entry[0]
+        error_name = entry[1]
+        error_date = entry[2]
+        error_time = entry[3]
+        error_detail = entry[4]
+        writer.writerow([error_type, error_name, error_date, error_time, error_detail])
     return (error_dict, fout)
 
 
@@ -270,7 +278,7 @@ def errorSearch(fs, fout, start, end, term):
 Find the usage cases in file fs from a certain time period.
 Search queries must be in form ''
 Function converts a 'start' and 'end' date and/or time to datetime format.
-Then the function writes the errors that occurred between those times to the output file, fs.
+Then the function writes the uses that occurred between those times to the output file, fs.
 Returns fs, the output file
 """
 
@@ -279,13 +287,14 @@ def usageSearch(fs, fout, start, end, term):
     usage_dict = {'Docker Server Controller': 0, 'Docker Volume Controller': 0, 'Provision Controller': 0,
                   'Blueprint Controller': 0}
     format = "%b %d %H:%M:%S %Y"
+    cases = []
     if start > end:
         tmp = end
         end = start
         start = tmp
     with open(fout, 'w') as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['type', 'error', 'date', 'time', 'details'])
+        writer.writerow(['type', 'use', 'date', 'time', 'details'])
         with open(fs, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
@@ -297,57 +306,41 @@ def usageSearch(fs, fout, start, end, term):
                         if term in line:
                             found = True
                             break
-                usage_type = row[0]
                 usage_name = row[1]
                 usage_date = row[2]
                 usage_time = row[3]
-                usage_detail = row[4]
                 if found:
                     if usage_date != 'date':
                         date = datetime.datetime.strptime(usage_date + " " + usage_time + " 2017", format)
                         if date >= start and date <= end:
-                            writer.writerow([usage_type, usage_name, usage_date, usage_time, usage_detail])
+                            cases.append(row)
                             if usage_name in usage_dict.keys():
                                 usage_dict[usage_name] += 1
+        cases = sorted(cases, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                             + " " + entry[3] + " 2017", format))
+        for entry in cases:
+            usage_type = entry[0]
+            usage_name = entry[1]
+            usage_date = entry[2]
+            usage_time = entry[3]
+            usage_detail = entry[4]
+            writer.writerow([usage_type, usage_name, usage_date, usage_time, usage_detail])
     return (usage_dict, fout)
 
-def sortbyDate(fin, fout):
-    errors = []
-    format = "%b %d %H:%M:%S %Y"
-    with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['type', 'error', 'date', 'time', 'details'])
-        with open(fin, 'r') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for row in reader:
-                if row[2] != 'date':
-                    errors.append(row)
-        errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
-                                                                             + " " + entry[3] + " 2017", format))
-        for entry in errors:
-            error_type = entry[0]
-            error_name = entry[1]
-            error_date = entry[2]
-            error_time = entry[3]
-            error_detail = entry[4]
-            writer.writerow([error_type, error_name, error_date, error_time, error_detail])
-    return fout
-
-def usageRate(fs, fout, start, end, term):
-    analyzedLog = usageSearch(fs, fout, start, end, term)[1]
-    sortedLog = sortbyDate(analyzedLog, fout)
+def usageRate(fin, fout, start, end, term):
+    analyzedLog = usageSearch(fin, fout, start, end, term)[1]
     format = "%b %d %H:%M:%S %Y"
     rate_dictionary = {}
-    currentdate = datetime.datetime.now()
+    time = firstdate = currentdate = datetime.datetime.now()
     currenthour = 0.5
     count = 0
-    with open(sortedLog, 'r') as csvfile:
+    with open(analyzedLog, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:
-            error_date = row[2]
-            error_time = row[3]
-            if error_date != 'date':
-                date = datetime.datetime.strptime(error_date + " " + error_time \
+            use_date = row[2]
+            use_time = row[3]
+            if use_date != 'date':
+                date = datetime.datetime.strptime(use_date + " " + use_time \
                                                   + " 2017", format)
                 if currenthour == 0.5:
                     currenthour = date.hour
@@ -368,3 +361,25 @@ def usageRate(fs, fout, start, end, term):
                            + " " + str(date.hour) + ":00"
                     count = 0
     return (rate_dictionary, fout, firstdate)
+
+"""def sortbyDate(fin, fout):
+    uses = []
+    format = "%b %d %H:%M:%S %Y"
+    with open(fout, 'w') as csvfile:
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['type', 'use', 'date', 'time', 'details'])
+        with open(fin, 'r') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+            for row in reader:
+                if row[2] != 'date':
+                    uses.append(row)
+        uses = sorted(uses, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                             + " " + entry[3] + " 2017", format))
+        for entry in uses:
+            use_type = entry[0]
+            use_name = entry[1]
+            use_date = entry[2]
+            use_time = entry[3]
+            use_detail = entry[4]
+            writer.writerow([use_type, use_name, use_date, use_time, use_detail])
+    return fout"""
