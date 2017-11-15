@@ -361,3 +361,38 @@ def usageRate(fin, fout, start, end, term):
                            + " " + str(date.hour) + ":00"
                     count = 0
     return (rate_dictionary, fout, firstdate)
+
+def errorRate(fin, fout, start, end, term):
+    analyzedLog = errorSearch(fin, fout, start, end, term)[1]
+    format = "%b %d %H:%M:%S %Y"
+    rate_dictionary = {}
+    time = firstdate = currentdate = datetime.datetime.now()
+    currenthour = 0.5
+    count = 0
+    with open(analyzedLog, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            use_date = row[2]
+            use_time = row[3]
+            if use_date != 'date':
+                date = datetime.datetime.strptime(use_date + " " + use_time \
+                                                  + " 2017", format)
+                if currenthour == 0.5:
+                    currenthour = date.hour
+                    currentdate = date
+                    firstdate = date
+                    count = 1
+                    time = str(calendar.month_abbr[date.month]) + \
+                           " " + str(date.day) + " " + str(date.hour) + ":00"
+                elif date.hour == currenthour \
+                        and date.month == currentdate.month \
+                        and date.day == currentdate.day:
+                    count += 1
+                    rate_dictionary[time] = count
+                else:
+                    currenthour = date.hour
+                    currentdate = date
+                    time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
+                           + " " + str(date.hour) + ":00"
+                    count = 0
+    return (rate_dictionary, fout, firstdate)
