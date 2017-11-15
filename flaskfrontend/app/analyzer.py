@@ -262,15 +262,15 @@ def errorSearch(fs, fout, start, end, term):
                             errors.append(row)
                             if error_name in error_dict.keys():
                                 error_dict[error_name] += 1
-    errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
+        errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
                                                                        + " " + entry[3] + " 2017", format))
-    for entry in errors:
-        error_type = entry[0]
-        error_name = entry[1]
-        error_date = entry[2]
-        error_time = entry[3]
-        error_detail = entry[4]
-        writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+        for entry in errors:
+            error_type = entry[0]
+            error_name = entry[1]
+            error_date = entry[2]
+            error_time = entry[3]
+            error_detail = entry[4]
+            writer.writerow([error_type, error_name, error_date, error_time, error_detail])
     return (error_dict, fout)
 
 
@@ -361,25 +361,3 @@ def usageRate(fin, fout, start, end, term):
                            + " " + str(date.hour) + ":00"
                     count = 0
     return (rate_dictionary, fout, firstdate)
-
-"""def sortbyDate(fin, fout):
-    uses = []
-    format = "%b %d %H:%M:%S %Y"
-    with open(fout, 'w') as csvfile:
-        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['type', 'use', 'date', 'time', 'details'])
-        with open(fin, 'r') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for row in reader:
-                if row[2] != 'date':
-                    uses.append(row)
-        uses = sorted(uses, key=lambda entry: datetime.datetime.strptime(entry[2]
-                                                                             + " " + entry[3] + " 2017", format))
-        for entry in uses:
-            use_type = entry[0]
-            use_name = entry[1]
-            use_date = entry[2]
-            use_time = entry[3]
-            use_detail = entry[4]
-            writer.writerow([use_type, use_name, use_date, use_time, use_detail])
-    return fout"""
