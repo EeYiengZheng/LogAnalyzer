@@ -1,9 +1,9 @@
 import csv
 import datetime
 from re import *
+import calendar
 
 word_code = '[38866]: '
-
 
 def errorlog(fin, fout):
     error_dict = {'HttpClientError': 0, 'AccessDenied': 0, 'RuntimeException': 0, 'transport error': 0,
@@ -310,3 +310,61 @@ def usageSearch(fs, fout, start, end, term):
                             if usage_name in usage_dict.keys():
                                 usage_dict[usage_name] += 1
     return (usage_dict, fout)
+
+def sortbyDate(fin, fout):
+    errors = []
+    format = "%b %d %H:%M:%S %Y"
+    with open(fout, 'w') as csvfile:
+        writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['type', 'error', 'date', 'time', 'details'])
+        with open(fin, 'r') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+            for row in reader:
+                if row[2] != 'date':
+                    errors.append(row)
+        errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
+                                                                             + " " + entry[3] + " 2017", format))
+        for entry in errors:
+            error_type = entry[0]
+            error_name = entry[1]
+            error_date = entry[2]
+            error_time = entry[3]
+            error_detail = entry[4]
+            writer.writerow([error_type, error_name, error_date, error_time, error_detail])
+    return fout
+
+def usageRate(fs, fout, start, end, term):
+    analyzedLog = usageSearch(fs, fout, start, end, term)[1]
+    sortedLog = sortbyDate(analyzedLog, fout)
+    format = "%b %d %H:%M:%S %Y"
+    rate_dictionary = {}
+    currentdate = datetime.datetime.now()
+    currenthour = 0.5
+    count = 0
+    with open(sortedLog, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        for row in reader:
+            error_date = row[2]
+            error_time = row[3]
+            if error_date != 'date':
+                date = datetime.datetime.strptime(error_date + " " + error_time \
+                                                  + " 2017", format)
+                if currenthour == 0.5:
+                    currenthour = date.hour
+                    currentdate = date
+                    firstdate = date
+                    count = 1
+                    time = str(calendar.month_abbr[date.month]) + \
+                           " " + str(date.day) + " " + str(date.hour) + ":00"
+                elif date.hour == currenthour \
+                        and date.month == currentdate.month \
+                        and date.day == currentdate.day:
+                    count += 1
+                    rate_dictionary[time] = count
+                else:
+                    currenthour = date.hour
+                    currentdate = date
+                    time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
+                           + " " + str(date.hour) + ":00"
+                    count = 0
+    return (rate_dictionary, fout, firstdate)

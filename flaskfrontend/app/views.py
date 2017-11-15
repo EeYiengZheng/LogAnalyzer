@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
 from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from os import path
-from .analyzer import errorSearch, usageSearch, usagelog, errorlog
+from .analyzer import errorSearch, usageSearch, usagelog, errorlog, usageRate
 import datetime
 from dateutil import parser
 
@@ -176,6 +176,87 @@ def graphs_usage():
     x = range(len(entries))
     plt.plot(x, counts, 'ro', markersize=12)
     plt.xticks(x, entries)
+    fig = plt.gcf()
+    fig.set_figheight(5)
+    fig.set_figwidth(9)
+
+    stats = '<table class="table table-striped">'
+    with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                        request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"), 'r') as csv:
+        headers = csv.readline().split(',')
+        stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{}</th></tr></thead><tbody>'.format(
+            headers[1], headers[2] + headers[3], headers[4])
+        contents = csv.readlines()
+        l = 1
+        for line in contents:
+            tokens = line.split(',', 4)
+            stats += '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{}</td></tr>'.format(
+                l, tokens[1], tokens[2] + ' '+tokens[3], tokens[4])
+            l += 1
+        stats += '</tbody></table>'
+    summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
+    for e in range(0, len(entries)):
+        summarized += '<tr scope="row"><td>' + entries[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
+    summarized += '</table>'
+    html = '<div class="container container-fluid"><div class="row justify-content-center"'\
+           + mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
+           + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
+           + stats + '</details>' + '</div></div>'
+
+    return html
+
+@app.route('/rate_use', methods=['GET', 'POST'])
+def rate_usage():
+    import matplotlib.pyplot as plt, mpld3
+    from os import makedirs
+    if request.args['filename'] == 'Choose a file':
+        return ''
+    start = request.args['start']
+    end = request.args['end']
+    term = request.args['term']
+    filename = path.join(app.root_path, UPLOAD_FOLDER, str(current_user.id), request.args['filename'])
+    # src/--.py functions should be called here to return matplot html
+    if not path.exists(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id))):
+        makedirs(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id)))
+    loginfo = usagelog(filename, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                           request.args['filename'].rsplit('.', 1)[0] + "_usagelog.csv"))
+    log = loginfo[1]
+    if start != '' and end != '':
+        s = parser.parse(start, parserinfo=None, default=datetime.datetime(loginfo[2].year, 1, 1))
+        e = parser.parse(end, parserinfo=None, default=datetime.datetime(loginfo[3].year, 12, 31))
+    else:
+        s = loginfo[2]
+        e = loginfo[3]
+    print(s)
+    print(e)
+    rateInfo = usageRate(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
+                                    request.args['filename'].rsplit('.', 1)[0] + "_usageRate.csv"), s, e, term)
+    dictionary = rateInfo[0]
+    print(dictionary)
+    entries = list()
+    counts = list()
+    x = range(len(dictionary))
+    y = list(dictionary.values())
+    plt.title("Number of Errors per hour")
+    plt.xlabel("Time")
+    plt.ylabel("Number of Errors")
+    plt.scatter(x, y)
+    plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))], \
+               [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) \
+                for i in range(int(len(dictionary) / 4))])
+    plt.plot(x, y)
+    """fig = plt.figure()
+    return mpld3.fig_to_html(fig, template_type='simple')
+    
+    
+    
+    for key, val in dictionary:
+        entries.append(key)
+        counts.append(val)
+    plt.close()
+    x = range(len(entries))
+    plt.plot(x, counts, 'ro', markersize=12)
+    plt.xticks(x, entries)"""
     fig = plt.gcf()
     fig.set_figheight(5)
     fig.set_figwidth(9)

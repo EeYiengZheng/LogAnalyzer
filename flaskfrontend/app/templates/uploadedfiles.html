@@ -36,6 +36,21 @@
             }
         });
         });
+
+        $('#rateBtnUse').click(function() {
+                $.ajax({
+                    url: '/rate_use',
+                    type: 'GET',
+                    data: { filename: $("#sel1").find("option:selected").text(), start: $("#start").val(), end: $("#end").val(), term: $("#term").val()},
+
+                    success: function(response) {
+                        $('#feedback').html(response)
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+                });
     });
 
 {% endblock %}
