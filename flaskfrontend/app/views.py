@@ -109,7 +109,7 @@ def graphs_error():
         counts.append(val)
     plt.close()
     x = range(len(errors))
-    plt.plot(x, counts, 'ro', markersize=12)
+    plt.bar(x, counts, width=0.4)
     plt.xticks(x, errors)
     fig = plt.gcf()
     fig.set_figheight(5)
@@ -174,11 +174,11 @@ def graphs_usage():
         counts.append(val)
     plt.close()
     x = range(len(entries))
-    plt.plot(x, counts, 'ro', markersize=12)
+    plt.bar(x, counts, width=0.3)
     plt.xticks(x, entries)
     fig = plt.gcf()
     fig.set_figheight(5)
-    fig.set_figwidth(9)
+    fig.set_figwidth(8)
 
     stats = '<table class="table table-striped">'
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
@@ -233,18 +233,21 @@ def rate_usage():
                                     request.args['filename'].rsplit('.', 1)[0] + "_usageRate.csv"), s, e, term)
     print(rateInfo)
     dictionary = rateInfo[0]
-    x = range(len(dictionary))
+    x = list(range(len(dictionary)))
     y = list(dictionary.values())
+    plt.close()
     plt.title("Number of Usage Cases per hour")
     plt.xlabel("Time")
     plt.ylabel("Number of Usage Cases")
-    plt.scatter(x, y)
-    plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))],
-               [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) \
-                for i in range(int(len(dictionary) / 4))])
+    plt.plot(x, y, 'o', markersize=10)
+    plt.xticks(x, dictionary.keys())
+    # plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))],
+    #            [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) \
+    #             for i in range(int(len(dictionary) / 4))])
     fig = plt.gcf()
     fig.set_figheight(5)
     fig.set_figwidth(9)
+    fig.tight_layout()
     return mpld3.fig_to_html(fig, template_type='simple')
 
 @app.route('/rate_err', methods=['GET', 'POST'])
@@ -275,19 +278,22 @@ def rate_error():
                                     request.args['filename'].rsplit('.', 1)[0] + "_errorRate.csv"), s, e, term)
     print(rateInfo)
     dictionary = rateInfo[0]
-    x = range(len(dictionary))
+    x = list(range(len(dictionary)))
     y = list(dictionary.values())
+    print(x, y)
+    plt.close()
     plt.title("Number of Errors per hour")
     plt.xlabel("Time")
     plt.ylabel("Number of Errors")
-    plt.scatter(x, y)
+    plt.plot(x, y, 'o', markersize=10)
     plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))],
                [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) \
                 for i in range(int(len(dictionary) / 4))])
     fig = plt.gcf()
     fig.set_figheight(5)
     fig.set_figwidth(9)
-    return mpld3.fig_to_html(fig, template_type='simple')
+    fig.tight_layout()
+    return mpld3.fig_to_html(fig)
 
 
 @app.route('/login', methods=['GET', 'POST'])

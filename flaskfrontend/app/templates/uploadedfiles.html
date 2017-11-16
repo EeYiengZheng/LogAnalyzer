@@ -86,12 +86,13 @@
             <div class="d-flex  justify-content-between">
                 <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
                 {% if request.path == "/usecase" %}
-                <button id="analyzeBtnUse" type="button" class="btn btn-primary" >Analyze</button>
-                <button id="rateBtnUse" type="button" class="btn btn-primary" >Rate Graph</button>
+                    <button id="analyzeBtnUse" type="button" class="btn btn-primary" >Analyze</button>
+                    <button id="rateBtnUse" type="button" class="btn btn-primary" >Rate Graph</button>
                 {% elif request.path == "/errorcase" %}
-                <button id="analyzeBtnErr" type="button" class="btn btn-primary" >Analyze</button>
-                <button id="rateBtnErr" type="button" class="btn btn-primary" >Rate Graph</button>
+                    <button id="analyzeBtnErr" type="button" class="btn btn-primary" >Analyze</button>
+                    <button id="rateBtnErr" type="button" class="btn btn-primary" >Rate Graph</button>
                 {% endif %}
             </div>
+        </div>
     </form>
 {% endblock %}
