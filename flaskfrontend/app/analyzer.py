@@ -125,6 +125,7 @@ def errorlog(fin, fout):
 
     errors = []
     format = "%b %d %H:%M:%S %Y"
+    earliestDate = latestDate = datetime.datetime.now()
     with open(fout, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:
@@ -132,9 +133,11 @@ def errorlog(fin, fout):
                 errors.append(row)
     errors = sorted(errors, key=lambda entry: datetime.datetime.strptime(entry[2]
                                                                              + " " + entry[3] + " 2017", format))
-    earliestDate = datetime.datetime.strptime(errors[0][2] + " " + errors[0][3] + " 2017", format)
-    lastindex = len(errors) - 1
-    latestDate = datetime.datetime.strptime(errors[lastindex][2] + " " + errors[lastindex][3] + " 2017", format)
+
+    if len(errors) >= 1:
+        earliestDate = datetime.datetime.strptime(errors[0][2] + " " + errors[0][3] + " 2017", format)
+        lastindex = len(errors) - 1
+        latestDate = datetime.datetime.strptime(errors[lastindex][2] + " " + errors[lastindex][3] + " 2017", format)
     return (error_dict, fout, earliestDate, latestDate)
 
 
@@ -208,6 +211,7 @@ def usagelog(fin, fout):
                     usage_dict['BlueprintController'] += 1
     cases = []
     format = "%b %d %H:%M:%S %Y"
+    earliestDate = latestDate = datetime.datetime.now()
     with open(fout, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:
@@ -215,9 +219,10 @@ def usagelog(fin, fout):
                 cases.append(row)
     cases = sorted(cases, key=lambda entry: datetime.datetime.strptime(entry[2]
                                                                              + " " + entry[3] + " 2017", format))
-    earliestDate = datetime.datetime.strptime(cases[0][2] + " " + cases[0][3] + " 2017", format)
-    lastindex = len(cases) - 1
-    latestDate = datetime.datetime.strptime(cases[lastindex][2] + " " + cases[lastindex][3] + " 2017", format)
+    if len(cases) >= 1:
+        earliestDate = datetime.datetime.strptime(cases[0][2] + " " + cases[0][3] + " 2017", format)
+        lastindex = len(cases) - 1
+        latestDate = datetime.datetime.strptime(cases[lastindex][2] + " " + cases[lastindex][3] + " 2017", format)
     return (usage_dict, fout, earliestDate, latestDate)
 
 """
