@@ -8,12 +8,12 @@ word_code = '[38866]: '
 def errorlog(fin, fout):
     error_dict = {'HttpClientError': 0, 'AccessDenied': 0, 'RuntimeException': 0, 'transport error': 0,
                   'DefaultResponseErrorHandler': 0, 'WARN': 0, 'timeout': 0}
-    with open(fout, 'w') as csvfile:
+    with open(fout, mode = 'w', encoding = "utf-8") as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
 
         # open a syslog file to read from
-        with open(fin, 'r') as in_file:
+        with open(fin, mode = 'r', encoding = "utf-8") as in_file:
 
             # ------------ Errors --------------------
             # ----------------------------------------
@@ -126,7 +126,7 @@ def errorlog(fin, fout):
     errors = []
     format = "%b %d %H:%M:%S %Y"
     earliestDate = latestDate = datetime.datetime.now()
-    with open(fout, 'r') as csvfile:
+    with open(fout, mode = 'r', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:
             if row[2] != 'date':
@@ -150,12 +150,12 @@ def errorlog(fin, fout):
 def usagelog(fin, fout):
     usage_dict = {'DockerServerController': 0, 'DockerVolumeController': 0, 'ProvisionController': 0,
                   'BlueprintController': 0}
-    with open(fout, 'w') as csvfile:
+    with open(fout, mode= 'w', encoding ="utf-8") as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
 
         # open a syslog file to read from
-        with open(fin, 'r') as in_file:
+        with open(fin, mode = 'r', encoding ="utf-8") as in_file:
 
             for line in in_file:
                 # Use Case 1: Compute/VM - look for "DockerServerController"
@@ -212,7 +212,7 @@ def usagelog(fin, fout):
     cases = []
     format = "%b %d %H:%M:%S %Y"
     earliestDate = latestDate = datetime.datetime.now()
-    with open(fout, 'r') as csvfile:
+    with open(fout, mode = 'r', encoding = "utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:
             if row[2] != 'date':
@@ -243,10 +243,10 @@ def errorSearch(fs, fout, start, end, term):
         tmp = end
         end = start
         start = tmp
-    with open(fout, 'w') as csvfile:
+    with open(fout, mode = 'w', encoding = "utf-8") as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'error', 'date', 'time', 'details'])
-        with open(fs, 'r') as csvfile:
+        with open(fs, mode = 'r', encoding = "utf-8") as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
                 found = False
@@ -297,10 +297,10 @@ def usageSearch(fs, fout, start, end, term):
         tmp = end
         end = start
         start = tmp
-    with open(fout, 'w') as csvfile:
+    with open(fout, mode = 'w', encoding = "utf-8") as csvfile:
         writer = csv.writer(csvfile, lineterminator='\n', delimiter=',', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['type', 'use', 'date', 'time', 'details'])
-        with open(fs, 'r') as csvfile:
+        with open(fs, mode = 'r', encoding = "utf-8") as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
                 found = False
@@ -339,7 +339,7 @@ def usageRate(fin, fout, start, end, term):
     time = firstdate = currentdate = datetime.datetime.now()
     currenthour = 0.5
     count = 0
-    with open(analyzedLog, 'r') as csvfile:
+    with open(analyzedLog, mode = 'r', encoding = "utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:
             use_date = row[2]
@@ -374,7 +374,7 @@ def errorRate(fin, fout, start, end, term):
     time = firstdate = currentdate = datetime.datetime.now()
     currenthour = 0.5
     count = 0
-    with open(analyzedLog, 'r') as csvfile:
+    with open(analyzedLog, mode = 'r', encoding = "utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in reader:
             use_date = row[2]

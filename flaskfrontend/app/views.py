@@ -116,7 +116,7 @@ def graphs_error():
     fig.set_figwidth(12)
     stats = '<table class="table table-striped">'
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                        request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"), 'r') as csv:
+                        request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"), mode = 'r', encoding = "utf-8") as csv:
         headers = csv.readline().split(',')
         stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{}</th></tr></thead><tbody>'.format(
             headers[1], headers[2] + headers[3], headers[4])
