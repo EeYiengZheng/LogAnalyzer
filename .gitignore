@@ -37,6 +37,3 @@ flask
 # MacOS specific
 .DS_Store
 .DS_store.orig
-
-# temporarily
-flaskfrontend/app.db
