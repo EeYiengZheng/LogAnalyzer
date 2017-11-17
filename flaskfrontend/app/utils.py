@@ -82,6 +82,28 @@ def findUserFiles(target_user):
     return fileArray
 
 
+graph_css = """
+table
+{
+  border-collapse: collapse;
+}
+th
+{
+  color: #ffffff;
+  background-color: #000000;
+}
+td
+{
+  background-color: #cccccc;
+}
+table, th, td
+{
+  font-family:Arial, Helvetica, sans-serif;
+  border: 1px solid black;
+  text-align: right;
+}
+"""
+
 '''
 def after_login(resp):
     if resp.email is None or resp.email == "":

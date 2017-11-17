@@ -360,6 +360,12 @@ def usageRate(fin, fout, start, end, term):
                     count += 1
                     rate_dictionary[time] = count
                 else:
+                    temp = currenthour
+                    while temp < date.hour - 1:
+                        temp += 1
+                        time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
+                           + " " + str(temp) + ":00"
+                        rate_dictionary[time] = 0
                     currenthour = date.hour
                     currentdate = date
                     time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
@@ -395,6 +401,12 @@ def errorRate(fin, fout, start, end, term):
                     count += 1
                     rate_dictionary[time] = count
                 else:
+                    temp = currenthour
+                    while temp < date.hour - 1:
+                        temp += 1
+                        time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
+                           + " " + str(temp) + ":00"
+                        rate_dictionary[time] = 0
                     currenthour = date.hour
                     currentdate = date
                     time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \

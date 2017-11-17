@@ -6,10 +6,12 @@ from .forms import LoginForm, RegistrationForm, UploadForm
 from werkzeug.security import generate_password_hash
 from .utils import findUserFiles, file_save_seq
 from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
-from os import path
+from os import path, makedirs
 from .analyzer import errorSearch, usageSearch, usagelog, errorlog, usageRate, errorRate
 import datetime
 from dateutil import parser
+import matplotlib.pyplot as plt, mpld3
+
 
 @app.before_request
 def before_request():
@@ -75,9 +77,6 @@ def errorcase():
 
 @app.route('/graphs_err', methods=['GET', 'POST'])
 def graphs_error():
-    import matplotlib.pyplot as plt, mpld3
-    from os import makedirs
-
     if request.args['filename'] == 'Choose a file':
         return ''
     start = request.args['start']
@@ -111,12 +110,15 @@ def graphs_error():
     x = range(len(errors))
     plt.bar(x, counts, width=0.4)
     plt.xticks(x, errors)
+    plt.grid(True, alpha=0.3)
+
     fig = plt.gcf()
     fig.set_figheight(5)
     fig.set_figwidth(12)
     stats = '<table class="table table-striped">'
     with open(path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                        request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"), mode = 'r', encoding = "utf-8") as csv:
+                        request.args['filename'].rsplit('.', 1)[0] + "_errorlog.csv"), mode='r',
+              encoding="utf-8") as csv:
         headers = csv.readline().split(',')
         stats += '<thead><tr><th>#</th><th>{}</th><th>{}</th><th>{}</th></tr></thead><tbody>'.format(
             headers[1], headers[2] + headers[3], headers[4])
@@ -132,7 +134,7 @@ def graphs_error():
     for e in range(0, len(errors)):
         summarized += '<tr scope="row"><td>' + errors[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
     summarized += '</table>'
-    html = '<div class="container container-fluid"><div class="row justify-content-center"'\
+    html = '<div class="container container-fluid"><div class="row justify-content-center"' \
            + mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
            + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
            + stats + '</details>' + '</div></div>'
@@ -142,8 +144,6 @@ def graphs_error():
 
 @app.route('/graphs_use', methods=['GET', 'POST'])
 def graphs_usage():
-    import matplotlib.pyplot as plt, mpld3
-    from os import makedirs
     if request.args['filename'] == 'Choose a file':
         return ''
     start = request.args['start']
@@ -165,7 +165,8 @@ def graphs_usage():
     print(s)
     print(e)
     dictionary = sorted(usageSearch(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                    request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e, term)[0].items())
+                                                   request.args['filename'].rsplit('.', 1)[0] + "_searchlog.csv"), s, e,
+                                    term)[0].items())
     print(dictionary)
     entries = list()
     counts = list()
@@ -176,6 +177,8 @@ def graphs_usage():
     x = range(len(entries))
     plt.bar(x, counts, width=0.3)
     plt.xticks(x, entries)
+    plt.grid(True, alpha=0.3)
+
     fig = plt.gcf()
     fig.set_figheight(5)
     fig.set_figwidth(8)
@@ -191,24 +194,23 @@ def graphs_usage():
         for line in contents:
             tokens = line.split(',', 4)
             stats += '<tr><th scope="row">{}</th><td>{}</td><td>{}</td><td>{}</td></tr>'.format(
-                l, tokens[1], tokens[2] + ' '+tokens[3], tokens[4])
+                l, tokens[1], tokens[2] + ' ' + tokens[3], tokens[4])
             l += 1
         stats += '</tbody></table>'
     summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
     for e in range(0, len(entries)):
         summarized += '<tr scope="row"><td>' + entries[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
     summarized += '</table>'
-    html = '<div class="container container-fluid"><div class="row justify-content-center"'\
+    html = '<div class="container container-fluid"><div class="row justify-content-center"' \
            + mpld3.fig_to_html(fig, template_type='simple') + '</div><div class="row justify-content-center">' \
            + summarized + '</div><div class="row justify-content-center"><details title="Detailed Statistics">' \
            + stats + '</details>' + '</div></div>'
 
     return html
 
+
 @app.route('/rate_use', methods=['GET', 'POST'])
 def rate_usage():
-    import matplotlib.pyplot as plt, mpld3
-    from os import makedirs
     if request.args['filename'] == 'Choose a file':
         return ''
     start = request.args['start']
@@ -230,30 +232,34 @@ def rate_usage():
     print(s)
     print(e)
     rateInfo = usageRate(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                    request.args['filename'].rsplit('.', 1)[0] + "_usageRate.csv"), s, e, term)
+                                        request.args['filename'].rsplit('.', 1)[0] + "_usageRate.csv"), s, e, term)
     print(rateInfo)
     dictionary = rateInfo[0]
     x = list(range(len(dictionary)))
     y = list(dictionary.values())
     plt.close()
+
+    fig, ax = plt.subplots()
+    ax.grid(True, alpha=0.3)
+
     plt.title("Number of Usage Cases per hour")
     plt.xlabel("Time")
     plt.ylabel("Number of Usage Cases")
-    plt.plot(x, y, 'o', markersize=10)
+
+    points = ax.plot(x, y, 'o', markersize=10 ,mec='k', mew=1, alpha=.6)
     plt.xticks(x, dictionary.keys())
     # plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))],
     #            [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) \
     #             for i in range(int(len(dictionary) / 4))])
-    fig = plt.gcf()
     fig.set_figheight(5)
     fig.set_figwidth(9)
     fig.tight_layout()
-    return mpld3.fig_to_html(fig, template_type='simple')
+    mpld3.plugins.connect(fig, mpld3.plugins.PointLabelTooltip(points[0], [str("({}, {})".format(key, val)) for key, val in dictionary.items()]))
+    return mpld3.fig_to_html(fig)
+
 
 @app.route('/rate_err', methods=['GET', 'POST'])
 def rate_error():
-    import matplotlib.pyplot as plt, mpld3
-    from os import makedirs
     if request.args['filename'] == 'Choose a file':
         return ''
     start = request.args['start']
@@ -275,24 +281,26 @@ def rate_error():
     print(s)
     print(e)
     rateInfo = errorRate(log, path.join(app.root_path, ANALYZED_CSV_FOLDER, str(current_user.id),
-                                    request.args['filename'].rsplit('.', 1)[0] + "_errorRate.csv"), s, e, term)
+                                        request.args['filename'].rsplit('.', 1)[0] + "_errorRate.csv"), s, e, term)
     print(rateInfo)
     dictionary = rateInfo[0]
     x = list(range(len(dictionary)))
     y = list(dictionary.values())
-    print(x, y)
     plt.close()
+
+    fig, ax = plt.subplots()
+    ax.grid(True, alpha=0.3)
     plt.title("Number of Errors per hour")
     plt.xlabel("Time")
     plt.ylabel("Number of Errors")
-    plt.plot(x, y, 'o', markersize=10)
-    plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))],
-               [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) \
-                for i in range(int(len(dictionary) / 4))])
-    fig = plt.gcf()
+    points = ax.plot(x, y, 'o', markersize=10 ,mec='k', mew=1, alpha=.6)
+    plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))], [list(dictionary.keys())[i * 4] for i in range(int(len(dictionary) / 4))])
+    # [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) for i in range(int(len(dictionary) / 4))]
     fig.set_figheight(5)
     fig.set_figwidth(9)
     fig.tight_layout()
+
+    mpld3.plugins.connect(fig, mpld3.plugins.PointLabelTooltip(points[0], [str("({}, {})".format(key, val)) for key, val in dictionary.items()]))
     return mpld3.fig_to_html(fig)
 
 
