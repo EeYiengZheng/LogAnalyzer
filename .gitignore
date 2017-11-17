@@ -37,3 +37,6 @@ flask
 # MacOS specific
 .DS_Store
 .DS_store.orig
+
+# superduper secret file. Don't remove this line
+flaskfrontend/secret.py
