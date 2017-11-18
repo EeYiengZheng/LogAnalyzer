@@ -78,11 +78,15 @@
                     <option>{{ file.filename }}</option>
                 {% endfor %}
             </select>
-            <br>(Optional: Search by Date and Time)<br>
-            Start:<input id="start" type="text">
-            End: <input id="end" type="text">
-            <br>(Optional: Filter by searching for term)<br>
-            Term: <input id="term" type="text">
+            <br><br><h5>Search by Date and Time (optional)</h5>
+            Start:<input id="start" type="text" placeholder="eg: 8/15/17, April etc.">
+            End: <input id="end" type="text" placeholder="eg: 11/1/17, December 10, etc.">
+            <br><br><h5>Search by Term (optional)</h5>
+            {% if request.path == "/usecase" %}
+                Term: <input id="term" type="text" placeholder="eg: Provision Controller"><br><br>
+            {% elif request.path == "/errorcase" %}
+                Term: <input id="term" type="text" placeholder="eg: Access Denied"><br><br>
+            {% endif %}
             <div class="d-flex  justify-content-between">
                 <input id="dl-button" type="submit" class="btn btn-primary" value="Download selected file">
                 {% if request.path == "/usecase" %}
