@@ -243,9 +243,9 @@ def rate_usage():
     fig, ax = plt.subplots()
     ax.grid(True, alpha=0.3)
 
-    plt.title("Number of Usage Cases per hour")
-    plt.xlabel("Time")
-    plt.ylabel("Number of Usage Cases")
+    plt.title("Usage Cases per hour", fontsize=24)
+    plt.xlabel("Time", fontsize=18)
+    plt.ylabel("Usage Cases", fontsize=18)
 
     points = ax.plot(x, y, 'o', markersize=10 ,mec='k', mew=1, alpha=.6)
     plt.xticks(x, dictionary.keys())
@@ -301,9 +301,9 @@ def rate_error():
 
     fig, ax = plt.subplots()
     ax.grid(True, alpha=0.3)
-    plt.title("Number of Errors per hour")
-    plt.xlabel("Time")
-    plt.ylabel("Number of Errors")
+    plt.title("Errors per hour", fontsize=24)
+    plt.xlabel("Time", fontsize=18)
+    plt.ylabel("Errors", fontsize=18)
     points = ax.plot(x, y, 'o', markersize=10 ,mec='k', mew=1, alpha=.6)
     plt.xticks([i * 4 for i in range(int(len(dictionary) / 4))], [list(dictionary.keys())[i * 4] for i in range(int(len(dictionary) / 4))])
     # [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) for i in range(int(len(dictionary) / 4))]
