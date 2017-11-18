@@ -4,7 +4,7 @@ LogAnalyzer is a log analytics app that allows users to upload their sytem log f
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
@@ -32,7 +32,7 @@ example
 * [Bootstrap](http://getbootstrap.com/) - Bootstrap for front end components
 * [matplotlib](http://matplotlib.org/) - Generate graphs in Python
 * [mpld3](http://mpld3.github.io/) - Bring matplotlib onto the web
-* [SQLite] (https://www.sqlite.org/) - SQLite for the database (is this the one we used??)
+* [SQLite](https://www.sqlite.org/) - SQLite for the database (is this the one we used??)
 
 
 
