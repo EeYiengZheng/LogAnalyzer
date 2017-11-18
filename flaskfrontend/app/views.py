@@ -131,7 +131,7 @@ def graphs_error():
                 l, tokens[1], tokens[2] + ' ' + tokens[3], tokens[4].replace('"', ''))
             l += 1
         stats += '</tbody></table>'
-    summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
+    summarized = '<table class="table table-striped"><tr scope="row"><th>Error Cases</th><th>Count</th></tr>'
     for e in range(0, len(errors)):
         summarized += '<tr scope="row"><td>' + errors[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
     summarized += '</table>'
@@ -198,7 +198,7 @@ def graphs_usage():
                 l, tokens[1], tokens[2] + ' ' + tokens[3], tokens[4])
             l += 1
         stats += '</tbody></table>'
-    summarized = '<table class="table table-striped"><tr scope="row"><th>Error</th><th>Count</th></tr>'
+    summarized = '<table class="table table-striped"><tr scope="row"><th>Usage Cases</th><th>Count</th></tr>'
     for e in range(0, len(entries)):
         summarized += '<tr scope="row"><td>' + entries[e] + '</td>' + '<td>' + str(counts[e]) + '</td></tr>'
     summarized += '</table>'
@@ -255,8 +255,18 @@ def rate_usage():
     fig.set_figheight(5)
     fig.set_figwidth(9)
     fig.tight_layout()
+
     mpld3.plugins.connect(fig, mpld3.plugins.PointLabelTooltip(points[0], [str("({}, {})".format(key, val)) for key, val in dictionary.items()]))
-    return mpld3.fig_to_html(fig)
+
+    summarized = '<table class="table table-striped"><tr scope="row"><th>Usage Count by Hour</th><th>Count</th></tr>'
+    for e in x:
+        summarized += '<tr scope="row"><td>' + list(dictionary.keys())[e] + '</td>' + '<td>' + str(y[e]) + '</td></tr>'
+    summarized += '</table>'
+    html = '<div class="container container-fluid"><div class="row justify-content-center"' \
+           + mpld3.fig_to_html(fig) + '</div><div class="row justify-content-center">' \
+           + summarized + '</div></div>'
+
+    return html
 
 
 @app.route('/rate_err', methods=['GET', 'POST'])
@@ -302,7 +312,16 @@ def rate_error():
     fig.tight_layout()
 
     mpld3.plugins.connect(fig, mpld3.plugins.PointLabelTooltip(points[0], [str("({}, {})".format(key, val)) for key, val in dictionary.items()]))
-    return mpld3.fig_to_html(fig)
+
+    summarized = '<table class="table table-striped"><tr scope="row"><th>Error Count by Hour</th><th>Count</th></tr>'
+    for e in x:
+        summarized += '<tr scope="row"><td>' + list(dictionary.keys())[e] + '</td>' + '<td>' + str(y[e]) + '</td></tr>'
+    summarized += '</table>'
+    html = '<div class="container container-fluid"><div class="row justify-content-center"' \
+           + mpld3.fig_to_html(fig) + '</div><div class="row justify-content-center">' \
+           + summarized + '</div></div>'
+
+    return html
 
 
 @app.route('/login', methods=['GET', 'POST'])
