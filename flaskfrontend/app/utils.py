@@ -1,12 +1,12 @@
-from flask import flash, url_for, redirect
-from werkzeug.utils import secure_filename
-from config import ALLOWED_EXTENSIONS, UPLOAD_FOLDER
-from app import app, models, db
-from os import path, remove, makedirs, rename
-from flask_login import current_user
 import hashlib
-import csv
-from re import *
+from os import path, remove, makedirs, rename
+
+from flask import flash, url_for, redirect
+from flask_login import current_user
+from werkzeug.utils import secure_filename
+
+from app import app, models, db
+from app.config import ALLOWED_EXTENSIONS, UPLOAD_FOLDER
 
 
 def allowed_file(filename):
@@ -71,7 +71,7 @@ def file_save_seq(f):
 
 def findUserFiles(target_user):
     import os
-    from config import UPLOAD_FOLDER
+    from app.config import UPLOAD_FOLDER
     fileArray = []
     userFolder = os.path.join(app.root_path, UPLOAD_FOLDER, str(target_user.id))
     if (os.path.exists(userFolder)):

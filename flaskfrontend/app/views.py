@@ -1,16 +1,19 @@
+import datetime
+from os import path, makedirs
+
+import matplotlib.pyplot as plt
+import mpld3
+from dateutil import parser
 from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
-from app import app, db, models
-from .models import User
-from .forms import LoginForm, RegistrationForm, UploadForm
 from werkzeug.security import generate_password_hash
-from .utils import findUserFiles, file_save_seq
-from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
-from os import path, makedirs
+
+from app import app, db, models
+from app.config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from .analyzer import errorSearch, usageSearch, usagelog, errorlog, usageRate, errorRate
-import datetime
-from dateutil import parser
-import matplotlib.pyplot as plt, mpld3
+from .forms import LoginForm, RegistrationForm, UploadForm
+from .models import User
+from .utils import findUserFiles, file_save_seq
 
 
 @app.before_request
