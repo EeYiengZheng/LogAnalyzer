@@ -9,7 +9,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash
 
 from app import app, db, models
-from app.config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
+from config import UPLOAD_FOLDER, ANALYZED_CSV_FOLDER
 from .analyzer import errorSearch, usageSearch, usagelog, errorlog, usageRate, errorRate
 from .forms import LoginForm, RegistrationForm, UploadForm
 from .models import User
