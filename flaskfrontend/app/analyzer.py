@@ -370,7 +370,8 @@ def usageRate(fin, fout, start, end, term):
                     currentdate = date
                     time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
                            + " " + str(date.hour) + ":00"
-                    count = 0
+                    count = 1
+                    rate_dictionary[time] = count
     return (rate_dictionary, fout, firstdate)
 
 def errorRate(fin, fout, start, end, term):
@@ -411,5 +412,6 @@ def errorRate(fin, fout, start, end, term):
                     currentdate = date
                     time = str(calendar.month_abbr[date.month]) + " " + str(date.day) \
                            + " " + str(date.hour) + ":00"
-                    count = 0
+                    count = 1
+                    rate_dictionary[time] = count
     return (rate_dictionary, fout, firstdate)
