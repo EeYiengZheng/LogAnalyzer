@@ -257,6 +257,7 @@ def rate_usage():
     #             for i in range(int(len(dictionary) / 4))])
     fig.set_figheight(5)
     fig.set_figwidth(9)
+    ax.set_ylim(ymin=0)
     fig.tight_layout()
 
     mpld3.plugins.connect(fig, mpld3.plugins.PointLabelTooltip(points[0], [str("({}, {})".format(key, val)) for key, val in dictionary.items()]))
@@ -312,6 +313,7 @@ def rate_error():
     # [str(datetime.datetime.combine(rateInfo[2], datetime.time(4 * i)).strftime("%b %d %H:00")) for i in range(int(len(dictionary) / 4))]
     fig.set_figheight(5)
     fig.set_figwidth(9)
+    ax.set_ylim(ymin=0)
     fig.tight_layout()
 
     mpld3.plugins.connect(fig, mpld3.plugins.PointLabelTooltip(points[0], [str("({}, {})".format(key, val)) for key, val in dictionary.items()]))
