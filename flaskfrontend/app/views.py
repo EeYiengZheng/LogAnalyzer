@@ -115,6 +115,9 @@ def graphs_error():
     plt.bar(x, counts, width=0.4)
     plt.xticks(x, errors)
     plt.grid(True, alpha=0.3)
+    for i in range(len(x)):
+        if counts[i] != 0:
+            plt.text(x[i] - .05, counts[i] + .7, s=counts[i], fontsize=14)
 
     fig = plt.gcf()
     fig.set_figheight(5)
@@ -182,6 +185,9 @@ def graphs_usage():
     plt.bar(x, counts, width=0.3)
     plt.xticks(x, entries)
     plt.grid(True, alpha=0.3)
+    for i in range(len(x)):
+        if counts[i] != 0:
+            plt.text(x[i] - .05, counts[i] + .7, s=counts[i], fontsize=14)
 
     fig = plt.gcf()
     fig.set_figheight(5)
