@@ -251,7 +251,7 @@ def rate_usage():
     fig, ax = plt.subplots()
     ax.grid(True, alpha=0.3)
 
-    plt.title("Usage Cases per hour", fontsize=24)
+    plt.title("Total Number of Usage Cases per Hour", fontsize=24)
     plt.xlabel("Time", fontsize=18)
     plt.ylabel("Usage Cases", fontsize=18)
 
@@ -310,7 +310,7 @@ def rate_error():
 
     fig, ax = plt.subplots()
     ax.grid(True, alpha=0.3)
-    plt.title("Errors per hour", fontsize=24)
+    plt.title("Total Number of Errors per hour", fontsize=24)
     plt.xlabel("Time", fontsize=18)
     plt.ylabel("Errors", fontsize=18)
     points = ax.plot(x, y, 'o', markersize=10 ,mec='k', mew=1, alpha=.6)
