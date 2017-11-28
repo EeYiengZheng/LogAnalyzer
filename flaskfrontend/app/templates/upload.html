@@ -1,40 +1,4 @@
 {% extends "base.html" %}
-
-{% block script_content %}
-<script type="text/javascript" src="http://stuk.github.io/jszip/dist/jszip.min.js"></script>
-<script type="text/javascript">
- $(document).ready(function(){
-     $('#surprise').click(function() {
-        var file = $('#f-chooser1');
-        var formData = new FormData();
-        formData.append('log', "TEST");
-        /*var file = document.getElementById('f-chooser1')
-        var zip = new JSZip();
-        zip.file("new_file.txt", file);
-        var content = null;
-        zip.file("hello.txt", "Hello Word!!\n")
-        content = zip.generateAsync({type:"blob", compression:"deflate"});
-        alert("damn!");*/
-        //formData.append('zip', content);
-        //formData.append('log', document.getElementById('f-chooser1'));
-        alert("shit!");
-        $.ajax({
-            url: '/upload_file',
-            type:'POST',
-            contentType: false,
-            processData: false,
-            data: formData,
-            success: function(response) {
-                $('#feedback').html(response)
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-     });
- });
-</script>
-{% endblock %}
 {% block uploader %}
     <div class="p-2">
         <h1>Upload File</h1>
@@ -48,23 +12,7 @@
                                     aria-describedby="file-chooser-helper"/>
                 <small id="file-chooser-helper" class="form-text text-muted">Supported filetype: *.log</small>
             </div>
-            <button id="surprise" type="button" class="btn btn-primary" >A surprise</button>
             <div class="p-2"><input class="btn btn-primary float-right" type="submit"/></div>
         </div>
     </form>
 {% endblock %}
-
-<!--        function addFileToZip(n) {
-            var arrayBuffer;
-            var fileReader = new FileReader();
-            fileReader.onload = function() {
-                arrayBuffer = this.result;
-                zip.file(file.name, arrayBuffer);
-                addFileToZip(n + 1);
-            };
-            fileReader.readAsArrayBuffer(file);
-            zippingComplete(zip.generate({type:"blob", compression:"deflate"}));
-            return;
-        }
-        addFileToZip(0);
-        -->

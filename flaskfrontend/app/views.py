@@ -39,7 +39,7 @@ def upload():
     return render_template('upload.html',
                            form=form,
                            title='Upload')
-"""@app.route('/upload_file', methods=['GET', 'POST'])
+@app.route('/upload_file', methods=['GET', 'POST'])
 @login_required
 def upload_file():
     if request.method == 'POST':
@@ -48,20 +48,6 @@ def upload_file():
             return redirect(url_for('upload'))
         f = request.files['new_file']
         return file_save_seq(f)
-    return"""
-
-@app.route('/upload_file', methods=['GET', 'POST'])
-@login_required
-def upload_file():
-    print("at upload_file")
-    f = request.files
-    print("got file")
-    if request.method == 'POST':
-        if len(f) == 0:
-            print("no files")
-            flash('No file part')
-            return redirect(url_for('upload'))
-        return file_save_seq(f['zip'])
     return
 
 @app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
@@ -265,7 +251,7 @@ def rate_usage():
     fig, ax = plt.subplots()
     ax.grid(True, alpha=0.3)
 
-    plt.title("Usage Cases per hour", fontsize=24)
+    plt.title("Total Number of Usage Cases per Hour", fontsize=24)
     plt.xlabel("Time", fontsize=18)
     plt.ylabel("Usage Cases", fontsize=18)
 
@@ -324,7 +310,7 @@ def rate_error():
 
     fig, ax = plt.subplots()
     ax.grid(True, alpha=0.3)
-    plt.title("Errors per hour", fontsize=24)
+    plt.title("Total Number of Errors per hour", fontsize=24)
     plt.xlabel("Time", fontsize=18)
     plt.ylabel("Errors", fontsize=18)
     points = ax.plot(x, y, 'o', markersize=10 ,mec='k', mew=1, alpha=.6)
