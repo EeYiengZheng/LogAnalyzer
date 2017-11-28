@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block script_content %}
-
+<script type="text/javascript">
     $(document).ready(function(){
         $('#sel1').change(function() {
             $("#downloadLog").attr("action", "/uploads/" + $(this).find("option:selected").text());
@@ -65,7 +65,7 @@
         });
         });
     });
-
+</script>
 {% endblock %}
 
 {% block uploader %}

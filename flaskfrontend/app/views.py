@@ -38,7 +38,6 @@ def upload():
                            form=form,
                            title='Upload')
 
-
 @app.route('/upload_file', methods=['GET', 'POST'])
 @login_required
 def upload_file():
