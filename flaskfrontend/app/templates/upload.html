@@ -7,12 +7,14 @@
           enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            <label for="f-chooser1"> </label>
-            <div class="p-2"><input type="file" class="form-control-file" name="new_file" id="f-chooser1"
-                                    aria-describedby="file-chooser-helper"/>
-                <small id="file-chooser-helper" class="form-text text-muted">Supported filetype: *.log</small>
+            <div class="row">
+                <label for="f-chooser1"> </label>
+                <div class="p-2"><input type="file" class="form-control-file" name="new_file" id="f-chooser1"
+                                        aria-describedby="file-chooser-helper"/>
+                    <small id="file-chooser-helper" class="form-text text-muted">Supported filetype: *.log</small>
+                </div>
+                <div class="p-2"><input class="btn btn-primary float-right" type="submit"/></div>
             </div>
-            <div class="p-2"><input class="btn btn-primary float-right" type="submit"/></div>
         </div>
     </form>
 {% endblock %}

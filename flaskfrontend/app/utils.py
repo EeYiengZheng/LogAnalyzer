@@ -43,7 +43,7 @@ def file_save_seq(f):
         log_hash = models.Log.query.filter_by(file_hash=hash, user_id=current_user.id).first()
         if log_hash is not None:
             remove(tmp_path)
-            flash('Upload unsuccessful: file already exist')
+            flash('Upload unsuccessful: file already exist', 'good')
             return redirect(url_for('upload'))
         f_name = secure_filename(f.filename)
         i_f_name = f_name.rsplit('.', 1)[0] + '_'

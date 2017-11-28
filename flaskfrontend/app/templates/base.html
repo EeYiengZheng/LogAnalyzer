@@ -32,8 +32,12 @@
             margin-bottom: 0;
         }
 
-        .data {
-            white-space: pre;
+        .bad {
+            color: red;
+        }
+
+        .good {
+            color: green;
         }
 
         :root #content > #right > .dose > .dosesingle,
@@ -105,12 +109,15 @@
 
     <main role="main">
         <div class="jumbotron" id="top-jumbo">
-            <div class="mx-auto">
-                {% with messages = get_flashed_messages() %}
+            <div class="row justify-content-center mx-auto">
+                {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
-                        {% for message in messages %}
-                            <p style="color:red">{{ message }} </p>
-                        {% endfor %}
+                        <ul class=flashes>
+                            {% for category, message in messages %}
+                                <p class="bad {{ category }}">{{ message }} </p>
+
+                            {% endfor %}
+                        </ul>
                     {% endif %}
                 {% endwith %}
             </div>
@@ -123,7 +130,7 @@
                 {% block about %}
                 {% endblock %}
             </div>
-            <div class="col-sm-5 mx-auto">
+            <div class="col-sm-5 justify-content-center mx-auto">
                 <div class="d-flex p-2 flex-column">
                     {% block uploader %}
                     {% endblock %}
@@ -164,8 +171,8 @@
         });
     }
 </script>
-    {% block script_content %}
-        {# script_content goes here #}
-    {% endblock %}
+{% block script_content %}
+    {# script_content goes here #}
+{% endblock %}
 </body>
 </html>

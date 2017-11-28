@@ -361,7 +361,7 @@ def register():
         user.password_hash = generate_password_hash(request.form.get('password'))
         db.session.add(user)
         db.session.commit()
-        flash('Thanks for registering')
+        flash('Thanks for registering', 'good')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
@@ -369,5 +369,5 @@ def register():
 @app.route('/logout')
 def logout():
     logout_user()
-    flash('You are logged out')
+    flash('You are logged out', 'good')
     return redirect(url_for('index'))
