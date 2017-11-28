@@ -3,6 +3,7 @@ from os import path, makedirs
 
 import matplotlib.pyplot as plt
 import mpld3
+import zipfile
 from dateutil import parser
 from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
@@ -34,11 +35,11 @@ def index():
 @login_required
 def upload():
     form = UploadForm(request.form)
+    print("upload")
     return render_template('upload.html',
                            form=form,
                            title='Upload')
-
-@app.route('/upload_file', methods=['GET', 'POST'])
+"""@app.route('/upload_file', methods=['GET', 'POST'])
 @login_required
 def upload_file():
     if request.method == 'POST':
@@ -47,8 +48,21 @@ def upload_file():
             return redirect(url_for('upload'))
         f = request.files['new_file']
         return file_save_seq(f)
-    return
+    return"""
 
+@app.route('/upload_file', methods=['GET', 'POST'])
+@login_required
+def upload_file():
+    print("at upload_file")
+    f = request.files
+    print("got file")
+    if request.method == 'POST':
+        if len(f) == 0:
+            print("no files")
+            flash('No file part')
+            return redirect(url_for('upload'))
+        return file_save_seq(f['zip'])
+    return
 
 @app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
@@ -61,7 +75,7 @@ def download(filename):
 def usecase():
     fileArray = findUserFiles(current_user)
     '''
-    usage analysis statistics 
+    usage analysis statistics
     '''
     return render_template(['usecase.html'],
                            title='Use Case',
