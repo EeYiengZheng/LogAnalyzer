@@ -2,6 +2,9 @@
 
 LogAnalyzer is a log analytics app that allows users to upload their sytem log files and get both error case and use case analytics in return. Both error and use case analytics can be viewed in descriptive graphs showing each case, graphs showing the rate of each case over time, and with details about individual cases. The user can also choose to only see the analytics within a specified date range. The log files for each user are saved so they do not need to be uploaded again. Users do not need to worry about uploading CSV files, LogAnalyzer will create CSV files of the logs in the background after the .log file is uploaded.
 
+### Demo of working repo
+http://zemartinho.pythonanywhere.com/
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
